@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{59D000E1-35FD-4C0C-B53E-459E7CFE4910}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FakeMaker</RootNamespace>
+    <AssemblyName>FakeMaker</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPiServer, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.ApplicationModules, Version=7.0.859.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.Framework.7.0.859.24\lib\net40\EPiServer.ApplicationModules.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.BaseLibrary, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.BaseLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Blog, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.Blog.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Configuration, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Data, Version=7.0.859.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.Framework.7.0.859.24\lib\net40\EPiServer.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Data.Cache, Version=7.0.859.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.Framework.7.0.859.24\lib\net40\EPiServer.Data.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Enterprise, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.Enterprise.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Events, Version=7.0.859.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.Framework.7.0.859.24\lib\net40\EPiServer.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Framework, Version=7.0.859.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.Framework.7.0.859.24\lib\net40\EPiServer.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.ImageLibrary, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.ImageLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Implementation, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.Implementation.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Licensing, Version=7.0.859.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.Framework.7.0.859.24\lib\net40\EPiServer.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.LinkAnalyzer, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.LinkAnalyzer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Scheduler, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.Scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Scheduler.WKTL, Version=5.1.422.4, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.Scheduler.WKTL.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Shell, Version=7.0.859.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.Framework.7.0.859.24\lib\net40\EPiServer.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.UI, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Web.WebControls, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.Web.WebControls.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.WebDav, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.WebDav.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.WebParts, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.WebParts.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.WorkflowFoundation, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.WorkflowFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.XForms, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.XmlRpc, Version=7.0.586.24, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EPiServer.CMS.Core.7.0.586.24\lib\net40\EPiServer.XmlRpc.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.1.1311.0615\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExampleUnitTests.cs" />
+    <Compile Include="FakeMaker.cs" />
+    <Compile Include="FakePage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
