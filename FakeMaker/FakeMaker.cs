@@ -40,6 +40,10 @@ namespace FakeMaker
 				.Setup(repo => repo.Get<IContent>(content.ContentLink))
 				.Returns(content);
 
+			_contentRepo
+				.Setup(repo => repo.Get<PageData>(content.ContentLink))
+				.Returns(content as PageData);
+
 			var testPage = content as FakePage;
 
 			if (testPage == null)
@@ -81,6 +85,13 @@ namespace FakeMaker
 			_contentRepo
 				.Setup(repo => repo.GetChildren<IContent>(parent.ContentLink))
 				.Returns(contentList);
+
+
+			var pageDataList = contentList.Select(content => content as PageData).ToList();
+
+			_contentRepo
+				.Setup(repo => repo.GetChildren<PageData>(parent.ContentLink))
+				.Returns(pageDataList);
 
 			var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
 

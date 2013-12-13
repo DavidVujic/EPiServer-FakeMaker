@@ -33,17 +33,13 @@ namespace FakeMaker
 				.Create("About us")
 				.IsChildOf(start);
 
-			FakePage
-				.Create("Our services")
-				.IsChildOf(start);
-
 			_fake.AddToRepository(root);
 
 			// Act
 			var children = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink, _fake.ContentRepository);
 
 			//Assert
-			Assert.That(children.Count(), Is.EqualTo(3));
+			Assert.That(children.Count(), Is.EqualTo(2));
 		}
 
 		[Test]
@@ -53,19 +49,17 @@ namespace FakeMaker
 			var root = FakePage
 				.Create("Root");
 
+			FakePage
+				.Create("my page")
+				.IsChildOf(root);
+			
 			var start = FakePage
 				.Create("Start")
 				.IsChildOf(root);
 
 			FakePage
-				.Create("my page")
-				.IsChildOf(root)
-				.PublishedOn(DateTime.Now);
-
-			FakePage
 				.Create("About us")
-				.IsChildOf(start)
-				.IsHiddenFromMenu();
+				.IsChildOf(start);
 
 			FakePage
 				.Create("Our services")
@@ -110,6 +104,25 @@ namespace FakeMaker
 			//Assert
 			Assert.That(children.Count(), Is.EqualTo(2));
 		}
+
+		[Test]
+		public void Get_pages_visible_in_menu()
+		{
+			// Arrange
+			var root = FakePage.Create("root");
+
+			FakePage.Create("AboutUs").IsChildOf(root).IsVisibleInMenu();
+			FakePage.Create("OtherPage").IsChildOf(root).IsHiddenFromMenu();
+			FakePage.Create("Contact").IsChildOf(root).IsVisibleInMenu();
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var pages = ExampleFindPagesHelper.GetMenu(root.ContentLink, _fake.ContentRepository);
+
+			// Assert
+			Assert.That(pages.Count(), Is.EqualTo(2));
+		}
 	}
 
 	/// <summary>
@@ -143,6 +156,13 @@ namespace FakeMaker
 			var page = repository.Get<PageData>(reference);
 
 			return page;
+		}
+
+		public static IEnumerable<IContent> GetMenu(ContentReference reference, IContentRepository repository)
+		{
+			var children = repository.GetChildren<PageData>(reference);
+
+			return children.Where(page => page.VisibleInMenu).ToList();
 		}
 	}
 }
