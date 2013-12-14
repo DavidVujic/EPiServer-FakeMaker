@@ -26,7 +26,7 @@ namespace FakeMaker
 				return;
 			}
 
-			PrepareServiceLocatorWith(_contentRepo);
+			PrepareServiceLocatorWith(_contentRepo.Object);
 		}
 
 		public Mock<IContentRepository> GetMockForFakeContentRepository()

@@ -1,11 +1,37 @@
-﻿Help features for test driving EPiServer CMS 7
+﻿# Quick Start
 ========
 
-Unit testing the EPiServer CMS got a whole lot easier with version 7. However, creating fake content to be used when setting up mocked repositories isn't that smooth, right?
+Have a look at the __ExampleUnitTests.cs__, containing some basic scenarios for unit testing with the FakeMaker and FakePage classes.
 
-When mocking of code is all you see on your screen, this little library may help. A bigger screen probably also would, but is probably more expensive.
+FakeMaker relies on the __Moq__ library and the __EPiServer__ assemblies (currently the 7.1 version). The assembly references in the Visual Studio project file are added from both the official NuGet feed and the EPiServer feed.
 
-Check out the example unit tests, using the FakeMaker class that takes care of mocking a repository and populating the ServiceLocator, and also the FakePage class for creating Pages with the ability to set some of the most common properties.
+#### Create an instance of FakeMaker:
 
-Let me know what you think about it!
+```cs
+var fake = new FakeMaker();
+```
+
+#### Create the pages you need:
+
+```cs
+var page = FakePage.Create("MyPageName");
+```
+
+#### Add it to the mocked repository:
+
+```cs
+fake.AddToRepository(page);
+```cs
+
+#### Get the mocked instance of the repository:
+
+```cs
+var repository = fake.ContentRepository;
+```
+
+You can pass in the fake repository to the code you are about to test, by injecting it as a method parameter or with the constructor (aka Dependency Injection), or by using the ServiceLocator feature with a fake IContentRepository implementation. 
+
+You can also use `cs ServiceLocator.Current.GetRepository<IContentRepository>()` as an alternative to Dependency Injection in your code under test.
+
+__Please contact me if you have feedback or questions about FakeMaker!__
 

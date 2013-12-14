@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EPiServer;
 using EPiServer.Core;
+using EPiServer.ServiceLocation;
 using NUnit.Framework;
 
 namespace FakeMaker
@@ -37,6 +38,30 @@ namespace FakeMaker
 
 			// Act
 			var children = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink, _fake.ContentRepository);
+
+			//Assert
+			Assert.That(children.Count(), Is.EqualTo(2));
+		}
+
+		[Test]
+		public void Get_descendants_by_using_ServiceLocator()
+		{
+			// Arrange
+			var root = FakePage
+				.Create("Root");
+
+			var start = FakePage
+				.Create("Start")
+				.IsChildOf(root);
+
+			FakePage
+				.Create("About us")
+				.IsChildOf(start);
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var children = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink);
 
 			//Assert
 			Assert.That(children.Count(), Is.EqualTo(2));
@@ -138,6 +163,13 @@ namespace FakeMaker
 
 		public static IEnumerable<ContentReference> GetDescendantsOf(ContentReference root, IContentRepository repository)
 		{
+			return repository.GetDescendents(root);
+		}
+
+		public static IEnumerable<ContentReference> GetDescendantsOf(ContentReference root)
+		{
+			var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
+
 			return repository.GetDescendents(root);
 		}
 
