@@ -28,6 +28,12 @@ fake.AddToRepository(page);
 var repository = fake.ContentRepository;
 ```
 
+#### Cast FakePage to PageData
+
+```cs
+var page = FakePage.Create("MyPageName").To<PageData>();
+```
+
 You can pass in the fake repository to the code you are about to test, by injecting it to the class (aka Dependency Injection). The examples uses method parameter injection.
 
 You can also use 
