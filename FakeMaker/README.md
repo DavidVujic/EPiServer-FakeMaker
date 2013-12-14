@@ -21,7 +21,7 @@ var page = FakePage.Create("MyPageName");
 
 ```cs
 fake.AddToRepository(page);
-```cs
+```
 
 #### Get the mocked instance of the repository:
 
