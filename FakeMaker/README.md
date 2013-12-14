@@ -31,7 +31,11 @@ var repository = fake.ContentRepository;
 
 You can pass in the fake repository to the code you are about to test, by injecting it as a method parameter or with the constructor (aka Dependency Injection).
 
-You can also use ```cs ServiceLocator.Current.GetRepository<IContentRepository>()``` as an alternative to Dependency Injection in your code under test.
+You can also use 
+```cs 
+ServiceLocator.Current.GetRepository<IContentRepository>()
+```
+as an alternative to Dependency Injection in your code under test.
 
 __Please contact me if you have feedback or questions about FakeMaker!__
 
