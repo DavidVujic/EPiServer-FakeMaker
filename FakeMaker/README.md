@@ -1,5 +1,4 @@
 ﻿# Quick Start
-========
 
 Have a look at the __ExampleUnitTests.cs__, containing some basic scenarios for unit testing with the FakeMaker and FakePage classes.
 
@@ -33,7 +32,7 @@ You can pass in the fake repository to the code you are about to test, by inject
 
 You can also use 
 ```cs 
-ServiceLocator.Current.GetRepository<IContentRepository>()
+ServiceLocator.Current.GetRepository<IContentRepository>();
 ```
 as an alternative to Dependency Injection in your code under test.
 
