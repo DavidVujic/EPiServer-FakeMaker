@@ -28,7 +28,7 @@ fake.AddToRepository(page);
 var repository = fake.ContentRepository;
 ```
 
-You can pass in the fake repository to the code you are about to test, by injecting it as a method parameter or with the constructor (aka Dependency Injection).
+You can pass in the fake repository to the code you are about to test, by injecting it to the class (aka Dependency Injection). The examples uses method parameter injection.
 
 You can also use 
 ```cs 

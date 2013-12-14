@@ -37,10 +37,10 @@ namespace FakeMaker
 			_fake.AddToRepository(root);
 
 			// Act
-			var children = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink, _fake.ContentRepository);
+			var descendants = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink, _fake.ContentRepository);
 
 			//Assert
-			Assert.That(children.Count(), Is.EqualTo(2));
+			Assert.That(descendants.Count(), Is.EqualTo(2));
 		}
 
 		[Test]
@@ -61,10 +61,10 @@ namespace FakeMaker
 			_fake.AddToRepository(root);
 
 			// Act
-			var children = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink);
+			var descendants = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink);
 
 			//Assert
-			Assert.That(children.Count(), Is.EqualTo(2));
+			Assert.That(descendants.Count(), Is.EqualTo(2));
 		}
 
 		[Test]
@@ -124,10 +124,10 @@ namespace FakeMaker
 			_fake.AddToRepository(root);
 
 			// Act
-			var children = ExampleFindPagesHelper.GetAllPublishedPages(root.ContentLink, _fake.ContentRepository);
+			var pages = ExampleFindPagesHelper.GetAllPublishedPages(root.ContentLink, _fake.ContentRepository);
 
 			//Assert
-			Assert.That(children.Count(), Is.EqualTo(2));
+			Assert.That(pages.Count(), Is.EqualTo(2));
 		}
 
 		[Test]
@@ -152,7 +152,7 @@ namespace FakeMaker
 
 	/// <summary>
 	/// This is an example of a helper class.
-	/// The repository is injected to the class (and/or methods).
+	/// The repository is injected to the class.
 	/// </summary>
 	public static class ExampleFindPagesHelper
 	{
