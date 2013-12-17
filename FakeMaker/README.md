@@ -16,6 +16,12 @@ var fake = new FakeMaker();
 var page = FakePage.Create("MyPageName");
 ```
 
+or a page of a specific page type:
+
+```cs
+FakePage.Create<CustomPageData>("MyOtherPageName");
+```
+
 #### Add it to the mocked repository:
 
 ```cs

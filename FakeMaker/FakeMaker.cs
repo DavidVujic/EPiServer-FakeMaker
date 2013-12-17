@@ -34,24 +34,17 @@ namespace FakeMaker
 			return _contentRepo;
 		}
 
-		public void AddToRepository(IContent content)
+		public void AddToRepository(FakePage fake)
 		{
 			_contentRepo
-				.Setup(repo => repo.Get<IContent>(content.ContentLink))
-				.Returns(content);
+				.Setup(repo => repo.Get<IContent>(fake.Page.ContentLink))
+				.Returns(fake.Page);
 
 			_contentRepo
-				.Setup(repo => repo.Get<PageData>(content.ContentLink))
-				.Returns(content as PageData);
+				.Setup(repo => repo.Get<PageData>(fake.Page.ContentLink))
+				.Returns(fake.Page);
 
-			var testPage = content as FakePage;
-
-			if (testPage == null)
-			{
-				return;
-			}
-
-			AddToRepository(testPage.Children, testPage);
+			AddToRepository(fake.Children, fake);
 		}
 
 		private static void SetupMocksForClassFactory()
@@ -80,73 +73,53 @@ namespace FakeMaker
 			ServiceLocator.SetLocator(serviceLocator.Object);
 		}
 
-		private void AddToRepository(IList<IContent> contentList, IContent parent)
+		private void AddToRepository(IList<FakePage> fakeList, FakePage parent)
 		{
+			var contentList = fakeList.Select(fake => fake.Page).ToList();
+
 			_contentRepo
-				.Setup(repo => repo.GetChildren<IContent>(parent.ContentLink))
+				.Setup(repo => repo.GetChildren<IContent>(parent.Page.ContentLink))
 				.Returns(contentList);
 
-
-			var pageDataList = contentList.Select(content => content as PageData).ToList();
-
 			_contentRepo
-				.Setup(repo => repo.GetChildren<PageData>(parent.ContentLink))
-				.Returns(pageDataList);
+				.Setup(repo => repo.GetChildren<PageData>(parent.Page.ContentLink))
+				.Returns(contentList);
 
 			var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
 
 			_contentRepo
-				.Setup(repo => repo.GetDescendents(parent.ContentLink))
+				.Setup(repo => repo.GetDescendents(parent.Page.ContentLink))
 				.Returns(parentDescendants);
 
-			foreach (var content in contentList)
+			foreach (var fake in fakeList)
 			{
-				var page = content as FakePage;
-
-				if (page == null)
-				{
-					continue;
-				}
+				var item = fake;
 
 				_contentRepo
-					.Setup(repo => repo.Get<IContent>(page.ContentLink))
-					.Returns(content);
+					.Setup(repo => repo.Get<IContent>(item.Page.ContentLink))
+					.Returns(item.Page);
 
 				_contentRepo
-					.Setup(repo => repo.Get<PageData>(page.ContentLink))
-					.Returns(content as PageData);
+					.Setup(repo => repo.Get<PageData>(item.Page.ContentLink))
+					.Returns(item.Page);
 
-				var pageDescendants = GetDescendantsOf(page, new List<IContent>());
+				var pageDescendants = GetDescendantsOf(item, new List<IContent>());
 
 				_contentRepo
-					.Setup(repo => repo.GetDescendents(page.ContentLink))
+					.Setup(repo => repo.GetDescendents(item.Page.ContentLink))
 					.Returns(pageDescendants);
 
-				AddToRepository(page.Children, page);
+				AddToRepository(item.Children, item);
 			}
 		}
 
-		private static IEnumerable<ContentReference> GetDescendantsOf(IContent content, ICollection<IContent> descendants)
+		private static IEnumerable<ContentReference> GetDescendantsOf(FakePage fake, ICollection<IContent> descendants)
 		{
-			var page = content as FakePage;
-
-			if (page == null)
+			foreach (var child in fake.Children)
 			{
-				return new List<ContentReference>();
-			}
+				descendants.Add(child.Page);
 
-			foreach (var child in page.Children)
-			{
-				var testPage = child as FakePage;
-
-				if (testPage == null)
-				{
-					continue;
-				}
-
-				descendants.Add(child);
-
-				GetDescendantsOf(testPage, descendants);
+				GetDescendantsOf(child, descendants);
 			}
 
 			return descendants.Select(descendant => descendant.ContentLink).ToList();

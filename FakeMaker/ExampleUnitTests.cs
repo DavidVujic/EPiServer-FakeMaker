@@ -37,7 +37,7 @@ namespace FakeMaker
 			_fake.AddToRepository(root);
 
 			// Act
-			var descendants = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink, _fake.ContentRepository);
+			var descendants = ExampleFindPagesHelper.GetDescendantsOf(root.Page.ContentLink, _fake.ContentRepository);
 
 			//Assert
 			Assert.That(descendants.Count(), Is.EqualTo(2));
@@ -61,7 +61,7 @@ namespace FakeMaker
 			_fake.AddToRepository(root);
 
 			// Act
-			var descendants = ExampleFindPagesHelper.GetDescendantsOf(root.ContentLink);
+			var descendants = ExampleFindPagesHelper.GetDescendantsOf(root.Page.ContentLink);
 
 			//Assert
 			Assert.That(descendants.Count(), Is.EqualTo(2));
@@ -93,7 +93,7 @@ namespace FakeMaker
 			_fake.AddToRepository(root);
 
 			// Act
-			var children = ExampleFindPagesHelper.GetDescendantsOf(start.ContentLink, _fake.ContentRepository);
+			var children = ExampleFindPagesHelper.GetDescendantsOf(start.Page.ContentLink, _fake.ContentRepository);
 
 			//Assert
 			Assert.That(children.Count(), Is.EqualTo(2));
@@ -103,28 +103,31 @@ namespace FakeMaker
 		public void Get_published_only_pages()
 		{
 			// Arrange
+			var lastWeek = DateTime.Today.AddDays(-7);
+			var yesterday = DateTime.Today.AddDays(-1);
+
 			var root = FakePage
 				.Create("Root");
 
 			var start = FakePage
 				.Create("Start")
 				.IsChildOf(root)
-				.PublishedOn(DateTime.Now.AddDays(-10));
+				.PublishedOn(lastWeek);
 
 			FakePage
 				.Create("About us")
 				.IsChildOf(start)
-				.PublishedOn(DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-1));
+				.PublishedOn(lastWeek, yesterday);
 
 			FakePage
 				.Create("Our services")
 				.IsChildOf(start)
-				.PublishedOn(DateTime.Now.AddHours(-1));
+				.PublishedOn(lastWeek);
 
 			_fake.AddToRepository(root);
 
 			// Act
-			var pages = ExampleFindPagesHelper.GetAllPublishedPages(root.ContentLink, _fake.ContentRepository);
+			var pages = ExampleFindPagesHelper.GetAllPublishedPages(root.Page.ContentLink, _fake.ContentRepository);
 
 			//Assert
 			Assert.That(pages.Count(), Is.EqualTo(2));
@@ -143,11 +146,35 @@ namespace FakeMaker
 			_fake.AddToRepository(root);
 
 			// Act
-			var pages = ExampleFindPagesHelper.GetMenu(root.ContentLink, _fake.ContentRepository);
+			var pages = ExampleFindPagesHelper.GetMenu(root.Page.ContentLink, _fake.ContentRepository);
 
 			// Assert
 			Assert.That(pages.Count(), Is.EqualTo(2));
 		}
+
+		[Test]
+		public void Get_pages_of_certain_pagedata_type()
+		{
+			// Arrange
+			var root = FakePage.Create("root");
+
+			FakePage.Create("AboutUs").IsChildOf(root);
+			FakePage.Create<CustomPageData>("OtherPage").IsChildOf(root);
+			FakePage.Create("Contact").IsChildOf(root);
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var pages = ExampleFindPagesHelper.GetDescendantsOf<CustomPageData>(root.Page.ContentLink, _fake.ContentRepository);
+
+			// Assert
+			Assert.That(pages.Count(), Is.EqualTo(1));
+		}
+	}
+
+	public class CustomPageData : PageData
+	{
+		public string CustomPageName { get; set; }
 	}
 
 	/// <summary>
@@ -171,6 +198,17 @@ namespace FakeMaker
 			var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
 
 			return repository.GetDescendents(root);
+		}
+
+		public static IEnumerable<IContent> GetDescendantsOf<T>(ContentReference root, IContentRepository repository)
+			where T : PageData
+		{
+			var descendants = GetDescendantsOf(root, repository);
+			var pages = descendants
+				.Select(repository.Get<IContent>)
+				.OfType<T>();
+
+			return pages;
 		}
 
 		public static IEnumerable<IContent> GetAllPublishedPages(ContentReference root, IContentRepository repository)
