@@ -7,7 +7,7 @@ using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using Moq;
 
-namespace FakeMaker
+namespace EPiFakeMaker
 {
 	public class FakeMaker
 	{

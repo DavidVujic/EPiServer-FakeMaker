@@ -6,7 +6,7 @@ using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using NUnit.Framework;
 
-namespace FakeMaker.Examples
+namespace EPiFakeMaker.Examples
 {
 	[TestFixture]
 	public class ExampleUnitTests

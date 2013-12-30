@@ -7,8 +7,8 @@
     <ProjectGuid>{FAE5449E-AA8F-453A-A11B-9C5DC0F4AED0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FakeMaker.Examples</RootNamespace>
-    <AssemblyName>FakeMaker.Examples</AssemblyName>
+    <RootNamespace>EPiFakeMaker.Examples</RootNamespace>
+    <AssemblyName>EPiFakeMaker.Examples</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

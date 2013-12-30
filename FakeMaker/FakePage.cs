@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using EPiServer.Core;
 
-namespace FakeMaker
+namespace EPiFakeMaker
 {
 	public class FakePage
 	{
