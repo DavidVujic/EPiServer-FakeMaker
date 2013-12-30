@@ -28,11 +28,11 @@ namespace EPiFakeMaker.Examples
 
 			var start = FakePage
 				.Create("Start")
-				.IsChildOf(root);
+				.ChildOf(root);
 
 			FakePage
 				.Create("About us")
-				.IsChildOf(start);
+				.ChildOf(start);
 
 			_fake.AddToRepository(root);
 
@@ -52,11 +52,11 @@ namespace EPiFakeMaker.Examples
 
 			var start = FakePage
 				.Create("Start")
-				.IsChildOf(root);
+				.ChildOf(root);
 
 			FakePage
 				.Create("About us")
-				.IsChildOf(start);
+				.ChildOf(start);
 
 			_fake.AddToRepository(root);
 
@@ -76,19 +76,19 @@ namespace EPiFakeMaker.Examples
 
 			FakePage
 				.Create("my page")
-				.IsChildOf(root);
+				.ChildOf(root);
 			
 			var start = FakePage
 				.Create("Start")
-				.IsChildOf(root);
+				.ChildOf(root);
 
 			FakePage
 				.Create("About us")
-				.IsChildOf(start);
+				.ChildOf(start);
 
 			FakePage
 				.Create("Our services")
-				.IsChildOf(start);
+				.ChildOf(start);
 
 			_fake.AddToRepository(root);
 
@@ -111,17 +111,17 @@ namespace EPiFakeMaker.Examples
 
 			var start = FakePage
 				.Create("Start")
-				.IsChildOf(root)
+				.ChildOf(root)
 				.PublishedOn(lastWeek);
 
 			FakePage
 				.Create("About us")
-				.IsChildOf(start)
+				.ChildOf(start)
 				.PublishedOn(lastWeek, yesterday);
 
 			FakePage
 				.Create("Our services")
-				.IsChildOf(start)
+				.ChildOf(start)
 				.PublishedOn(lastWeek);
 
 			_fake.AddToRepository(root);
@@ -139,9 +139,9 @@ namespace EPiFakeMaker.Examples
 			// Arrange
 			var root = FakePage.Create("root");
 
-			FakePage.Create("AboutUs").IsChildOf(root).IsVisibleInMenu();
-			FakePage.Create("OtherPage").IsChildOf(root).IsHiddenFromMenu();
-			FakePage.Create("Contact").IsChildOf(root).IsVisibleInMenu();
+			FakePage.Create("AboutUs").ChildOf(root).VisibleInMenu();
+			FakePage.Create("OtherPage").ChildOf(root).HiddenFromMenu();
+			FakePage.Create("Contact").ChildOf(root).VisibleInMenu();
 
 			_fake.AddToRepository(root);
 
@@ -158,9 +158,9 @@ namespace EPiFakeMaker.Examples
 			// Arrange
 			var root = FakePage.Create("root");
 
-			FakePage.Create("AboutUs").IsChildOf(root);
-			FakePage.Create<CustomPageData>("OtherPage").IsChildOf(root);
-			FakePage.Create("Contact").IsChildOf(root);
+			FakePage.Create("AboutUs").ChildOf(root);
+			FakePage.Create<CustomPageData>("OtherPage").ChildOf(root);
+			FakePage.Create("Contact").ChildOf(root);
 
 			_fake.AddToRepository(root);
 

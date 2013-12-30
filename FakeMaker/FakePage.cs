@@ -32,12 +32,12 @@ namespace EPiFakeMaker
 
 			fake.WithReferenceId(Randomizer.Next(10, 1000));
 
-			fake.IsVisibleInMenu();
+			fake.VisibleInMenu();
 
 			return fake;
 		}
 
-		public virtual FakePage IsChildOf(FakePage parent)
+		public virtual FakePage ChildOf(FakePage parent)
 		{
 			parent.Children.Add(this);
 
@@ -57,19 +57,19 @@ namespace EPiFakeMaker
 		{
 			Page.Property["PageStartPublish"] = new PropertyDate(publishDate);
 
-			HasWorkStatus(VersionStatus.Published);
+			WorkStatus(VersionStatus.Published);
 
 			StopPublishOn(stopPublishDate.HasValue ? stopPublishDate.Value : publishDate.AddYears(1));
 
 			return this;
 		}
 
-		public virtual FakePage IsVisibleInMenu()
+		public virtual FakePage VisibleInMenu()
 		{
 			return SetMenuVisibility(true);
 		}
 
-		public virtual FakePage IsHiddenFromMenu()
+		public virtual FakePage HiddenFromMenu()
 		{
 			return SetMenuVisibility(false);
 		}
@@ -95,7 +95,7 @@ namespace EPiFakeMaker
 			return this;
 		}
 
-		public virtual FakePage HasWorkStatus(VersionStatus status)
+		public virtual FakePage WorkStatus(VersionStatus status)
 		{
 			Page.Property["PageWorkStatus"] = new PropertyNumber((int)status);
 
