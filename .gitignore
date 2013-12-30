@@ -132,6 +132,10 @@ publish/
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line
 #packages/
 
+# NuGet Packages and specifications
+*.nupkg
+*.nuspec
+
 # Windows Azure Build Output
 csx
 *.build.csdef

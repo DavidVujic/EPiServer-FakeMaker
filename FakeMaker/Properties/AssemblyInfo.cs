@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FakeMaker")]
-[assembly: AssemblyDescription("Help features for test driving EPiServer CMS 7")]
+[assembly: AssemblyDescription("Help features for test driving EPiServer CMS 7.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("David Vujic")]
 [assembly: AssemblyProduct("FakeMaker")]
