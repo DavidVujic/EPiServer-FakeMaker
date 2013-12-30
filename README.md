@@ -1,8 +1,7 @@
 ﻿Help features for test driving EPiServer CMS 7
 ========
 
-#### Update
-If you don't want the source code, there is a __NuGet__ package: https://www.nuget.org/packages/FakeMaker/
+__Update__ - if you don't want the source code, there is a __NuGet__ package: https://www.nuget.org/packages/FakeMaker/
 
 Unit testing the EPiServer CMS got a whole lot easier with version 7. However, creating fake content to be used when setting up mocked repositories isn't that smooth, right?
 
