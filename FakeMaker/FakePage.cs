@@ -6,13 +6,13 @@ namespace EPiFakeMaker
 {
 	public class FakePage
 	{
-		public PageData Page { get; private set; }
+		public virtual PageData Page { get; private set; }
 
 		private readonly IList<FakePage> _children;
 
 		private static readonly Random Randomizer = new Random();
 
-		public IList<FakePage> Children { get { return _children; } }
+		public virtual IList<FakePage> Children { get { return _children; } }
 
 		private FakePage()
 		{
@@ -37,7 +37,7 @@ namespace EPiFakeMaker
 			return fake;
 		}
 
-		public FakePage IsChildOf(FakePage parent)
+		public virtual FakePage IsChildOf(FakePage parent)
 		{
 			parent.Children.Add(this);
 
@@ -46,14 +46,14 @@ namespace EPiFakeMaker
 			return this;
 		}
 
-		public FakePage PublishedOn(DateTime publishDate)
+		public virtual FakePage PublishedOn(DateTime publishDate)
 		{
 			 PublishedOn(publishDate, null);
 
 			return this;
 		}
 
-		public FakePage PublishedOn(DateTime publishDate, DateTime? stopPublishDate)
+		public virtual FakePage PublishedOn(DateTime publishDate, DateTime? stopPublishDate)
 		{
 			Page.Property["PageStartPublish"] = new PropertyDate(publishDate);
 
@@ -64,45 +64,45 @@ namespace EPiFakeMaker
 			return this;
 		}
 
-		public FakePage IsVisibleInMenu()
+		public virtual FakePage IsVisibleInMenu()
 		{
 			return SetMenuVisibility(true);
 		}
 
-		public FakePage IsHiddenFromMenu()
+		public virtual FakePage IsHiddenFromMenu()
 		{
 			return SetMenuVisibility(false);
 		}
 
-		public FakePage SetMenuVisibility(bool isVisible)
+		public virtual FakePage SetMenuVisibility(bool isVisible)
 		{
 			Page.Property["PageVisibleInMenu"] = new PropertyBoolean(isVisible);
 
 			return this;
 		}
 
-		public FakePage WithReferenceId(int referenceId)
+		public virtual FakePage WithReferenceId(int referenceId)
 		{
 			Page.Property["PageLink"] = new PropertyPageReference(new PageReference(referenceId));
 
 			return this;
 		}
 
-		public FakePage StopPublishOn(DateTime stopPublishDate)
+		public virtual FakePage StopPublishOn(DateTime stopPublishDate)
 		{
 			Page.Property["PageStopPublish"] = new PropertyDate(stopPublishDate);
 
 			return this;
 		}
 
-		public FakePage HasWorkStatus(VersionStatus status)
+		public virtual FakePage HasWorkStatus(VersionStatus status)
 		{
 			Page.Property["PageWorkStatus"] = new PropertyNumber((int)status);
 
 			return this;
 		}
 
-		public T To<T>() where T : PageData
+		public virtual T To<T>() where T : PageData
 		{
 			return Page as T;
 		}
