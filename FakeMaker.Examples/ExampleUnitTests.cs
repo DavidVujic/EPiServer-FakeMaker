@@ -170,6 +170,67 @@ namespace EPiFakeMaker.Examples
 			// Assert
 			Assert.That(pages.Count(), Is.EqualTo(1));
 		}
+
+		[Test]
+		public void Get_pages_with_certain_pagetypeid()
+		{
+			// Arrange
+			var root = FakePage.Create("root");
+
+			FakePage.Create("AboutUs").ChildOf(root).WithContentTypeId(1);
+			FakePage.Create("OtherPage").ChildOf(root).WithContentTypeId(2);
+			FakePage.Create("Contact").ChildOf(root).WithContentTypeId(3);
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var pages = ExampleFindPagesHelper.GetChildrenOf(root.Page.ContentLink, _fake.ContentRepository).Where(p => p.ContentTypeID == 2);
+
+			// Assert
+			Assert.That(pages.Count(), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void Get_pages_with_custom_property()
+		{
+			// Arrange
+			var root = FakePage.Create("root");
+
+			FakePage.Create("AboutUs").ChildOf(root);
+			FakePage.Create("OtherPage").ChildOf(root).WithProperty("CustomProperty", new PropertyString("Custom value"));
+			FakePage.Create("Contact").ChildOf(root);
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var pages =
+				ExampleFindPagesHelper.GetChildrenOf(root.Page.ContentLink, _fake.ContentRepository)
+					.Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
+
+			// Assert
+			Assert.That(pages.Count(), Is.EqualTo(1));
+		}
+
+		[Test]
+		public void Get_pages_with_certain_languagebranch()
+		{
+			// Arrange
+			var root = FakePage.Create("root").WithLanguageBranch("en");
+
+			FakePage.Create("AboutUs").ChildOf(root).WithLanguageBranch("en");
+			FakePage.Create("OtherPage").ChildOf(root).WithLanguageBranch("sv");
+			FakePage.Create("Contact").ChildOf(root).WithLanguageBranch("en");
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var pages =
+				ExampleFindPagesHelper.GetChildrenOf(root.Page.ContentLink, _fake.ContentRepository)
+					.Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
+
+			// Assert
+			Assert.That(pages.Count(), Is.EqualTo(1));
+		}
 	}
 
 	public class CustomPageData : PageData
