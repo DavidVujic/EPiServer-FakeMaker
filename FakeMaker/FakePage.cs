@@ -88,6 +88,27 @@ namespace EPiFakeMaker
 			return this;
 		}
 
+		public FakePage WithLanguageBranch(string languageBranch)
+		{
+			Page.Property["PageLanguageBranch"] = new PropertyString(languageBranch);
+
+			return this;
+		}
+
+		public virtual FakePage WithProperty(string propertyName, PropertyData propertyData)
+		{
+			Page.Property[propertyName] = propertyData;
+
+			return this;
+		}
+
+		public FakePage WithContentTypeId(int contentTypeId)
+		{
+			Page.Property["PageTypeID"] = new PropertyNumber(contentTypeId);
+
+			return this;
+		}
+
 		public virtual FakePage StopPublishOn(DateTime stopPublishDate)
 		{
 			Page.Property["PageStopPublish"] = new PropertyDate(stopPublishDate);
