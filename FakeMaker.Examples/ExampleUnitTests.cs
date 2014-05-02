@@ -231,6 +231,35 @@ namespace EPiFakeMaker.Examples
 			// Assert
 			Assert.That(pages.Count(), Is.EqualTo(1));
 		}
+
+		[Test]
+		public void Get_descendants_from_with_children()
+		{
+			// Arrange
+			var root =
+				FakePage.Create("root")
+					.WithChildren(
+						new List<FakePage>
+							{
+								FakePage.Create("AboutUs"),
+								FakePage.Create("News").WithChildren(new List<FakePage>
+										{
+											FakePage.Create("News item 1"), 
+											FakePage.Create("News item 2")
+										}),
+								FakePage.Create("Contact")
+							});
+
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var pages =
+				ExampleFindPagesHelper.GetDescendantsOf(root.Page.ContentLink, _fake.ContentRepository);
+
+			// Assert
+			Assert.That(pages.Count(), Is.EqualTo(5));
+		}
 	}
 
 	public class CustomPageData : PageData
