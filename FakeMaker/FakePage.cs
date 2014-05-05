@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EPiServer.Core;
 
 namespace EPiFakeMaker
@@ -105,6 +106,13 @@ namespace EPiFakeMaker
 		public virtual FakePage WithContentTypeId(int contentTypeId)
 		{
 			Page.Property["PageTypeID"] = new PropertyNumber(contentTypeId);
+
+			return this;
+		}
+
+		public virtual FakePage WithChildren(IEnumerable<FakePage> children)
+		{
+			children.ToList().ForEach(c => c.ChildOf(this));
 
 			return this;
 		}
