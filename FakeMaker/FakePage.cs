@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using EPiServer.Core;
+using EPiServer.Web;
+using Moq;
 
 namespace EPiFakeMaker
 {
@@ -11,6 +13,8 @@ namespace EPiFakeMaker
 
 		private readonly IList<FakePage> _children;
 
+		private Mock<SiteDefinition> _siteDefinitonMock;
+
 		private static readonly Random Randomizer = new Random();
 
 		public virtual IList<FakePage> Children { get { return _children; } }
@@ -18,6 +22,17 @@ namespace EPiFakeMaker
 		private FakePage()
 		{
 			_children = new List<FakePage>();
+		}
+
+		private static Mock<SiteDefinition> SetupSiteDefinition()
+		{
+			var mock = new Mock<SiteDefinition>();
+
+			mock.SetupGet(def => def.Name).Returns("FakeMakerSiteDefinition");
+
+			SiteDefinition.Current = mock.Object;
+
+			return mock;
 		}
 
 		public static FakePage Create(string pageName)
@@ -127,6 +142,18 @@ namespace EPiFakeMaker
 		public virtual FakePage WorkStatus(VersionStatus status)
 		{
 			Page.Property["PageWorkStatus"] = new PropertyNumber((int)status);
+
+			return this;
+		}
+
+		public virtual FakePage AsStartPage()
+		{
+			if (_siteDefinitonMock == null)
+			{
+				_siteDefinitonMock = SetupSiteDefinition();
+			}
+
+			_siteDefinitonMock.SetupGet(def => def.StartPage).Returns(Page.ContentLink);
 
 			return this;
 		}

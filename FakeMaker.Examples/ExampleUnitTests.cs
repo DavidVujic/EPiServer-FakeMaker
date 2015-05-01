@@ -260,6 +260,18 @@ namespace EPiFakeMaker.Examples
 			// Assert
 			Assert.That(pages.Count(), Is.EqualTo(5));
 		}
+
+		[Test]
+		public void Set_a_page_as_start_page()
+		{
+			var root = FakePage.Create<PageData>("Root");
+			var start = FakePage.Create<PageData>("Start").ChildOf(root).AsStartPage();
+			FakePage.Create<PageData>("Child").ChildOf(start);
+
+			_fake.AddToRepository(root);
+
+			Assert.That(ContentReference.StartPage, Is.EqualTo(start.Page.ContentLink));
+		}
 	}
 
 	public class CustomPageData : PageData
