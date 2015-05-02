@@ -1,4 +1,4 @@
-﻿Help features for test driving EPiServer CMS 7
+﻿Help features for test driving EPiServer CMS 7 and 8
 ========
 
 __Update__ - if you don't want the source code, there is a __NuGet__ package: https://www.nuget.org/packages/FakeMaker/
