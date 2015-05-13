@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using EPiServer;
 using EPiServer.Core;
 using EPiServer.Web;
 using Moq;
@@ -18,6 +20,8 @@ namespace EPiFakeMaker
 		private static readonly Random Randomizer = new Random();
 
 		public virtual IList<FakePage> Children { get { return _children; } }
+
+		public Expression<Func<IContentRepository, IContent>> RepoGet;
 
 		private FakePage()
 		{
@@ -49,6 +53,8 @@ namespace EPiFakeMaker
 			fake.WithReferenceId(Randomizer.Next(10, 1000));
 
 			fake.VisibleInMenu();
+
+			fake.RepoGet = repo => repo.Get<T>(fake.Page.ContentLink);
 
 			return fake;
 		}

@@ -272,6 +272,47 @@ namespace EPiFakeMaker.Examples
 
 			Assert.That(ContentReference.StartPage, Is.EqualTo(start.Page.ContentLink));
 		}
+
+		[Test]
+		public void Get_page_of_explicit_page_type()
+		{
+			// Arrange
+			var customPage = FakePage
+				.Create<CustomPageData>("MyCustomPage");
+
+			_fake.AddToRepository(customPage);
+
+			// Act
+			var result = _fake.ContentRepository.Get<CustomPageData>(customPage.Page.ContentLink);
+
+			// Assert
+			Assert.IsNotNull(result);
+		}
+
+		[Test]
+		public void Get_children_as_explicit_page_type()
+		{
+			// Arrange
+			var root = FakePage
+				.Create("Root");
+
+			var start = FakePage
+				.Create("Start")
+				.ChildOf(root).AsStartPage();
+
+			FakePage
+				.Create<CustomPageData>("About us")
+				.ChildOf(start);
+
+			_fake.AddToRepository(root);
+
+			// Act
+			var children = _fake.ContentRepository.GetChildren<CustomPageData>(ContentReference.StartPage);
+
+			// Assert
+			Assert.That(children.Count(), Is.EqualTo(1));
+
+		}
 	}
 
 	public class CustomPageData : PageData
