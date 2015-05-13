@@ -290,6 +290,28 @@ namespace EPiFakeMaker.Examples
 		}
 
 		[Test]
+		public void Get_page_of_explicit_base_page_type()
+		{
+			// Arrange
+			var fakePage = FakePage
+				.Create<InteritsCustomPageData>("MyInheritedCustomPage");
+
+			_fake.AddToRepository(fakePage);
+
+			// Custom mocking that is not handled by FakeMaker
+			_fake.GetMockForFakeContentRepository()
+				.Setup(repo => repo.Get<CustomPageData>(fakePage.Page.ContentLink))
+				.Returns(fakePage.To<CustomPageData>());
+
+			// Act
+			var result = _fake.ContentRepository.Get<CustomPageData>(fakePage.Page.ContentLink);
+
+			// Assert
+			Assert.IsNotNull(result);
+			Assert.That(result is InteritsCustomPageData);
+		}
+
+		[Test]
 		public void Get_children_as_explicit_page_type()
 		{
 			// Arrange
@@ -300,11 +322,18 @@ namespace EPiFakeMaker.Examples
 				.Create("Start")
 				.ChildOf(root).AsStartPage();
 
-			FakePage
+			var aboutUs = FakePage
 				.Create<CustomPageData>("About us")
 				.ChildOf(start);
 
 			_fake.AddToRepository(root);
+
+			var customPageDataList = new List<CustomPageData> { aboutUs.To<CustomPageData>() };
+
+			// Custom mocking that is not handled by FakeMaker
+			_fake.GetMockForFakeContentRepository()
+				.Setup(repo => repo.GetChildren<CustomPageData>(ContentReference.StartPage))
+				.Returns(customPageDataList);
 
 			// Act
 			var children = _fake.ContentRepository.GetChildren<CustomPageData>(ContentReference.StartPage);
@@ -318,6 +347,10 @@ namespace EPiFakeMaker.Examples
 	public class CustomPageData : PageData
 	{
 		public string CustomPageName { get; set; }
+	}
+
+	public class InteritsCustomPageData : CustomPageData
+	{
 	}
 
 	/// <summary>
