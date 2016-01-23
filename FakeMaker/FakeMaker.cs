@@ -1,136 +1,117 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EPiServer;
-using EPiServer.BaseLibrary;
+﻿using EPiServer;
 using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using Moq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EPiFakeMaker
 {
-	public class FakeMaker
-	{
-		private readonly Mock<IContentRepository> _contentRepo;
+    public class FakeMaker
+    {
+        private readonly Mock<IContentRepository> _contentRepo;
 
-		public IContentRepository ContentRepository { get { return _contentRepo.Object; } }
+        public IContentRepository ContentRepository { get { return _contentRepo.Object; } }
 
-		public FakeMaker(bool prepareServiceLocatorWithFakeRepository = true)
-		{
-			SetupMocksForClassFactory();
+        public FakeMaker(bool prepareServiceLocatorWithFakeRepository = true)
+        {
+            _contentRepo = new Mock<IContentRepository>();
 
-			_contentRepo = new Mock<IContentRepository>();
+            if (!prepareServiceLocatorWithFakeRepository)
+            {
+                return;
+            }
 
-			if (!prepareServiceLocatorWithFakeRepository)
-			{
-				return;
-			}
+            PrepareServiceLocatorWith(_contentRepo.Object);
+        }
 
-			PrepareServiceLocatorWith(_contentRepo.Object);
-		}
+        public Mock<IContentRepository> GetMockForFakeContentRepository()
+        {
+            return _contentRepo;
+        }
 
-		public Mock<IContentRepository> GetMockForFakeContentRepository()
-		{
-			return _contentRepo;
-		}
+        public void AddToRepository(FakePage fake)
+        {
+            _contentRepo
+                .Setup(repo => repo.Get<IContent>(fake.Page.ContentLink))
+                .Returns(fake.Page);
 
-		public void AddToRepository(FakePage fake)
-		{
-			_contentRepo
-				.Setup(repo => repo.Get<IContent>(fake.Page.ContentLink))
-				.Returns(fake.Page);
+            _contentRepo
+                .Setup(repo => repo.Get<PageData>(fake.Page.ContentLink))
+                .Returns(fake.Page);
 
-			_contentRepo
-				.Setup(repo => repo.Get<PageData>(fake.Page.ContentLink))
-				.Returns(fake.Page);
+            _contentRepo
+                .Setup(fake.RepoGet)
+                .Returns(fake.Page);
 
-			_contentRepo
-				.Setup(fake.RepoGet)
-				.Returns(fake.Page);
+            AddToRepository(fake.Children, fake);
+        }
 
-			AddToRepository(fake.Children, fake);
-		}
+        private static void PrepareServiceLocatorWith<T>(T repository)
+        {
+            var serviceLocator = new Mock<IServiceLocator>();
 
-		private static void SetupMocksForClassFactory()
-		{
-			var fakeEpiBaseLibraryContext = new Mock<IContext>();
-			fakeEpiBaseLibraryContext
-				.Setup(fake => fake.RequestTime)
-				.Returns(DateTime.Now);
+            serviceLocator
+                .Setup(locator => locator.GetInstance<T>())
+                .Returns(repository);
 
-			var fakeBaseFactory = new Mock<IBaseLibraryFactory>();
-			fakeBaseFactory
-				.Setup(factory => factory.CreateContext())
-				.Returns(fakeEpiBaseLibraryContext.Object);
+            ServiceLocator.SetLocator(serviceLocator.Object);
+        }
 
-			ClassFactory.Instance = fakeBaseFactory.Object;
-		}
+        private void AddToRepository(IList<FakePage> fakeList, FakePage parent)
+        {
+            var contentList = fakeList.Select(fake => fake.Page).ToList();
 
-		private static void PrepareServiceLocatorWith<T>(T repository)
-		{
-			var serviceLocator = new Mock<IServiceLocator>();
+            _contentRepo
+                .Setup(repo => repo.GetChildren<IContent>(parent.Page.ContentLink))
+                .Returns(contentList);
 
-			serviceLocator
-				.Setup(locator => locator.GetInstance<T>())
-				.Returns(repository);
+            _contentRepo
+                .Setup(repo => repo.GetChildren<PageData>(parent.Page.ContentLink))
+                .Returns(contentList);
 
-			ServiceLocator.SetLocator(serviceLocator.Object);
-		}
+            var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
 
-		private void AddToRepository(IList<FakePage> fakeList, FakePage parent)
-		{
-			var contentList = fakeList.Select(fake => fake.Page).ToList();
+            _contentRepo
+                .Setup(repo => repo.GetDescendents(parent.Page.ContentLink))
+                .Returns(parentDescendants);
 
-			_contentRepo
-				.Setup(repo => repo.GetChildren<IContent>(parent.Page.ContentLink))
-				.Returns(contentList);
+            foreach (var fake in fakeList)
+            {
+                var item = fake;
 
-			_contentRepo
-				.Setup(repo => repo.GetChildren<PageData>(parent.Page.ContentLink))
-				.Returns(contentList);
+                _contentRepo
+                    .Setup(repo => repo.Get<IContent>(item.Page.ContentLink))
+                    .Returns(item.Page);
 
-			var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
+                _contentRepo
+                    .Setup(repo => repo.Get<PageData>(item.Page.ContentLink))
+                    .Returns(item.Page);
 
-			_contentRepo
-				.Setup(repo => repo.GetDescendents(parent.Page.ContentLink))
-				.Returns(parentDescendants);
+                _contentRepo
+                    .Setup(item.RepoGet)
+                    .Returns(item.Page);
 
-			foreach (var fake in fakeList)
-			{
-				var item = fake;
+                var pageDescendants = GetDescendantsOf(item, new List<IContent>());
 
-				_contentRepo
-					.Setup(repo => repo.Get<IContent>(item.Page.ContentLink))
-					.Returns(item.Page);
+                _contentRepo
+                    .Setup(repo => repo.GetDescendents(item.Page.ContentLink))
+                    .Returns(pageDescendants);
 
-				_contentRepo
-					.Setup(repo => repo.Get<PageData>(item.Page.ContentLink))
-					.Returns(item.Page);
+                AddToRepository(item.Children, item);
+            }
+        }
 
-				_contentRepo
-					.Setup(item.RepoGet)
-					.Returns(item.Page);
+        private static IEnumerable<ContentReference> GetDescendantsOf(FakePage fake, ICollection<IContent> descendants)
+        {
+            foreach (var child in fake.Children)
+            {
+                descendants.Add(child.Page);
 
-				var pageDescendants = GetDescendantsOf(item, new List<IContent>());
+                GetDescendantsOf(child, descendants);
+            }
 
-				_contentRepo
-					.Setup(repo => repo.GetDescendents(item.Page.ContentLink))
-					.Returns(pageDescendants);
-
-				AddToRepository(item.Children, item);
-			}
-		}
-
-		private static IEnumerable<ContentReference> GetDescendantsOf(FakePage fake, ICollection<IContent> descendants)
-		{
-			foreach (var child in fake.Children)
-			{
-				descendants.Add(child.Page);
-
-				GetDescendantsOf(child, descendants);
-			}
-
-			return descendants.Select(descendant => descendant.ContentLink).ToList();
-		}
-	}
+            return descendants.Select(descendant => descendant.ContentLink).ToList();
+        }
+    }
 }
