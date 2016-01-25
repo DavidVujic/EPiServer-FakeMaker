@@ -1,5 +1,7 @@
-﻿Help features for test driving EPiServer CMS 7 and 8
+﻿Help features for test driving EPiServer CMS 7, 8 and 9
 ========
+
+__Note__ - This branch (master) depends on EPiServer CMS version 9 references. Need version 8 support? Clone this repository and checkout the __epi-8-support__ branch.
 
 __Update__ - if you don't want the source code, there is a __NuGet__ package: https://www.nuget.org/packages/FakeMaker/
 
