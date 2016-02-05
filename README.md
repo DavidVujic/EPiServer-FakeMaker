@@ -60,7 +60,7 @@ You can pass in the fake repository to the code you are about to test, by inject
 
 You can also use
 ```cs
-ServiceLocator.Current.GetRepository<IContentRepository>();
+ServiceLocator.Current.GetInstance<IContentRepository>();
 ```
 as an alternative to Dependency Injection in your code under test.
 
