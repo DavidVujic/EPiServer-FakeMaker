@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/jk8x396fet3lxu84/branch/master?svg=true)](https://ci.appveyor.com/project/DavidVujic/episerver-fakemaker/branch/master)
+
+
 ﻿Help features for test driving EPiServer CMS
 ========
 
