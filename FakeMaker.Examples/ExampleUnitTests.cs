@@ -171,7 +171,7 @@ namespace EPiFakeMaker.Examples
 			Assert.That(pages.Count(), Is.EqualTo(1));
 		}
 
-		[Test]
+        [Test]
 		public void Get_pages_with_certain_pagetypeid()
 		{
 			// Arrange
@@ -311,7 +311,7 @@ namespace EPiFakeMaker.Examples
 			Assert.That(result is InteritsCustomPageData);
 		}
 
-		[Test]
+        [Test]
 		public void Get_children_as_explicit_page_type()
 		{
 			// Arrange
@@ -340,9 +340,91 @@ namespace EPiFakeMaker.Examples
 
 			// Assert
 			Assert.That(children.Count(), Is.EqualTo(1));
-
 		}
-	}
+
+        [Test]
+        public void Get_instance_of_base_type()
+        {
+            // Arrange
+            var fakePage = FakePage
+                .Create<PageData>("MyPage");
+
+            _fake.AddToRepository(fakePage);
+
+            // Act
+            var result = _fake.ContentRepository.Get<ContentData>(fakePage.Page.ContentLink);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.That(result is ContentData);
+        }
+
+        [Test]
+        public void Get_instance_of_base_interface_type()
+        {
+            // Arrange
+            var fakePage = FakePage
+                .Create<PageData>("MyPage");
+
+            _fake.AddToRepository(fakePage);
+
+            // Act
+            var result = _fake.ContentRepository.Get<IContentData>(fakePage.Page.ContentLink);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.That(result is IContentData);
+        }
+
+        [Test]
+        public void Get_children_as_base_content_type()
+        {
+            // Arrange
+            var root = FakePage
+                .Create("Root");
+
+            var start = FakePage
+                .Create("Start")
+                .ChildOf(root).AsStartPage();
+
+            var aboutUs = FakePage
+                .Create("About us")
+                .ChildOf(start);
+
+            _fake.AddToRepository(root);
+
+            // Act
+            var children = _fake.ContentRepository.GetChildren<ContentData>(ContentReference.StartPage);
+
+            // Assert
+            Assert.That(children.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Get_children_as_base_content_interface_type()
+        {
+            // Arrange
+            var root = FakePage
+                .Create("Root");
+
+            var start = FakePage
+                .Create("Start")
+                .ChildOf(root).AsStartPage();
+
+            var aboutUs = FakePage
+                .Create("About us")
+                .ChildOf(start);
+
+            _fake.AddToRepository(root);
+
+            // Act
+            var children = _fake.ContentRepository.GetChildren<IContentData>(ContentReference.StartPage);
+
+            // Assert
+            Assert.That(children.Count(), Is.EqualTo(1));
+
+        }
+    }
 
 	public class CustomPageData : PageData
 	{
