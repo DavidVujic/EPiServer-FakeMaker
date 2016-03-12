@@ -346,8 +346,7 @@ namespace EPiFakeMaker.Examples
         public void Get_instance_of_base_type()
         {
             // Arrange
-            var fakePage = FakePage
-                .Create<PageData>("MyPage");
+            var fakePage = FakePage.Create("MyPage");
 
             _fake.AddToRepository(fakePage);
 
@@ -363,8 +362,7 @@ namespace EPiFakeMaker.Examples
         public void Get_instance_of_base_interface_type()
         {
             // Arrange
-            var fakePage = FakePage
-                .Create<PageData>("MyPage");
+            var fakePage = FakePage.Create("MyPage");
 
             _fake.AddToRepository(fakePage);
 
@@ -422,7 +420,6 @@ namespace EPiFakeMaker.Examples
 
             // Assert
             Assert.That(children.Count(), Is.EqualTo(1));
-
         }
     }
 

@@ -29,11 +29,15 @@ namespace EPiFakeMaker
         {
             return _contentRepo;
         }
-
+        
         public void AddToRepository(FakePage fake)
-        {
+        {  
             _contentRepo
                 .Setup(repo => repo.Get<IContent>(fake.Page.ContentLink))
+                .Returns(fake.Page);
+
+            _contentRepo
+                .Setup(repo => repo.Get<IContentData>(fake.Page.ContentLink))
                 .Returns(fake.Page);
 
             _contentRepo
@@ -42,10 +46,6 @@ namespace EPiFakeMaker
 
             _contentRepo
                 .Setup(repo => repo.Get<ContentData>(fake.Page.ContentLink))
-                .Returns(fake.Page);
-
-            _contentRepo
-                .Setup(repo => repo.Get<IContentData>(fake.Page.ContentLink))
                 .Returns(fake.Page);
 
             _contentRepo
@@ -75,15 +75,15 @@ namespace EPiFakeMaker
                 .Returns(contentList);
 
             _contentRepo
+               .Setup(repo => repo.GetChildren<IContentData>(parent.Page.ContentLink))
+               .Returns(contentList);
+
+            _contentRepo
                 .Setup(repo => repo.GetChildren<PageData>(parent.Page.ContentLink))
                 .Returns(contentList);
 
             _contentRepo
                 .Setup(repo => repo.GetChildren<ContentData>(parent.Page.ContentLink))
-                .Returns(contentList);
-
-            _contentRepo
-                .Setup(repo => repo.GetChildren<IContentData>(parent.Page.ContentLink))
                 .Returns(contentList);
 
             var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
@@ -101,15 +101,15 @@ namespace EPiFakeMaker
                     .Returns(item.Page);
 
                 _contentRepo
+                    .Setup(repo => repo.Get<IContentData>(item.Page.ContentLink))
+                    .Returns(item.Page);
+
+                _contentRepo
                     .Setup(repo => repo.Get<PageData>(item.Page.ContentLink))
                     .Returns(item.Page);
 
                 _contentRepo
                     .Setup(repo => repo.Get<ContentData>(item.Page.ContentLink))
-                    .Returns(item.Page);
-
-                _contentRepo
-                    .Setup(repo => repo.Get<IContentData>(item.Page.ContentLink))
                     .Returns(item.Page);
 
                 _contentRepo
