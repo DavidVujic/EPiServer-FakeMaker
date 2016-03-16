@@ -44,7 +44,7 @@ namespace EPiFakeMaker.Examples
 		}
 
 		[Test]
-		public void Get_descendants_by_using_ServiceLocator()
+		public void Get_descendants_by_using_ServiceLocator_and_contentrepository()
 		{
 			// Arrange
 			var root = FakePage
@@ -60,14 +60,43 @@ namespace EPiFakeMaker.Examples
 
 			_fake.AddToRepository(root);
 
-			// Act
-			var descendants = ExampleFindPagesHelper.GetDescendantsOf(root.Page.ContentLink);
+            // Act
+            var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
+
+            var descendants = repository.GetDescendents(root.Page.ContentLink);
 
 			//Assert
 			Assert.That(descendants.Count(), Is.EqualTo(2));
 		}
 
-		[Test]
+        [Test]
+        public void Get_descendants_by_using_ServiceLocator_and_contentloader()
+        {
+            // Arrange
+            var root = FakePage
+                .Create("Root");
+
+            var start = FakePage
+                .Create("Start")
+                .ChildOf(root);
+
+            FakePage
+                .Create("About us")
+                .ChildOf(start);
+
+            _fake.AddToRepository(root);
+
+            // Act
+            var repository = ServiceLocator.Current.GetInstance<IContentLoader>();
+
+            var descendants = repository.GetDescendents(root.Page.ContentLink);
+
+            //Assert
+            Assert.That(descendants.Count(), Is.EqualTo(2));
+        }
+
+
+        [Test]
 		public void Get_children_of_first_child()
 		{
 			// Arrange
@@ -445,13 +474,6 @@ namespace EPiFakeMaker.Examples
 
 		public static IEnumerable<ContentReference> GetDescendantsOf(ContentReference root, IContentRepository repository)
 		{
-			return repository.GetDescendents(root);
-		}
-
-		public static IEnumerable<ContentReference> GetDescendantsOf(ContentReference root)
-		{
-			var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
-
 			return repository.GetDescendents(root);
 		}
 
