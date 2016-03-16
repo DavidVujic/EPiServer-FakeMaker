@@ -63,7 +63,7 @@ namespace EPiFakeMaker
 
             CreateMockFor<PageData>(parent, fakeList);
             CreateMockFor<ContentData>(parent, fakeList);
-         
+
             var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
 
             _contentRepo
@@ -75,10 +75,6 @@ namespace EPiFakeMaker
                 var item = fake;
 
                 CreateMockFor<IContent>(item);
-                CreateMockFor<IContentData>(item);
-
-                CreateMockFor<PageData>(item);
-                CreateMockFor<ContentData>(item);
 
                 _contentRepo
                     .Setup(item.RepoGet)
