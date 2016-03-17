@@ -519,7 +519,7 @@ namespace EPiFakeMaker.Examples
 
     /// <summary>
     /// This is an example of a helper class.
-    /// The repository is injected to the class.
+    /// The repository is injected to the methods of the class.
     /// </summary>
     public static class HelperExamples
     {
