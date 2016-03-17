@@ -9,164 +9,164 @@ using Moq;
 
 namespace EPiFakeMaker
 {
-	public class FakePage
-	{
-		public virtual PageData Page { get; private set; }
+    public class FakePage
+    {
+        public virtual PageData Page { get; private set; }
 
-		private readonly IList<FakePage> _children;
+        private readonly IList<FakePage> _children;
 
-		private Mock<SiteDefinition> _siteDefinitonMock;
+        private Mock<SiteDefinition> _siteDefinitonMock;
 
-		private static readonly Random Randomizer = new Random();
+        private static readonly Random Randomizer = new Random();
 
-		public virtual IList<FakePage> Children { get { return _children; } }
+        public virtual IList<FakePage> Children { get { return _children; } }
 
-		public Expression<Func<IContentRepository, IContent>> RepoGet;
+        public Expression<Func<IContentRepository, IContent>> RepoGet;
 
-		private FakePage()
-		{
-			_children = new List<FakePage>();
-		}
+        private FakePage()
+        {
+            _children = new List<FakePage>();
+        }
 
-		private static Mock<SiteDefinition> SetupSiteDefinition()
-		{
-			var mock = new Mock<SiteDefinition>();
+        private static Mock<SiteDefinition> SetupSiteDefinition()
+        {
+            var mock = new Mock<SiteDefinition>();
 
-			mock.SetupGet(def => def.Name).Returns("FakeMakerSiteDefinition");
+            mock.SetupGet(def => def.Name).Returns("FakeMakerSiteDefinition");
 
-			SiteDefinition.Current = mock.Object;
+            SiteDefinition.Current = mock.Object;
 
-			return mock;
-		}
+            return mock;
+        }
 
-		public static FakePage Create(string pageName)
-		{
-			return Create<PageData>(pageName);
-		}
+        public static FakePage Create(string pageName)
+        {
+            return Create<PageData>(pageName);
+        }
 
-		public static FakePage Create<T>(string pageName) where T : PageData, new()
-		{
-			var fake = new FakePage {Page = new T()};
+        public static FakePage Create<T>(string pageName) where T : PageData, new()
+        {
+            var fake = new FakePage { Page = new T() };
 
-			fake.Page.Property["PageName"] = new PropertyString(pageName);
+            fake.Page.Property["PageName"] = new PropertyString(pageName);
 
-			fake.WithReferenceId(Randomizer.Next(10, 1000));
+            fake.WithReferenceId(Randomizer.Next(10, 1000));
 
-			fake.VisibleInMenu();
+            fake.VisibleInMenu();
 
-			fake.RepoGet = repo => repo.Get<T>(fake.Page.ContentLink);
+            fake.RepoGet = repo => repo.Get<T>(fake.Page.ContentLink);
 
-			return fake;
-		}
+            return fake;
+        }
 
-		public virtual FakePage ChildOf(FakePage parent)
-		{
-			parent.Children.Add(this);
+        public virtual FakePage ChildOf(FakePage parent)
+        {
+            parent.Children.Add(this);
 
-			Page.Property["PageParentLink"] = new PropertyPageReference(parent.Page.ContentLink);
+            Page.Property["PageParentLink"] = new PropertyPageReference(parent.Page.ContentLink);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage PublishedOn(DateTime publishDate)
-		{
-			 PublishedOn(publishDate, null);
+        public virtual FakePage PublishedOn(DateTime publishDate)
+        {
+            PublishedOn(publishDate, null);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage PublishedOn(DateTime publishDate, DateTime? stopPublishDate)
-		{
-			Page.Property["PageStartPublish"] = new PropertyDate(publishDate);
+        public virtual FakePage PublishedOn(DateTime publishDate, DateTime? stopPublishDate)
+        {
+            Page.Property["PageStartPublish"] = new PropertyDate(publishDate);
 
-			WorkStatus(VersionStatus.Published);
+            WorkStatus(VersionStatus.Published);
 
-			StopPublishOn(stopPublishDate.HasValue ? stopPublishDate.Value : publishDate.AddYears(1));
+            StopPublishOn(stopPublishDate.HasValue ? stopPublishDate.Value : publishDate.AddYears(1));
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage VisibleInMenu()
-		{
-			return SetMenuVisibility(true);
-		}
+        public virtual FakePage VisibleInMenu()
+        {
+            return SetMenuVisibility(true);
+        }
 
-		public virtual FakePage HiddenFromMenu()
-		{
-			return SetMenuVisibility(false);
-		}
+        public virtual FakePage HiddenFromMenu()
+        {
+            return SetMenuVisibility(false);
+        }
 
-		public virtual FakePage SetMenuVisibility(bool isVisible)
-		{
-			Page.Property["PageVisibleInMenu"] = new PropertyBoolean(isVisible);
+        public virtual FakePage SetMenuVisibility(bool isVisible)
+        {
+            Page.Property["PageVisibleInMenu"] = new PropertyBoolean(isVisible);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage WithReferenceId(int referenceId)
-		{
-			Page.Property["PageLink"] = new PropertyPageReference(new PageReference(referenceId));
+        public virtual FakePage WithReferenceId(int referenceId)
+        {
+            Page.Property["PageLink"] = new PropertyPageReference(new PageReference(referenceId));
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage WithLanguageBranch(string languageBranch)
-		{
-			Page.Property["PageLanguageBranch"] = new PropertyString(languageBranch);
+        public virtual FakePage WithLanguageBranch(string languageBranch)
+        {
+            Page.Property["PageLanguageBranch"] = new PropertyString(languageBranch);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage WithProperty(string propertyName, PropertyData propertyData)
-		{
-			Page.Property[propertyName] = propertyData;
+        public virtual FakePage WithProperty(string propertyName, PropertyData propertyData)
+        {
+            Page.Property[propertyName] = propertyData;
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage WithContentTypeId(int contentTypeId)
-		{
-			Page.Property["PageTypeID"] = new PropertyNumber(contentTypeId);
+        public virtual FakePage WithContentTypeId(int contentTypeId)
+        {
+            Page.Property["PageTypeID"] = new PropertyNumber(contentTypeId);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage WithChildren(IEnumerable<FakePage> children)
-		{
-			children.ToList().ForEach(c => c.ChildOf(this));
+        public virtual FakePage WithChildren(IEnumerable<FakePage> children)
+        {
+            children.ToList().ForEach(c => c.ChildOf(this));
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage StopPublishOn(DateTime stopPublishDate)
-		{
-			Page.Property["PageStopPublish"] = new PropertyDate(stopPublishDate);
+        public virtual FakePage StopPublishOn(DateTime stopPublishDate)
+        {
+            Page.Property["PageStopPublish"] = new PropertyDate(stopPublishDate);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage WorkStatus(VersionStatus status)
-		{
-			Page.Property["PageWorkStatus"] = new PropertyNumber((int)status);
+        public virtual FakePage WorkStatus(VersionStatus status)
+        {
+            Page.Property["PageWorkStatus"] = new PropertyNumber((int)status);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual FakePage AsStartPage()
-		{
-			if (_siteDefinitonMock == null)
-			{
-				_siteDefinitonMock = SetupSiteDefinition();
-			}
+        public virtual FakePage AsStartPage()
+        {
+            if (_siteDefinitonMock == null)
+            {
+                _siteDefinitonMock = SetupSiteDefinition();
+            }
 
-			_siteDefinitonMock.SetupGet(def => def.StartPage).Returns(Page.ContentLink);
+            _siteDefinitonMock.SetupGet(def => def.StartPage).Returns(Page.ContentLink);
 
-			return this;
-		}
+            return this;
+        }
 
-		public virtual T To<T>() where T : PageData
-		{
-			return Page as T;
-		}
-	}
+        public virtual T To<T>() where T : PageData
+        {
+            return Page as T;
+        }
+    }
 }
