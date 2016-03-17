@@ -22,7 +22,7 @@ or a page of a specific page type:
 FakePage.Create<CustomPageData>("MyOtherPageName");
 ```
 
-#### Add it to the mocked repository:
+#### Add it to the mocked repository (will be added to both IContentRepository and IContentLoader):
 
 ```cs
 fake.AddToRepository(page);
@@ -33,6 +33,11 @@ fake.AddToRepository(page);
 ```cs
 var repository = fake.ContentRepository;
 ```
+or
+
+```cs
+var loader = fake.ContentLoader;
+```
 
 #### Cast FakePage to PageData
 
@@ -40,12 +45,18 @@ var repository = fake.ContentRepository;
 var page = FakePage.Create("MyPageName").To<PageData>();
 ```
 
-You can pass in the fake repository to the code you are about to test, by injecting it to the class (aka Dependency Injection). The examples uses method parameter injection.
+You can pass in the fake repository to the code you are about to test, by injecting it to the class (aka Dependency Injection).
 
 You can also use 
 ```cs 
 ServiceLocator.Current.GetRepository<IContentRepository>();
 ```
+or
+
+```cs 
+var loader = ServiceLocator.Current.GetInstance<IContentLoader>();
+```
+
 as an alternative to Dependency Injection in your code under test.
 
 __Please contact me if you have feedback or questions about FakeMaker!__

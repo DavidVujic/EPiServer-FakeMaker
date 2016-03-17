@@ -10,19 +10,22 @@ namespace EPiFakeMaker
     public class FakeMaker
     {
         private readonly Mock<IContentRepository> _contentRepo;
+        private readonly Mock<IContentLoader> _contentLoader;
 
         public IContentRepository ContentRepository { get { return _contentRepo.Object; } }
+        public IContentLoader ContentLoader { get { return _contentLoader.Object; } }
 
         public FakeMaker(bool prepareServiceLocatorWithFakeRepository = true)
         {
             _contentRepo = new Mock<IContentRepository>();
+            _contentLoader = new Mock<IContentLoader>();
 
             if (!prepareServiceLocatorWithFakeRepository)
             {
                 return;
             }
 
-            PrepareServiceLocatorWith(_contentRepo.Object);
+            PrepareServiceLocatorWith(_contentRepo.Object, _contentLoader.Object);
         }
 
         public Mock<IContentRepository> GetMockForFakeContentRepository()
@@ -45,13 +48,17 @@ namespace EPiFakeMaker
             AddToRepository(fake.Children, fake);
         }
 
-        private static void PrepareServiceLocatorWith<T>(T repository)
+        private static void PrepareServiceLocatorWith<T, T2>(T repo, T2 loader)
         {
             var serviceLocator = new Mock<IServiceLocator>();
 
             serviceLocator
                 .Setup(locator => locator.GetInstance<T>())
-                .Returns(repository);
+                .Returns(repo);
+
+            serviceLocator
+                .Setup(locator => locator.GetInstance<T2>())
+                .Returns(loader);
 
             ServiceLocator.SetLocator(serviceLocator.Object);
         }
@@ -67,6 +74,10 @@ namespace EPiFakeMaker
             var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
 
             _contentRepo
+                .Setup(repo => repo.GetDescendents(parent.Page.ContentLink))
+                .Returns(parentDescendants);
+
+            _contentLoader
                 .Setup(repo => repo.GetDescendents(parent.Page.ContentLink))
                 .Returns(parentDescendants);
 
@@ -95,6 +106,10 @@ namespace EPiFakeMaker
             _contentRepo
                 .Setup(repo => repo.Get<T>(item.Page.ContentLink))
                 .Returns(item.Page as T);
+
+            _contentLoader
+                .Setup(repo => repo.Get<T>(item.Page.ContentLink))
+                .Returns(item.Page as T);
         }
 
         private void CreateMockFor<T>(FakePage parent, IList<FakePage> fakeList) where T : class, IContentData
@@ -102,6 +117,10 @@ namespace EPiFakeMaker
             var contentList = fakeList.Select(fake => fake.Page as T).ToList();
 
             _contentRepo
+                .Setup(repo => repo.GetChildren<T>(parent.Page.ContentLink))
+                .Returns(contentList);
+
+            _contentLoader
                 .Setup(repo => repo.GetChildren<T>(parent.Page.ContentLink))
                 .Returns(contentList);
         }
