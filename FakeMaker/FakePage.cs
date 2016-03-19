@@ -9,24 +9,33 @@ using Moq;
 
 namespace EPiFakeMaker
 {
-    public class FakePage
+    public interface IFake
     {
-        public virtual PageData Page { get; private set; }
+        IContent Content { get; }
+        IList<IFake> Children { get; }
 
-        private readonly IList<FakePage> _children;
+        Expression<Func<IContentRepository, IContent>> RepoGet { get; }
+        Expression<Func<IContentLoader, IContent>> LoaderGet { get; }
+    }
+
+    public class FakePage : IFake
+    {
+        public virtual IContent Content { get; private set; }
+
+        private readonly IList<IFake> _children;
 
         private Mock<SiteDefinition> _siteDefinitonMock;
 
         private static readonly Random Randomizer = new Random();
 
-        public virtual IList<FakePage> Children { get { return _children; } }
+        public virtual IList<IFake> Children { get { return _children; } }
 
-        public Expression<Func<IContentRepository, IContent>> RepoGet;
-        public Expression<Func<IContentLoader, IContent>> LoaderGet;
+        public Expression<Func<IContentRepository, IContent>> RepoGet { get; private set; }
+        public Expression<Func<IContentLoader, IContent>> LoaderGet { get; private set; }
 
         private FakePage()
         {
-            _children = new List<FakePage>();
+            _children = new List<IFake>();
         }
 
         private static Mock<SiteDefinition> SetupSiteDefinition()
@@ -47,16 +56,16 @@ namespace EPiFakeMaker
 
         public static FakePage Create<T>(string pageName) where T : PageData, new()
         {
-            var fake = new FakePage { Page = new T() };
+            var fake = new FakePage { Content = new T() };
 
-            fake.Page.Property["PageName"] = new PropertyString(pageName);
+            fake.Content.Property["PageName"] = new PropertyString(pageName);
 
             fake.WithReferenceId(Randomizer.Next(10, 1000));
 
             fake.VisibleInMenu();
 
-            fake.RepoGet = repo => repo.Get<T>(fake.Page.ContentLink);
-            fake.LoaderGet = loader => loader.Get<T>(fake.Page.ContentLink);
+            fake.RepoGet = repo => repo.Get<T>(fake.Content.ContentLink);
+            fake.LoaderGet = loader => loader.Get<T>(fake.Content.ContentLink);
 
             return fake;
         }
@@ -65,7 +74,7 @@ namespace EPiFakeMaker
         {
             parent.Children.Add(this);
 
-            Page.Property["PageParentLink"] = new PropertyPageReference(parent.Page.ContentLink);
+            Content.Property["PageParentLink"] = new PropertyPageReference(parent.Content.ContentLink);
 
             return this;
         }
@@ -79,7 +88,7 @@ namespace EPiFakeMaker
 
         public virtual FakePage PublishedOn(DateTime publishDate, DateTime? stopPublishDate)
         {
-            Page.Property["PageStartPublish"] = new PropertyDate(publishDate);
+            Content.Property["PageStartPublish"] = new PropertyDate(publishDate);
 
             WorkStatus(VersionStatus.Published);
 
@@ -100,35 +109,35 @@ namespace EPiFakeMaker
 
         public virtual FakePage SetMenuVisibility(bool isVisible)
         {
-            Page.Property["PageVisibleInMenu"] = new PropertyBoolean(isVisible);
+            Content.Property["PageVisibleInMenu"] = new PropertyBoolean(isVisible);
 
             return this;
         }
 
         public virtual FakePage WithReferenceId(int referenceId)
         {
-            Page.Property["PageLink"] = new PropertyPageReference(new PageReference(referenceId));
+            Content.Property["PageLink"] = new PropertyPageReference(new PageReference(referenceId));
 
             return this;
         }
 
         public virtual FakePage WithLanguageBranch(string languageBranch)
         {
-            Page.Property["PageLanguageBranch"] = new PropertyString(languageBranch);
+            Content.Property["PageLanguageBranch"] = new PropertyString(languageBranch);
 
             return this;
         }
 
         public virtual FakePage WithProperty(string propertyName, PropertyData propertyData)
         {
-            Page.Property[propertyName] = propertyData;
+            Content.Property[propertyName] = propertyData;
 
             return this;
         }
 
         public virtual FakePage WithContentTypeId(int contentTypeId)
         {
-            Page.Property["PageTypeID"] = new PropertyNumber(contentTypeId);
+            Content.Property["PageTypeID"] = new PropertyNumber(contentTypeId);
 
             return this;
         }
@@ -142,14 +151,14 @@ namespace EPiFakeMaker
 
         public virtual FakePage StopPublishOn(DateTime stopPublishDate)
         {
-            Page.Property["PageStopPublish"] = new PropertyDate(stopPublishDate);
+            Content.Property["PageStopPublish"] = new PropertyDate(stopPublishDate);
 
             return this;
         }
 
         public virtual FakePage WorkStatus(VersionStatus status)
         {
-            Page.Property["PageWorkStatus"] = new PropertyNumber((int)status);
+            Content.Property["PageWorkStatus"] = new PropertyNumber((int)status);
 
             return this;
         }
@@ -161,14 +170,14 @@ namespace EPiFakeMaker
                 _siteDefinitonMock = SetupSiteDefinition();
             }
 
-            _siteDefinitonMock.SetupGet(def => def.StartPage).Returns(Page.ContentLink);
+            _siteDefinitonMock.SetupGet(def => def.StartPage).Returns(Content.ContentLink);
 
             return this;
         }
 
-        public virtual T To<T>() where T : PageData
+        public virtual T To<T>() where T : class, IContent
         {
-            return Page as T;
+            return Content as T;
         }
     }
 }
