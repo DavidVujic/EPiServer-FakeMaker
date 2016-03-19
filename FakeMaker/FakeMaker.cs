@@ -45,6 +45,10 @@ namespace EPiFakeMaker
                 .Setup(fake.RepoGet)
                 .Returns(fake.Page);
 
+            _contentLoader
+                .Setup(fake.LoaderGet)
+                .Returns(fake.Page);
+
             AddToRepository(fake.Children, fake);
         }
 
@@ -89,6 +93,10 @@ namespace EPiFakeMaker
 
                 _contentRepo
                     .Setup(item.RepoGet)
+                    .Returns(item.Page);
+
+                _contentLoader
+                    .Setup(item.LoaderGet)
                     .Returns(item.Page);
 
                 var pageDescendants = GetDescendantsOf(item, new List<IContent>());

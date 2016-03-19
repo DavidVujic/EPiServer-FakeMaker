@@ -22,6 +22,7 @@ namespace EPiFakeMaker
         public virtual IList<FakePage> Children { get { return _children; } }
 
         public Expression<Func<IContentRepository, IContent>> RepoGet;
+        public Expression<Func<IContentLoader, IContent>> LoaderGet;
 
         private FakePage()
         {
@@ -55,6 +56,7 @@ namespace EPiFakeMaker
             fake.VisibleInMenu();
 
             fake.RepoGet = repo => repo.Get<T>(fake.Page.ContentLink);
+            fake.LoaderGet = loader => loader.Get<T>(fake.Page.ContentLink);
 
             return fake;
         }

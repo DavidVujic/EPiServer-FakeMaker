@@ -20,7 +20,7 @@ namespace EPiFakeMaker.Examples
         }
 
         [Test]
-        public void Get_descendants_by_using_IContentRepository()
+        public void Get_descendants()
         {
             // Arrange
             var root = FakePage
@@ -39,42 +39,20 @@ namespace EPiFakeMaker.Examples
             // An instance of IContentRepository that you can use for Dependency Injection
             var repository = _fake.ContentRepository;
 
-            // Act
-            var descendants = repository.GetDescendents(root.Page.ContentLink);
-
-            //Assert
-            Assert.That(descendants.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void Get_descendants_by_using_IContentLoader()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("Root");
-
-            var start = FakePage
-                .Create("Start")
-                .ChildOf(root);
-
-            FakePage
-                .Create("About us")
-                .ChildOf(start);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentLoader that you can use for Dependency Injection
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
             var loader = _fake.ContentLoader;
 
             // Act
-            var descendants = loader.GetDescendents(root.Page.ContentLink);
+            var descendants_from_repo = repository.GetDescendents(root.Page.ContentLink);
+            var descendants_from_loader = loader.GetDescendents(root.Page.ContentLink);
 
             //Assert
-            Assert.That(descendants.Count(), Is.EqualTo(2));
+            Assert.That(descendants_from_repo.Count(), Is.EqualTo(2));
+            Assert.That(descendants_from_loader.Count(), Is.EqualTo(2));
         }
 
         [Test]
-        public void Get_descendants_by_using_ServiceLocator_and_IContentRepository()
+        public void Get_descendants_by_using_ServiceLocator()
         {
             // Arrange
             var root = FakePage
@@ -90,39 +68,19 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
-            // Act
-            var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
 
-            var descendants = repository.GetDescendents(root.Page.ContentLink);
-
-            //Assert
-            Assert.That(descendants.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void Get_descendants_by_using_ServiceLocator_and_IContentLoader()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("Root");
-
-            var start = FakePage
-                .Create("Start")
-                .ChildOf(root);
-
-            FakePage
-                .Create("About us")
-                .ChildOf(start);
-
-            _fake.AddToRepository(root);
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
 
             // Act
-            var loader = ServiceLocator.Current.GetInstance<IContentLoader>();
-
-            var descendants = loader.GetDescendents(root.Page.ContentLink);
+            var descendants_from_repo = repository.GetDescendents(root.Page.ContentLink);
+            var descendants_from_loader = loader.GetDescendents(root.Page.ContentLink);
 
             //Assert
-            Assert.That(descendants.Count(), Is.EqualTo(2));
+            Assert.That(descendants_from_repo.Count(), Is.EqualTo(2));
+            Assert.That(descendants_from_loader.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -152,11 +110,19 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var pages = HelperExamples.GetAllPublishedPages(root.Page.ContentLink, _fake.ContentRepository);
+            var pages_from_repo = HelperExamples.GetAllPublishedPages(root.Page.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetAllPublishedPages(root.Page.ContentLink, loader);
 
             //Assert
-            Assert.That(pages.Count(), Is.EqualTo(2));
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -182,11 +148,19 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var pages = HelperExamples.GetMenu(root.Page.ContentLink, _fake.ContentRepository);
+            var pages_from_repo = HelperExamples.GetMenu(root.Page.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetMenu(root.Page.ContentLink, repository);
 
             // Assert
-            Assert.That(pages.Count(), Is.EqualTo(2));
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(2));
         }
 
         [Test]
@@ -210,11 +184,19 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var pages = HelperExamples.GetDescendantsOf<CustomPageData>(root.Page.ContentLink, _fake.ContentRepository);
+            var pages_from_repo = HelperExamples.GetDescendantsOf<CustomPageData>(root.Page.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetDescendantsOf<CustomPageData>(root.Page.ContentLink, loader);
 
             // Assert
-            Assert.That(pages.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -240,11 +222,19 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var pages = HelperExamples.GetChildrenOf(root.Page.ContentLink, _fake.ContentRepository).Where(p => p.ContentTypeID == 2);
+            var pages_from_repo = HelperExamples.GetChildrenOf(root.Page.ContentLink, repository).Where(p => p.ContentTypeID == 2);
+            var pages_from_loader = HelperExamples.GetChildrenOf(root.Page.ContentLink, loader).Where(p => p.ContentTypeID == 2);
 
             // Assert
-            Assert.That(pages.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -268,13 +258,24 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var pages =
-                HelperExamples.GetChildrenOf(root.Page.ContentLink, _fake.ContentRepository)
+            var pages_from_repo =
+                HelperExamples.GetChildrenOf(root.Page.ContentLink,repository)
+                    .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
+
+            var pages_from_loader =
+                HelperExamples.GetChildrenOf(root.Page.ContentLink, loader)
                     .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
 
             // Assert
-            Assert.That(pages.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -300,13 +301,24 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var pages =
-                HelperExamples.GetChildrenOf(root.Page.ContentLink, _fake.ContentRepository)
+            var pages_from_repo =
+                HelperExamples.GetChildrenOf(root.Page.ContentLink, repository)
+                    .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
+
+            var pages_from_loader =
+                HelperExamples.GetChildrenOf(root.Page.ContentLink, loader)
                     .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
 
             // Assert
-            Assert.That(pages.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -329,13 +341,20 @@ namespace EPiFakeMaker.Examples
 
 
             _fake.AddToRepository(root);
+
+            // An instance of IContentRepository that you can use for Dependency Injection
             var repository = _fake.ContentRepository;
 
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var pages = repository.GetDescendents(root.Page.ContentLink);
+            var pages_from_repo = repository.GetDescendents(root.Page.ContentLink);
+            var pages_from_loader = loader.GetDescendents(root.Page.ContentLink);
 
             // Assert
-            Assert.That(pages.Count(), Is.EqualTo(5));
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(5));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(5));
         }
 
         [Test]
@@ -367,11 +386,19 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(customPage);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var result = _fake.ContentRepository.Get<CustomPageData>(customPage.Page.ContentLink);
+            var result_from_repo = repository.Get<CustomPageData>(customPage.Page.ContentLink);
+            var result_from_loader = loader.Get<CustomPageData>(customPage.Page.ContentLink);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result_from_repo);
+            Assert.IsNotNull(result_from_loader);
         }
 
         [Test]
@@ -435,12 +462,22 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(fakePage);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var result = _fake.ContentRepository.Get<ContentData>(fakePage.Page.ContentLink);
+            var result_from_repo = repository.Get<ContentData>(fakePage.Page.ContentLink);
+            var result_from_loader = loader.Get<ContentData>(fakePage.Page.ContentLink);
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.That(result is ContentData);
+            Assert.IsNotNull(result_from_repo);
+            Assert.That(result_from_repo is ContentData);
+
+            Assert.IsNotNull(result_from_loader);
+            Assert.That(result_from_loader is ContentData);
         }
 
         [Test]
@@ -451,12 +488,22 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(fakePage);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var result = _fake.ContentRepository.Get<IContentData>(fakePage.Page.ContentLink);
+            var result_from_repo = repository.Get<IContentData>(fakePage.Page.ContentLink);
+            var result_from_loader = loader.Get<IContentData>(fakePage.Page.ContentLink);
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.That(result is IContentData);
+            Assert.IsNotNull(result_from_repo);
+            Assert.That(result_from_repo is IContentData);
+
+            Assert.IsNotNull(result_from_loader);
+            Assert.That(result_from_loader is IContentData);
         }
 
         [Test]
@@ -476,11 +523,19 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var children = _fake.ContentRepository.GetChildren<ContentData>(ContentReference.StartPage);
+            var children_from_repo = repository.GetChildren<ContentData>(ContentReference.StartPage);
+            var children_from_loader = loader.GetChildren<ContentData>(ContentReference.StartPage);
 
             // Assert
-            Assert.That(children.Count(), Is.EqualTo(1));
+            Assert.That(children_from_repo.Count(), Is.EqualTo(1));
+            Assert.That(children_from_loader.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -500,11 +555,54 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
             // Act
-            var children = _fake.ContentRepository.GetChildren<IContentData>(ContentReference.StartPage);
+            var children_from_repo = repository.GetChildren<IContentData>(ContentReference.StartPage);
+            var children_from_loader = loader.GetChildren<IContentData>(ContentReference.StartPage);
 
             // Assert
-            Assert.That(children.Count(), Is.EqualTo(1));
+            Assert.That(children_from_repo.Count(), Is.EqualTo(1));
+            Assert.That(children_from_loader.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Get_children()
+        {
+            // Arrange
+            var root = FakePage.Create("root");
+
+            FakePage
+                .Create("AboutUs")
+                .ChildOf(root);
+
+            FakePage
+                .Create("OtherPage")
+                .ChildOf(root);
+
+            FakePage
+                .Create("Contact")
+                .ChildOf(root);
+
+            _fake.AddToRepository(root);
+
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
+            // Act
+            var pages_from_repo = HelperExamples.GetChildrenOf(root.Page.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetChildrenOf(root.Page.ContentLink, loader);
+
+            // Assert
+            Assert.That(pages_from_repo.Count(), Is.EqualTo(3));
+            Assert.That(pages_from_loader.Count(), Is.EqualTo(3));
         }
     }
 
@@ -523,17 +621,17 @@ namespace EPiFakeMaker.Examples
     /// </summary>
     public static class HelperExamples
     {
-        public static IEnumerable<IContent> GetChildrenOf(ContentReference root, IContentRepository repository)
+        public static IEnumerable<IContent> GetChildrenOf(ContentReference root, IContentLoader repository)
         {
             return repository.GetChildren<IContent>(root);
         }
 
-        private static IEnumerable<ContentReference> GetDescendantsOf(ContentReference root, IContentRepository repository)
+        private static IEnumerable<ContentReference> GetDescendantsOf(ContentReference root, IContentLoader repository)
         {
             return repository.GetDescendents(root);
         }
 
-        public static IEnumerable<IContent> GetDescendantsOf<T>(ContentReference root, IContentRepository repository)
+        public static IEnumerable<IContent> GetDescendantsOf<T>(ContentReference root, IContentLoader repository)
             where T : PageData
         {
             var descendants = GetDescendantsOf(root, repository);
@@ -544,7 +642,7 @@ namespace EPiFakeMaker.Examples
             return pages;
         }
 
-        public static IEnumerable<IContent> GetAllPublishedPages(ContentReference root, IContentRepository repository)
+        public static IEnumerable<IContent> GetAllPublishedPages(ContentReference root, IContentLoader repository)
         {
             var descendants = GetDescendantsOf(root, repository);
 
