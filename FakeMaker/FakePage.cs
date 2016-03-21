@@ -20,6 +20,9 @@ namespace EPiFakeMaker
             _children = new List<IFake>();
         }
 
+        /// <summary>
+        /// Convenience feature that convert the Content property to PageData
+        /// </summary>
         public virtual PageData Page
         {
             get
