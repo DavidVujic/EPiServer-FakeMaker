@@ -505,6 +505,32 @@ namespace EPiFakeMaker.Examples
         }
 
         [Test]
+        public void Get_instance_of_pagedata_with_derived_class()
+        {
+            // Arrange
+            var fakePage = FakePage.Create<CustomPageData>("MyPage");
+
+            _fake.AddToRepository(fakePage);
+
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
+            // Act
+            var result_from_repo = repository.Get<PageData>(fakePage.Content.ContentLink);
+            var result_from_loader = loader.Get<PageData>(fakePage.Content.ContentLink);
+
+            // Assert
+            Assert.IsNotNull(result_from_repo);
+            Assert.That(result_from_repo is PageData);
+
+            Assert.IsNotNull(result_from_loader);
+            Assert.That(result_from_loader is PageData);
+        }
+
+        [Test]
         public void Get_children_as_base_content_type()
         {
             // Arrange

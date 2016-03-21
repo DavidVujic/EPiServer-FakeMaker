@@ -9,45 +9,30 @@ using Moq;
 
 namespace EPiFakeMaker
 {
-    public interface IFake
-    {
-        IContent Content { get; }
-        IList<IFake> Children { get; }
-
-        Expression<Func<IContentRepository, IContent>> RepoGet { get; }
-        Expression<Func<IContentLoader, IContent>> LoaderGet { get; }
-    }
-
     public class FakePage : IFake
     {
-        public virtual IContent Content { get; private set; }
-
         private readonly IList<IFake> _children;
-
         private Mock<SiteDefinition> _siteDefinitonMock;
-
         private static readonly Random Randomizer = new Random();
-
-        public virtual IList<IFake> Children { get { return _children; } }
-
-        public Expression<Func<IContentRepository, IContent>> RepoGet { get; private set; }
-        public Expression<Func<IContentLoader, IContent>> LoaderGet { get; private set; }
 
         private FakePage()
         {
             _children = new List<IFake>();
         }
 
-        private static Mock<SiteDefinition> SetupSiteDefinition()
+        public virtual IContent Content { get; private set; }
+        public virtual IList<IFake> Children { get { return _children; } }
+
+        public void HelpCreatingMockForCurrentType(IFakeMaker maker)
         {
-            var mock = new Mock<SiteDefinition>();
-
-            mock.SetupGet(def => def.Name).Returns("FakeMakerSiteDefinition");
-
-            SiteDefinition.Current = mock.Object;
-
-            return mock;
+            maker.CreateMockFor<PageData>(this);
+            maker.CreateMockFor<PageData>(this, Children);
+            maker.CreateMockFor(this, RepoGet);
+            maker.CreateMockFor(this, LoaderGet);
         }
+
+        public Expression<Func<IContentRepository, IContent>> RepoGet { get; private set; }
+        public Expression<Func<IContentLoader, IContent>> LoaderGet { get; private set; }
 
         public static FakePage Create(string pageName)
         {
@@ -173,6 +158,17 @@ namespace EPiFakeMaker
             _siteDefinitonMock.SetupGet(def => def.StartPage).Returns(Content.ContentLink);
 
             return this;
+        }
+
+        private static Mock<SiteDefinition> SetupSiteDefinition()
+        {
+            var mock = new Mock<SiteDefinition>();
+
+            mock.SetupGet(def => def.Name).Returns("FakeMakerSiteDefinition");
+
+            SiteDefinition.Current = mock.Object;
+
+            return mock;
         }
 
         public virtual T To<T>() where T : class, IContent

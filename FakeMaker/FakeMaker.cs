@@ -2,12 +2,23 @@
 using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace EPiFakeMaker
 {
-    public class FakeMaker
+    public interface IFakeMaker
+    {
+        void CreateMockFor<T>(IFake item) where T : class, IContentData;
+        void CreateMockFor<T>(IFake parent, IList<IFake> fakeList) where T : class, IContentData;
+
+        void CreateMockFor(IFake fake, Expression<Func<IContentRepository, IContent>> expression);
+        void CreateMockFor(IFake fake, Expression<Func<IContentLoader, IContent>> expression);
+    }
+
+    public class FakeMaker : IFakeMaker
     {
         private readonly Mock<IContentRepository> _contentRepo;
         private readonly Mock<IContentLoader> _contentLoader;
@@ -33,21 +44,18 @@ namespace EPiFakeMaker
             return _contentRepo;
         }
 
-        public void AddToRepository(FakePage fake)
+        public Mock<IContentLoader> GetMockForFakeContentLoader()
+        {
+            return _contentLoader;
+        }
+
+        public void AddToRepository(IFake fake)
         {
             CreateMockFor<IContent>(fake);
             CreateMockFor<IContentData>(fake);
-
-            CreateMockFor<PageData>(fake);
             CreateMockFor<ContentData>(fake);
 
-            _contentRepo
-                .Setup(fake.RepoGet)
-                .Returns(fake.Content);
-
-            _contentLoader
-                .Setup(fake.LoaderGet)
-                .Returns(fake.Content);
+            fake.HelpCreatingMockForCurrentType(this);
 
             AddToRepository(fake.Children, fake);
         }
@@ -71,8 +79,6 @@ namespace EPiFakeMaker
         {
             CreateMockFor<IContent>(parent, fakeList);
             CreateMockFor<IContentData>(parent, fakeList);
-
-            CreateMockFor<PageData>(parent, fakeList);
             CreateMockFor<ContentData>(parent, fakeList);
 
             var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
@@ -89,15 +95,11 @@ namespace EPiFakeMaker
             {
                 var item = fake;
 
-                CreateMockFor<IContent>(item);
+                CreateMockFor<IContent>(fake);
+                CreateMockFor<IContentData>(fake);
+                CreateMockFor<ContentData>(fake);
 
-                _contentRepo
-                    .Setup(item.RepoGet)
-                    .Returns(item.Content);
-
-                _contentLoader
-                    .Setup(item.LoaderGet)
-                    .Returns(item.Content);
+                fake.HelpCreatingMockForCurrentType(this);
 
                 var pageDescendants = GetDescendantsOf(item, new List<IContent>());
 
@@ -109,7 +111,7 @@ namespace EPiFakeMaker
             }
         }
 
-        private void CreateMockFor<T>(IFake item) where T : class, IContentData
+        public void CreateMockFor<T>(IFake item) where T : class, IContentData
         {
             _contentRepo
                 .Setup(repo => repo.Get<T>(item.Content.ContentLink))
@@ -120,7 +122,7 @@ namespace EPiFakeMaker
                 .Returns(item.Content as T);
         }
 
-        private void CreateMockFor<T>(IFake parent, IList<IFake> fakeList) where T : class, IContentData
+        public void CreateMockFor<T>(IFake parent, IList<IFake> fakeList) where T : class, IContentData
         {
             var contentList = fakeList.Select(fake => fake.Content as T).ToList();
 
@@ -131,6 +133,20 @@ namespace EPiFakeMaker
             _contentLoader
                 .Setup(repo => repo.GetChildren<T>(parent.Content.ContentLink))
                 .Returns(contentList);
+        }
+
+        public void CreateMockFor(IFake fake, Expression<Func<IContentRepository, IContent>> expression)
+        {
+            _contentRepo
+                .Setup(expression)
+                .Returns(fake.Content);
+        }
+
+        public void CreateMockFor(IFake fake, Expression<Func<IContentLoader, IContent>> expression)
+        {
+            _contentLoader
+                .Setup(expression)
+                .Returns(fake.Content);
         }
 
         private static IEnumerable<ContentReference> GetDescendantsOf(IFake fake, ICollection<IContent> descendants)
