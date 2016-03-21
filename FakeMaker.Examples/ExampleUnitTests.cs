@@ -41,8 +41,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var descendants_from_repo = repository.GetDescendents(root.Page.ContentLink);
-            var descendants_from_loader = loader.GetDescendents(root.Page.ContentLink);
+            var descendants_from_repo = repository.GetDescendents(root.Content.ContentLink);
+            var descendants_from_loader = loader.GetDescendents(root.Content.ContentLink);
 
             //Assert
             Assert.That(descendants_from_repo.Count(), Is.EqualTo(2));
@@ -73,8 +73,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var descendants_from_repo = repository.GetDescendents(root.Page.ContentLink);
-            var descendants_from_loader = loader.GetDescendents(root.Page.ContentLink);
+            var descendants_from_repo = repository.GetDescendents(root.Content.ContentLink);
+            var descendants_from_loader = loader.GetDescendents(root.Content.ContentLink);
 
             //Assert
             Assert.That(descendants_from_repo.Count(), Is.EqualTo(2));
@@ -115,8 +115,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetAllPublishedPages(root.Page.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetAllPublishedPages(root.Page.ContentLink, loader);
+            var pages_from_repo = HelperExamples.GetAllPublishedPages(root.Content.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetAllPublishedPages(root.Content.ContentLink, loader);
 
             //Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
@@ -153,8 +153,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetMenu(root.Page.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetMenu(root.Page.ContentLink, repository);
+            var pages_from_repo = HelperExamples.GetMenu(root.Content.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetMenu(root.Content.ContentLink, repository);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
@@ -189,8 +189,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetDescendantsOf<CustomPageData>(root.Page.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetDescendantsOf<CustomPageData>(root.Page.ContentLink, loader);
+            var pages_from_repo = HelperExamples.GetDescendantsOf<CustomPageData>(root.Content.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetDescendantsOf<CustomPageData>(root.Content.ContentLink, loader);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
@@ -227,8 +227,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetChildrenOf(root.Page.ContentLink, repository).Where(p => p.ContentTypeID == 2);
-            var pages_from_loader = HelperExamples.GetChildrenOf(root.Page.ContentLink, loader).Where(p => p.ContentTypeID == 2);
+            var pages_from_repo = HelperExamples.GetChildrenOf(root.Content.ContentLink, repository).Where(p => p.ContentTypeID == 2);
+            var pages_from_loader = HelperExamples.GetChildrenOf(root.Content.ContentLink, loader).Where(p => p.ContentTypeID == 2);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
@@ -264,11 +264,11 @@ namespace EPiFakeMaker.Examples
 
             // Act
             var pages_from_repo =
-                HelperExamples.GetChildrenOf(root.Page.ContentLink,repository)
+                HelperExamples.GetChildrenOf(root.Content.ContentLink,repository)
                     .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
 
             var pages_from_loader =
-                HelperExamples.GetChildrenOf(root.Page.ContentLink, loader)
+                HelperExamples.GetChildrenOf(root.Content.ContentLink, loader)
                     .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
 
             // Assert
@@ -307,11 +307,11 @@ namespace EPiFakeMaker.Examples
 
             // Act
             var pages_from_repo =
-                HelperExamples.GetChildrenOf(root.Page.ContentLink, repository)
+                HelperExamples.GetChildrenOf(root.Content.ContentLink, repository)
                     .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
 
             var pages_from_loader =
-                HelperExamples.GetChildrenOf(root.Page.ContentLink, loader)
+                HelperExamples.GetChildrenOf(root.Content.ContentLink, loader)
                     .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
 
             // Assert
@@ -347,8 +347,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = repository.GetDescendents(root.Page.ContentLink);
-            var pages_from_loader = loader.GetDescendents(root.Page.ContentLink);
+            var pages_from_repo = repository.GetDescendents(root.Content.ContentLink);
+            var pages_from_loader = loader.GetDescendents(root.Content.ContentLink);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(5));
@@ -372,7 +372,7 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
-            Assert.That(ContentReference.StartPage, Is.EqualTo(start.Page.ContentLink));
+            Assert.That(ContentReference.StartPage, Is.EqualTo(start.Content.ContentLink));
         }
 
         [Test]
@@ -391,8 +391,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var result_from_repo = repository.Get<CustomPageData>(customPage.Page.ContentLink);
-            var result_from_loader = loader.Get<CustomPageData>(customPage.Page.ContentLink);
+            var result_from_repo = repository.Get<CustomPageData>(customPage.Content.ContentLink);
+            var result_from_loader = loader.Get<CustomPageData>(customPage.Content.ContentLink);
 
             // Assert
             Assert.IsNotNull(result_from_repo);
@@ -410,11 +410,11 @@ namespace EPiFakeMaker.Examples
 
             // Custom mocking that is not handled by FakeMaker
             _fake.GetMockForFakeContentRepository()
-                .Setup(repo => repo.Get<CustomPageData>(fakePage.Page.ContentLink))
+                .Setup(repo => repo.Get<CustomPageData>(fakePage.Content.ContentLink))
                 .Returns(fakePage.To<CustomPageData>());
 
             // Act
-            var result = _fake.ContentRepository.Get<CustomPageData>(fakePage.Page.ContentLink);
+            var result = _fake.ContentRepository.Get<CustomPageData>(fakePage.Content.ContentLink);
 
             // Assert
             Assert.IsNotNull(result);
@@ -467,8 +467,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var result_from_repo = repository.Get<ContentData>(fakePage.Page.ContentLink);
-            var result_from_loader = loader.Get<ContentData>(fakePage.Page.ContentLink);
+            var result_from_repo = repository.Get<ContentData>(fakePage.Content.ContentLink);
+            var result_from_loader = loader.Get<ContentData>(fakePage.Content.ContentLink);
 
             // Assert
             Assert.IsNotNull(result_from_repo);
@@ -493,8 +493,8 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var result_from_repo = repository.Get<IContentData>(fakePage.Page.ContentLink);
-            var result_from_loader = loader.Get<IContentData>(fakePage.Page.ContentLink);
+            var result_from_repo = repository.Get<IContentData>(fakePage.Content.ContentLink);
+            var result_from_loader = loader.Get<IContentData>(fakePage.Content.ContentLink);
 
             // Assert
             Assert.IsNotNull(result_from_repo);
@@ -502,6 +502,32 @@ namespace EPiFakeMaker.Examples
 
             Assert.IsNotNull(result_from_loader);
             Assert.That(result_from_loader is IContentData);
+        }
+
+        [Test]
+        public void Get_instance_of_pagedata_with_derived_class()
+        {
+            // Arrange
+            var fakePage = FakePage.Create<CustomPageData>("MyPage");
+
+            _fake.AddToRepository(fakePage);
+
+            // An instance of IContentRepository that you can use for Dependency Injection
+            var repository = _fake.ContentRepository;
+
+            // Or, an instance of IContentLoader that you can use for Dependency Injection
+            var loader = _fake.ContentLoader;
+
+            // Act
+            var result_from_repo = repository.Get<PageData>(fakePage.Content.ContentLink);
+            var result_from_loader = loader.Get<PageData>(fakePage.Content.ContentLink);
+
+            // Assert
+            Assert.IsNotNull(result_from_repo);
+            Assert.That(result_from_repo is PageData);
+
+            Assert.IsNotNull(result_from_loader);
+            Assert.That(result_from_loader is PageData);
         }
 
         [Test]
@@ -595,12 +621,20 @@ namespace EPiFakeMaker.Examples
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetChildrenOf(root.Page.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetChildrenOf(root.Page.ContentLink, loader);
+            var pages_from_repo = HelperExamples.GetChildrenOf(root.Content.ContentLink, repository);
+            var pages_from_loader = HelperExamples.GetChildrenOf(root.Content.ContentLink, loader);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(3));
             Assert.That(pages_from_loader.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void Get_content_as_page()
+        {
+            var fake = FakePage.Create("MyPage");
+
+            Assert.That(fake.Page, Is.Not.Null);
         }
     }
 

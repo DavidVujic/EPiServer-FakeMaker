@@ -2,12 +2,23 @@
 using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace EPiFakeMaker
 {
-    public class FakeMaker
+    public interface IFakeMaker
+    {
+        void CreateMockFor<T>(IFake item) where T : class, IContentData;
+        void CreateMockFor<T>(IFake parent, IList<IFake> fakeList) where T : class, IContentData;
+
+        void CreateMockFor(IFake fake, Expression<Func<IContentRepository, IContent>> expression);
+        void CreateMockFor(IFake fake, Expression<Func<IContentLoader, IContent>> expression);
+    }
+
+    public class FakeMaker : IFakeMaker
     {
         private readonly Mock<IContentRepository> _contentRepo;
         private readonly Mock<IContentLoader> _contentLoader;
@@ -33,21 +44,18 @@ namespace EPiFakeMaker
             return _contentRepo;
         }
 
-        public void AddToRepository(FakePage fake)
+        public Mock<IContentLoader> GetMockForFakeContentLoader()
+        {
+            return _contentLoader;
+        }
+
+        public void AddToRepository(IFake fake)
         {
             CreateMockFor<IContent>(fake);
             CreateMockFor<IContentData>(fake);
-
-            CreateMockFor<PageData>(fake);
             CreateMockFor<ContentData>(fake);
 
-            _contentRepo
-                .Setup(fake.RepoGet)
-                .Returns(fake.Page);
-
-            _contentLoader
-                .Setup(fake.LoaderGet)
-                .Returns(fake.Page);
+            fake.HelpCreatingMockForCurrentType(this);
 
             AddToRepository(fake.Children, fake);
         }
@@ -67,77 +75,85 @@ namespace EPiFakeMaker
             ServiceLocator.SetLocator(serviceLocator.Object);
         }
 
-        private void AddToRepository(IList<FakePage> fakeList, FakePage parent)
+        private void AddToRepository(IList<IFake> fakeList, IFake parent)
         {
             CreateMockFor<IContent>(parent, fakeList);
             CreateMockFor<IContentData>(parent, fakeList);
-
-            CreateMockFor<PageData>(parent, fakeList);
             CreateMockFor<ContentData>(parent, fakeList);
 
             var parentDescendants = GetDescendantsOf(parent, new List<IContent>());
 
             _contentRepo
-                .Setup(repo => repo.GetDescendents(parent.Page.ContentLink))
+                .Setup(repo => repo.GetDescendents(parent.Content.ContentLink))
                 .Returns(parentDescendants);
 
             _contentLoader
-                .Setup(repo => repo.GetDescendents(parent.Page.ContentLink))
+                .Setup(repo => repo.GetDescendents(parent.Content.ContentLink))
                 .Returns(parentDescendants);
 
             foreach (var fake in fakeList)
             {
                 var item = fake;
 
-                CreateMockFor<IContent>(item);
+                CreateMockFor<IContent>(fake);
+                CreateMockFor<IContentData>(fake);
+                CreateMockFor<ContentData>(fake);
 
-                _contentRepo
-                    .Setup(item.RepoGet)
-                    .Returns(item.Page);
-
-                _contentLoader
-                    .Setup(item.LoaderGet)
-                    .Returns(item.Page);
+                fake.HelpCreatingMockForCurrentType(this);
 
                 var pageDescendants = GetDescendantsOf(item, new List<IContent>());
 
                 _contentRepo
-                    .Setup(repo => repo.GetDescendents(item.Page.ContentLink))
+                    .Setup(repo => repo.GetDescendents(item.Content.ContentLink))
                     .Returns(pageDescendants);
 
                 AddToRepository(item.Children, item);
             }
         }
 
-        private void CreateMockFor<T>(FakePage item) where T : class, IContentData
+        public void CreateMockFor<T>(IFake item) where T : class, IContentData
         {
             _contentRepo
-                .Setup(repo => repo.Get<T>(item.Page.ContentLink))
-                .Returns(item.Page as T);
+                .Setup(repo => repo.Get<T>(item.Content.ContentLink))
+                .Returns(item.Content as T);
 
             _contentLoader
-                .Setup(repo => repo.Get<T>(item.Page.ContentLink))
-                .Returns(item.Page as T);
+                .Setup(repo => repo.Get<T>(item.Content.ContentLink))
+                .Returns(item.Content as T);
         }
 
-        private void CreateMockFor<T>(FakePage parent, IList<FakePage> fakeList) where T : class, IContentData
+        public void CreateMockFor<T>(IFake parent, IList<IFake> fakeList) where T : class, IContentData
         {
-            var contentList = fakeList.Select(fake => fake.Page as T).ToList();
+            var contentList = fakeList.Select(fake => fake.Content as T).ToList();
 
             _contentRepo
-                .Setup(repo => repo.GetChildren<T>(parent.Page.ContentLink))
+                .Setup(repo => repo.GetChildren<T>(parent.Content.ContentLink))
                 .Returns(contentList);
 
             _contentLoader
-                .Setup(repo => repo.GetChildren<T>(parent.Page.ContentLink))
+                .Setup(repo => repo.GetChildren<T>(parent.Content.ContentLink))
                 .Returns(contentList);
         }
 
-        private static IEnumerable<ContentReference> GetDescendantsOf(FakePage fake, ICollection<IContent> descendants)
+        public void CreateMockFor(IFake fake, Expression<Func<IContentRepository, IContent>> expression)
+        {
+            _contentRepo
+                .Setup(expression)
+                .Returns(fake.Content);
+        }
+
+        public void CreateMockFor(IFake fake, Expression<Func<IContentLoader, IContent>> expression)
+        {
+            _contentLoader
+                .Setup(expression)
+                .Returns(fake.Content);
+        }
+
+        private static IEnumerable<ContentReference> GetDescendantsOf(IFake fake, ICollection<IContent> descendants)
         {
             foreach (var child in fake.Children)
             {
-                descendants.Add(child.Page);
+                descendants.Add(child.Content);
 
                 GetDescendantsOf(child, descendants);
             }
