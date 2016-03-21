@@ -20,6 +20,14 @@ namespace EPiFakeMaker
             _children = new List<IFake>();
         }
 
+        public virtual PageData Page
+        {
+            get
+            {
+                return To<PageData>();
+            }
+        }
+
         public virtual IContent Content { get; private set; }
         public virtual IList<IFake> Children { get { return _children; } }
 

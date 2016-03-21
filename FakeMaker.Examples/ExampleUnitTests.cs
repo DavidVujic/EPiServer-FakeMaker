@@ -628,6 +628,14 @@ namespace EPiFakeMaker.Examples
             Assert.That(pages_from_repo.Count(), Is.EqualTo(3));
             Assert.That(pages_from_loader.Count(), Is.EqualTo(3));
         }
+
+        [Test]
+        public void Get_content_as_page()
+        {
+            var fake = FakePage.Create("MyPage");
+
+            Assert.That(fake.Page, Is.Not.Null);
+        }
     }
 
     public class CustomPageData : PageData
