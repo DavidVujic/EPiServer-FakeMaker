@@ -9,7 +9,7 @@ using Moq;
 
 namespace EPiFakeMaker
 {
-    public class FakePage : IFake
+    public class FakePage : Fake
     {
         private readonly IList<IFake> _children;
         private Mock<SiteDefinition> _siteDefinitonMock;
@@ -31,19 +31,8 @@ namespace EPiFakeMaker
             }
         }
 
-        public virtual IContent Content { get; private set; }
-        public virtual IList<IFake> Children { get { return _children; } }
-
-        public void HelpCreatingMockForCurrentType(IFakeMaker maker)
-        {
-            maker.CreateMockFor<PageData>(this);
-            maker.CreateMockFor<PageData>(this, Children);
-            maker.CreateMockFor(this, RepoGet);
-            maker.CreateMockFor(this, LoaderGet);
-        }
-
-        public Expression<Func<IContentRepository, IContent>> RepoGet { get; private set; }
-        public Expression<Func<IContentLoader, IContent>> LoaderGet { get; private set; }
+        public override IContent Content { get; protected set; }
+        public override IList<IFake> Children { get { return _children; } }
 
         public static FakePage Create(string pageName)
         {
@@ -185,6 +174,17 @@ namespace EPiFakeMaker
         public virtual T To<T>() where T : class, IContent
         {
             return Content as T;
+        }
+
+        internal Expression<Func<IContentRepository, IContent>> RepoGet { get; private set; }
+        internal Expression<Func<IContentLoader, IContent>> LoaderGet { get; private set; }
+
+        internal override void HelpCreatingMockForCurrentType(IFakeMaker maker)
+        {
+            maker.CreateMockFor<PageData>(this);
+            maker.CreateMockFor<PageData>(this, Children);
+            maker.CreateMockFor(this, RepoGet);
+            maker.CreateMockFor(this, LoaderGet);
         }
     }
 }

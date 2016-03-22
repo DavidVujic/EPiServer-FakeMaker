@@ -55,7 +55,7 @@ namespace EPiFakeMaker
             CreateMockFor<IContentData>(fake);
             CreateMockFor<ContentData>(fake);
 
-            fake.HelpCreatingMockForCurrentType(this);
+            (fake as Fake).HelpCreatingMockForCurrentType(this);
 
             AddToRepository(fake.Children, fake);
         }
@@ -99,7 +99,7 @@ namespace EPiFakeMaker
                 CreateMockFor<IContentData>(fake);
                 CreateMockFor<ContentData>(fake);
 
-                fake.HelpCreatingMockForCurrentType(this);
+                (fake as Fake).HelpCreatingMockForCurrentType(this);
 
                 var pageDescendants = GetDescendantsOf(item, new List<IContent>());
 
