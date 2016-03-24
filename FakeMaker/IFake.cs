@@ -1,6 +1,8 @@
 ﻿using EPiServer.Core;
 using System.Collections.Generic;
-using System;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("FakeMaker.Commerce")]
 
 namespace EPiFakeMaker
 {
@@ -9,7 +11,7 @@ namespace EPiFakeMaker
         IContent Content { get; }
         IList<IFake> Children { get; }
     }
-
+    
     public abstract class Fake : IFake
     {
         public abstract IList<IFake> Children { get; }

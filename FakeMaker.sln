@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker", "FakeMaker\FakeMaker.csproj", "{59D000E1-35FD-4C0C-B53E-459E7CFE4910}"
 EndProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8FFF5F
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Examples", "FakeMaker.Examples\FakeMaker.Examples.csproj", "{FAE5449E-AA8F-453A-A11B-9C5DC0F4AED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Commerce", "c:\users\vagrant\documents\visual studio 2015\Projects\FakeMaker.Commerce\FakeMaker.Commerce.csproj", "{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{FAE5449E-AA8F-453A-A11B-9C5DC0F4AED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAE5449E-AA8F-453A-A11B-9C5DC0F4AED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAE5449E-AA8F-453A-A11B-9C5DC0F4AED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
