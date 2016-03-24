@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8FFF5F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Examples", "FakeMaker.Examples\FakeMaker.Examples.csproj", "{FAE5449E-AA8F-453A-A11B-9C5DC0F4AED0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Commerce", "c:\users\vagrant\documents\visual studio 2015\Projects\FakeMaker.Commerce\FakeMaker.Commerce.csproj", "{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Commerce", "FakeMaker.Commerce\FakeMaker.Commerce.csproj", "{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
