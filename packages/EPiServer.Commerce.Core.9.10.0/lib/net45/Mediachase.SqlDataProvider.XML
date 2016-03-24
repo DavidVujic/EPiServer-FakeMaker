@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mediachase.SqlDataProvider</name>
+    </assembly>
+    <members>
+        <member name="T:Mediachase.Data.Provider.DataParameterTypeToSqlDbType">
+            <summary>
+            The Mediachase.DataProvider.DataParameterType enum exists to allow users to have a dependency on SqlDbType, but
+            this implementation of the provider expects that the enum maps directly to SqlDbType.  This is an antipattern.
+            The DataParameterType is too widely used to safely/easily remove the anti pattern, so this class exists to verify
+            the assumption and safely convert from DataParameterType to SqlDbType.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider.
+            </summary>
+            <param name="name">The friendly name of the provider.</param>
+            <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+            <exception cref="T:System.ArgumentNullException">The name of the provider is null.</exception>
+            <exception cref="T:System.InvalidOperationException">An attempt is made to call <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)"></see> on a provider after the provider has already been initialized.</exception>
+            <exception cref="T:System.ArgumentException">The name of the provider has a length of zero.</exception>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.Save(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.WithRetry``1(System.Func{``0})">
+            <summary>
+            Executes a function with the ability of retrying a request if the error is in SqlTransientErrors.ExecuteRetryable.
+            </summary>
+            <typeparam name="TResult">The result which <paramref name="action"/> would return.</typeparam>
+            <param name="action">The actual action to be executed against the database.</param>
+            <returns>The result of <paramref name="action"/>.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.LoadTable(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.LoadDataSet(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.LoadTableSchema(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.LoadReader(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.Run(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.ExecuteScalar(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.ExecuteNonExec(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.RunReturnInteger(Mediachase.Data.Provider.DataCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.PopulateOutputParameters(System.Data.SqlClient.SqlCommand,Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Copies output parameters' values from SqlCommand to DataCommand
+            </summary>
+            <param name="cmd"></param>
+            <param name="command"></param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.AddParameters(System.Data.SqlClient.SqlCommand,Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Copies parameters from DataCommand to SqlCommand
+            </summary>
+            <param name="sql"></param>
+            <param name="cmd"></param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateInsertCommand(System.Data.DataTable)">
+            <summary>
+            Creates the insert command for the specified datatable
+            </summary>
+            <param name="dataTable">The data table for which the insert command will be created.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateInsertCommand(System.Data.DataTable,System.String)">
+            <summary>
+            Creates the insert command for the specified datatable
+            </summary>
+            <param name="dataTable">The data table for which the insert command will be created.</param>
+            <param name="dbTableName">Name of the corresponding table in the db.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateUpdateCommand(System.Data.DataTable)">
+            <summary>
+            Creates the update command for the specified datatable.
+            </summary>
+            <param name="dataTable">The data table on which an update command will be created.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateUpdateCommand(System.Data.DataTable,System.String)">
+            <summary>
+            Creates the update command for the specified datatable.
+            </summary>
+            <param name="dataTable">The data table on which an update command will be created.</param>
+            <param name="dbTableName">Name of the corresponding table in the db.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateDeleteCommand(System.Data.DataTable)">
+            <summary>
+            Creates the delete command for the specified table
+            </summary>
+            <param name="dataTable">The data table for which the command object will be created.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateDeleteCommand(System.Data.DataTable,System.String)">
+            <summary>
+            Creates the delete command for the specified table.
+            </summary>
+            <param name="dataTable">The data table for which the command object will be created.</param>
+            <param name="dbTableName">Name of the corresponding table in the db.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.GetTableNameFromMapping(System.Data.Common.DataTableMapping[],System.String)">
+            <summary>
+            Returns table name from mapping
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateParam(System.Data.DataTable,System.String)">
+            <summary>
+            Create a SQL parameter for a database column.
+            </summary>
+            <param name="table">The data table containig the column.</param>
+            <param name="columnName">Name of the column.</param>
+            <returns>SQL parameter.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.GetWhereClause(System.Data.SqlClient.SqlCommand@,System.Data.DataTable)">
+            <summary>
+            Build a where clause for the update and delete commands and modifies the command objects. When the table
+            has a primary key, only those columns are added to the 
+            </summary>
+            <param name="command">Current command object for which a where clause needs to be defined</param>
+            <param name="dataTable">Table associated with the current command object</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.AddColumn(System.Data.DataTable,System.Data.SqlClient.SqlCommand@,System.Text.StringBuilder@,System.Data.DataColumn)">
+            <summary>
+            Add a new column and accompanying columns to the where clause and command object
+            </summary>
+            <param name="table">The data table containing the column.</param>
+            <param name="command">Current command object for which a where clause needs to be defined</param>
+            <param name="whereClause">Reference to StringBuilder object that will contain the where clause</param>
+            <param name="column">DataColumn that needs to be added</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.CreateOldParam(System.Data.DataTable,System.String)">
+            <summary>
+            Creates the old parameter for database columns on tables without a primary key.
+            </summary>
+            <param name="table">The table containing the column.</param>
+            <param name="columnName">Name of the column.</param>
+            <returns>SQL paramete.r</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.SqlDataProvider.SqlName(System.String)">
+            <summary>
+            Adds square brackets to the specified name.
+            </summary>
+            <param name="name">Name of the parameter.</param>
+            <returns>Modified table name.</returns>
+        </member>
+    </members>
+</doc>

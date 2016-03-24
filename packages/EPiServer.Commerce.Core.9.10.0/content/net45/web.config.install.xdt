@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	<appSettings>
+		<add key="CommerceManagerBinPath" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+		<add key="CommerceManagerSharedPath" xdt:Transform="Remove" xdt:Locator="Match(key)" />
+	</appSettings>
+  	<system.webServer>
+    	<modules>
+			<add name="MigrationInitializationModule" xdt:Transform="Remove" xdt:Locator="Match(name)"/>
+	    </modules>
+  	</system.webServer>
+	<system.serviceModel>	
+		<serviceHostingEnvironment aspNetCompatibilityEnabled="true" multipleSiteBindingsEnabled="true" xdt:Transform="SetAttributes"/>
+		<services xdt:Transform="InsertIfMissing">
+		  <service name="EPiServer.Events.Remote.EventReplication" behaviorConfiguration="DebugServiceBehaviour" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)">
+			<endpoint name="RemoteEventServiceEndPoint" contract="EPiServer.Events.ServiceModel.IEventReplication" binding="customBinding" bindingConfiguration="RemoteEventsBinding" address="soap.udp://239.255.255.19:5000/RemoteEventService" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)"/>
+		  </service>
+		</services>
+		<client xdt:Transform="InsertIfMissing">		  
+		  <endpoint name="RemoteEventServiceClientEndPoint" address="soap.udp://239.255.255.19:5000/RemoteEventService" binding="customBinding" bindingConfiguration="RemoteEventsBinding" contract="EPiServer.Events.ServiceModel.IEventReplication" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
+		</client>
+	</system.serviceModel>
+</configuration>
