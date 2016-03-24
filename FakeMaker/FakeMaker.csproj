@@ -162,6 +162,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fake.cs" />
     <Compile Include="FakeMaker.cs" />
     <Compile Include="FakePage.cs" />
     <Compile Include="IFake.cs" />
