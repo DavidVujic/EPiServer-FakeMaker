@@ -34,7 +34,16 @@ namespace FakeMaker.Commerce
         {
             var fake = new FakeProduct { Content = new T() };
 
+            fake.WithReferenceId(Randomizer.Next(10, 1000));
+
             return fake;
+        }
+
+        public virtual FakeProduct WithReferenceId(int referenceId)
+        {
+            Content.ContentLink = new ContentReference(referenceId);
+
+            return this;
         }
 
         public virtual T To<T>() where T : class, IContent

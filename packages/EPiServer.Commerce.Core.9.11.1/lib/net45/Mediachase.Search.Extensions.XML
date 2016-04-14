@@ -1,0 +1,952 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mediachase.Search.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Mediachase.Search.Extensions.AbstractSearchCriteria">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.AbstractSearchCriteria.Add(Mediachase.Search.SearchFilter)">
+            <summary>
+            Adds the specified filter.
+            </summary>
+            <param name="filter">The filter.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.AbstractSearchCriteria.Add(System.String,Mediachase.Search.ISearchFilterValue)">
+            <summary>
+            Adds the specified filter.
+            </summary>
+            <param name="field"></param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.AbstractSearchCriteria.Add(System.String,System.Collections.Generic.IEnumerable{Mediachase.Search.ISearchFilterValue})">
+            <summary>
+            Adds the specified field.
+            </summary>
+            <param name="field">The field.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.AbstractSearchCriteria.GetSelectedSearchFilterValues(System.String)">
+            <summary>
+            Gets the selected search filter values.
+            </summary>
+            <param name="fieldName">Name of the field.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.AbstractSearchCriteria.ChangeState">
+            <summary>
+            Changes the state.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.IsModified">
+            <summary>
+            Gets a value indicating whether this instance is modified.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is modified; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.Filters">
+            <summary>
+            Gets the filters.
+            </summary>
+            <value>The filters.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.Currency">
+            <summary>
+            Gets or sets the currency.
+            </summary>
+            <value>The currency.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.MarketId">
+            <summary>
+            Gets or set the market ID.
+            </summary>
+            <value>
+            The market ID.
+            </value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.IncludeInactive">
+            <summary>
+            Gets or sets a value indicating whether include inactive entries in results.
+            </summary>
+            <value>
+              <c>true</c> if [include inactive]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.Sort">
+            <summary>
+            Gets the sorts.
+            </summary>
+            <value>The sorts.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.Scope">
+            <summary>
+            Gets the scope.
+            </summary>
+            <value>The scope.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.Locale">
+            <summary>
+            Gets or sets the locale.
+            </summary>
+            <value>The locale.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.KeyField">
+            <summary>
+            Gets the key field.
+            </summary>
+            <value>The key field.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.ActiveFilterValues">
+            <summary>
+            Gets the active filter values.
+            </summary>
+            <value>The active filter values.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.ActiveFilterFields">
+            <summary>
+            Gets the active filter fields.
+            </summary>
+            <value>The active filter fields.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.CacheKey">
+            <summary>
+            Gets the cache key.
+            </summary>
+            <value>The cache key.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.StartingRecord">
+            <summary>
+            Gets or sets the starting record.
+            </summary>
+            <value>The starting record.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.RecordsToRetrieve">
+            <summary>
+            Gets or sets the records to retrieve.
+            </summary>
+            <value>The records to retrieve.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.AbstractSearchCriteria.IgnoreFilterOnLanguage">
+            <summary>
+                Specifies if the search should filter on <see cref="P:Mediachase.Search.Extensions.AbstractSearchCriteria.Locale"/> or seach on all languages.
+            </summary>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.BaseCatalogIndexBuilder">
+            <summary>
+            Base class for the catalog indexer. Simplifies creating your own catalog indexer.
+            </summary>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder">
+            <summary>
+            Base class for the indexer. Simplifies creating your own indexer.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.BuildIndex(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.UpdateIndex(System.Collections.Generic.IEnumerable{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.OnSearchIndexMessage(Mediachase.Search.SearchIndexEventArgs)">
+            <summary>
+            Called to raise the SearchIndexMessage event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.AddMetaField(Mediachase.Search.Extensions.SearchDocument,Mediachase.MetaDataPlus.Configurator.MetaField,System.Collections.Hashtable)">
+            <summary>
+            Adds a metafield value to the search document.
+            </summary>
+            <param name="doc">The doc.</param>
+            <param name="metaField">The meta field.</param>
+            <param name="metaObject">The meta object.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.OnEvent(System.String,System.Double)">
+            <summary>
+            Raises a SearchIndexMessage event.
+            </summary>
+            <param name="message">The message for the event arguments.</param>
+            <param name="percentage">The completion percentage for the event arguments (100% is represented by 100.00, not 1.00).</param>
+        </member>
+        <member name="E:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.SearchIndexMessage">
+            <inheritdoc />
+        </member>
+        <member name="P:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.Manager">
+            <inheritdoc />
+        </member>
+        <member name="P:Mediachase.Search.Extensions.Indexers.BaseIndexBuilder.Indexer">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.#ctor(Mediachase.Commerce.Catalog.ICatalogSystem,Mediachase.Commerce.Pricing.IPriceService)">
+            <summary>
+            Creates an instance of the <see cref="T:Mediachase.Search.Extensions.BaseCatalogIndexBuilder"/> class with explicit dependencies.
+            </summary>
+            <param name="catalogSystem">The catalog system dependency.</param>
+            <param name="priceService">The pricing system dependency.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.#ctor">
+            <summary>
+            Creates an instance of the <see cref="T:Mediachase.Search.Extensions.BaseCatalogIndexBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.#ctor(Mediachase.MetaDataPlus.MetaDataContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.BaseCatalogIndexBuilder"/> class.
+            </summary>
+            <param name="metaDataContext">The meta data context.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.#ctor(Mediachase.Commerce.Catalog.ICatalogSystem,Mediachase.Commerce.Pricing.IPriceService,Mediachase.Commerce.InventoryService.IInventoryService)">
+            <summary>
+            Creates an instance of the <see cref="T:Mediachase.Search.Extensions.BaseCatalogIndexBuilder"/> class with explicit dependencies.
+            </summary>
+            <param name="catalogSystem">The catalog system dependency.</param>
+            <param name="priceService">The pricing system dependency.</param>
+            <param name="inventoryService">The inventory system dependency.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.#ctor(Mediachase.Commerce.Catalog.ICatalogSystem,Mediachase.Commerce.Pricing.IPriceService,Mediachase.Commerce.InventoryService.IInventoryService,Mediachase.MetaDataPlus.MetaDataContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.BaseCatalogIndexBuilder"/> class.
+            </summary>
+            <param name="catalogSystem">The catalog system.</param>
+            <param name="priceService">The price service.</param>
+            <param name="inventoryService">The inventory service.</param>
+            <param name="metaDataContext">The meta data context.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.RemoveDeletedEntries(System.DateTime)">
+            <summary>
+            Removes the deleted entries from the index.
+            </summary>
+            <param name="lastBuild">The last build.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.BuildIndex(System.Boolean)">
+            <summary>
+            Builds the index.
+            </summary>
+            <param name="rebuild">if set to <c>true</c> [rebuild].</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.UpdateIndex(System.Collections.Generic.IEnumerable{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.OnCatalogEntryIndex(Mediachase.Search.Extensions.SearchDocument@,Mediachase.Commerce.Catalog.Dto.CatalogEntryDto.CatalogEntryRow,System.String)">
+            <summary>
+            Called when catalog entry is indexed. Override this method to add some extra fields.
+            </summary>
+            <param name="document">The document.</param>
+            <param name="entry">The entry.</param>
+            <param name="language">The language.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.IndexCatalogEntryDto(Mediachase.Search.IndexBuilder,Mediachase.Commerce.Catalog.Dto.CatalogEntryDto.CatalogEntryRow,System.String,System.String[])">
+            <summary>
+            Indexes the catalog entry dto.
+            </summary>
+            <param name="indexer">The indexer.</param>
+            <param name="entryRow">The entry row.</param>
+            <param name="defaultCurrency">The default currency.</param>
+            <param name="languages">The languages.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.GetCatalogName(System.Int32)">
+            <summary>
+            Gets the name of the catalog.
+            </summary>
+            <param name="catalogId">The catalog id.</param>
+            <returns>the catalog name, otherwise string.Empty</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.BuildPath(Mediachase.Search.Extensions.SearchDocument,System.String,Mediachase.Commerce.Catalog.Dto.CatalogNodeDto,System.Int32)">
+            <summary>
+            Builds the path, add to index document as _node and _outline.
+            </summary>
+            <param name="doc">The doc.</param>
+            <param name="catalogName">Name of the catalog.</param>
+            <param name="node">starting node to find (bottom up) its ancestors.</param>
+            <param name="level">The level.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.AddPreoderAvailableFields(Mediachase.Search.Extensions.SearchDocument,System.String)">
+            <summary>
+            Adds the Preorder available date field.
+            </summary>
+            <param name="searchDocument">The search document to add fields to.</param>
+            <param name="entryCode">The category entry code.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.AddPriceFields(Mediachase.Search.Extensions.SearchDocument,Mediachase.Commerce.Catalog.Dto.CatalogEntryDto.CatalogEntryRow,System.String)">
+            <summary>
+            Adds the price fields (saleprice, listprice).
+            </summary>
+            <param name="searchDocument">The search document to add fields to.</param>
+            <param name="catalogEntry">The catalog entry to add prices for.</param>
+            <param name="defaultCurrency">No longer used.</param>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.MetaDataContextClone">
+            <summary>
+            Gets the meta data context clone.
+            </summary>
+            <value>The meta data context clone.</value>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants">
+            <summary>
+            Various field contants to build SearchField of Document.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.Catalog">
+            <summary>
+            "_catalog", contains the catalog name of entry
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.IsActive">
+            <summary>
+            _isactive, contains a flag to indicate the entry is active or not
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.MetaClass">
+            <summary>
+            "_metaclass", contains entry metaclass name
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.Code">
+            <summary>
+            "code", contains entry code
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.Content">
+            <summary>
+            "_content", contains the fulltext for this entry
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.Name">
+            <summary>
+            "name", contains entry name
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.Language">
+            <summary>
+            "_lang", contains entry LanguageCode (en-us, de-de, ...)
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.AllowPreorder">
+            <summary>
+            "allowpreorder", contains allow preorder for this entry
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.PreorderAvailableDate">
+            <summary>
+            "preorderavailabledate", contains preorder available date for this entry
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.StartDate">
+            <summary>
+            "startdate"
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.EndDate">
+            <summary>
+            "enddate"
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.ClassType">
+            <summary>
+            _classtype", contains ClassTypeId in LowerInvariant form
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.Node">
+            <summary>
+            _node", contains node Code
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.Outline">
+            <summary>
+            _outline", contains the path from catalog to the node contain the entry (catalogname/nodecode/nodecode)
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.SortOrder">
+            <summary>
+            _sortorder", contains SortOrder of the nodeEntryRelationRows
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.DisplayName">
+            <summary>
+            DisplayName", contains DisplayName in meta field or entry.Name;
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.ListPrice">
+            <summary>
+            "listprice", contains list price of the entry
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.BaseCatalogIndexBuilder.FieldConstants.SalePrice">
+            <summary>
+            saleprice", contains sale price of the entry
+            </summary>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.CatalogEntrySearchCriteria">
+            <summary>
+            Specfifies criteria to search within catalog(s).
+            </summary>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.KeywordSearchCriteria">
+            <summary>
+            Keyword based search criteria.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.KeywordSearchCriteria.SearchPhrase">
+            <summary>
+            Gets or sets the search phrase.
+            </summary>
+            <value>The search phrase.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.DefaultSortOrder">
+            <summary>
+            Gets the default sort order.
+            </summary>
+            <value>The default sort order.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.Sort">
+            <summary>
+            Gets or sets the sort.
+            </summary>
+            <value>The sort.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.IsFuzzySearch">
+            <summary>
+            Gets or sets a value indicating whether this instance is fuzzy search.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is fuzzy search; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.FuzzyMinSimilarity">
+            <summary>
+            Gets or sets the fuzzy min similarity.
+            </summary>
+            <value>The fuzzy min similarity.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.CatalogNames">
+            <summary>
+            Gets or sets the catalog names.
+            </summary>
+            <value>The catalog names.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.CatalogNodes">
+            <summary>
+            Gets or sets the catalog node codes.
+            </summary>
+            <value>The catalog node code.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.Outlines">
+            <summary>
+            Gets or sets the outlines. Outline consists of "CatalogName/CatalogNodeCode(s)".
+            </summary>
+            <example>Everything/digital-cameras</example>
+            <value>The outlines.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.SearchIndex">
+            <summary>
+            Gets or sets the indexes of the search.
+            </summary>
+            <value>The index of the search.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.ClassTypes">
+            <summary>
+            Gets or sets the class types.
+            </summary>
+            <value>The class types.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.IncludePreorderEntry">
+            <summary>
+            Gets or sets this flag to include preorder entry.
+            </summary>
+            <value>The start date.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.StartDate">
+            <summary>
+            Gets or sets the start date.
+            </summary>
+            <value>The start date.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.EndDate">
+            <summary>
+            Gets or sets the end date.
+            </summary>
+            <value>The end date.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.Scope">
+            <summary>
+            Gets the scope.
+            </summary>
+            <value>The scope.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.CatalogEntrySearchCriteria.CacheKey">
+            <summary>
+            Gets the cache key.
+            </summary>
+            <value>The cache key.</value>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder">
+            <summary>
+            Builds indexes for catalog entries.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder.#ctor(Mediachase.MetaDataPlus.MetaDataContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder"/> class.
+            </summary>
+            <param name="metaDataContext">The meta data context.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder.#ctor(Mediachase.Commerce.Catalog.ICatalogSystem,Mediachase.Commerce.Pricing.IPriceService,Mediachase.Commerce.InventoryService.IInventoryService,Mediachase.MetaDataPlus.MetaDataContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder"/> class.
+            </summary>
+            <param name="catalogSystem">The catalog system.</param>
+            <param name="priceService">The price service.</param>
+            <param name="inventoryService">The inventory service.</param>
+            <param name="metaDataContext">The meta data context.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Indexers.CatalogIndexBuilder.OnCatalogEntryIndex(Mediachase.Search.Extensions.SearchDocument@,Mediachase.Commerce.Catalog.Dto.CatalogEntryDto.CatalogEntryRow,System.String)">
+            <summary>
+            Called when catalog entry is indexed. Override this method to add some extra fields.
+            </summary>
+            <param name="document">The document.</param>
+            <param name="entry">The entry.</param>
+            <param name="language"></param>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.Facet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Facet.#ctor(Mediachase.Search.ISearchFacetGroup,System.String,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.Facet"/> class.
+            </summary>
+            <param name="group">The group.</param>
+            <param name="key">The key.</param>
+            <param name="name">The name.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.Facet.#ctor(Mediachase.Search.ISearchFacetGroup,System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.Facet"/> class.
+            </summary>
+            <param name="group">The group.</param>
+            <param name="key">The key.</param>
+            <param name="name">The name.</param>
+            <param name="count">The count.</param>
+            <param name="isSelected">if set to <c>true</c> [is selected].</param>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.Facet.Group">
+            <summary>
+            Gets the group.
+            </summary>
+            <value>The group.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.Facet.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.Facet.Count">
+            <summary>
+            Gets the count.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.Facet.Key">
+            <summary>
+            Gets or sets the Key.
+            </summary>
+            <value>The URL.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.Facet.IsSelected">
+            <summary>
+            Gets a value indicating whether this instance is selected.
+            </summary>
+            <value>
+            <c>true</c> if this instance is selected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.FacetGroup">
+            <summary>
+            Group of facets.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.FacetGroup.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.FacetGroup"/> class.
+            </summary>
+            <param name="fieldName">Name of the field.</param>
+            <param name="name">The name.</param>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.FacetGroup.FieldName">
+            <summary>
+            Gets the name of the field.
+            </summary>
+            <value>The name of the field.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.FacetGroup.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.FacetGroup.Facets">
+            <summary>
+            Gets the facets.
+            </summary>
+            <value>The facets.</value>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.ISearchProviderConfigGenerator">
+            <summary>
+            Interface for search providers to implement if they can generate external search engine configuration.
+            Content of the generated configuration is provider dependent.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.ISearchProviderConfigGenerator.GenerateCatalogConfiguration(Mediachase.MetaDataPlus.MetaDataContext)">
+            <summary>
+            Generates a string of configuration for external systems describing the catalog system.
+            </summary>
+            <param name="catalogContext">The metadata context to load catalog entry metaclass configuration from.</param>
+            <returns>Provider-dependent configuration data.</returns>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.MetaFieldIndexAttrs">
+            <summary>
+            Static utility class for accessing the indexing parameters of user metafields.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.IsIndexStored(Mediachase.MetaDataPlus.Configurator.MetaField)">
+            <summary>
+            Gets the index stored flag from a metafield.
+            </summary>
+            <param name="field">The metafield to evaluate.</param>
+            <returns>The state of the index stored flag.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.IsIndexSortable(Mediachase.MetaDataPlus.Configurator.MetaField)">
+            <summary>
+            Gets the index sortable flag from a metafield.
+            </summary>
+            <param name="field">The metafield to evaluate.</param>
+            <returns>The state of the index sortable flag.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.IsIndexTokenized(Mediachase.MetaDataPlus.Configurator.MetaField)">
+            <summary>
+            Gets the index tokenized flag from a metafield.
+            </summary>
+            <param name="field">The metafield to evaluate.</param>
+            <returns>The state of the index tokenized flag.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.IsIncludedInDefaultSearch(Mediachase.MetaDataPlus.Configurator.MetaField)">
+            <summary>
+            Get the include in default search flag from a metafield.
+            </summary>
+            <param name="field">The metafield to evaluate.</param>
+            <returns>The state of the include in default search flag.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.SetIndexStored(Mediachase.MetaDataPlus.Configurator.MetaField,System.Boolean)">
+            <summary>
+            Sets a value for the index stored flag on a metafield.
+            </summary>
+            <param name="field">The metafield to modify.</param>
+            <param name="value">The value of the index stored flag to set.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.SetIndexSortable(Mediachase.MetaDataPlus.Configurator.MetaField,System.Boolean)">
+            <summary>
+            Sets a value for the index sortable flag on a metafield.
+            </summary>
+            <param name="field">The metafield to modify.</param>
+            <param name="value">The value of the index stored flag to set.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.SetIndexTokenized(Mediachase.MetaDataPlus.Configurator.MetaField,System.Boolean)">
+            <summary>
+            Sets a value for the index tokenized flag on a metafield.
+            </summary>
+            <param name="field">The metafield to modify.</param>
+            <param name="value">The value of the index tokenized flag to set.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.SetIncludedInDefaultSearch(Mediachase.MetaDataPlus.Configurator.MetaField,System.Boolean)">
+            <summary>
+            Sets a value for the include in default search flag on a metafield.
+            </summary>
+            <param name="field">The metafield to modify.</param>
+            <param name="value">The value of the include in default search flag to set.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.CanBeIndexed(Mediachase.MetaDataPlus.Configurator.MetaDataType)">
+            <summary>
+            Returns if it is possible to enable the allow search attribute on a metafield with the specified type.
+            </summary>
+            <param name="metaDataType">The metadata type of the field.</param>
+            <returns>True if the allow search attribute can be set, else false.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.CanBeStored(Mediachase.MetaDataPlus.Configurator.MetaDataType)">
+            <summary>
+            Returns if it is possible to enable the index stored flag on a metafield with the specified type.
+            </summary>
+            <param name="metaDataType">The metadata type of the field.</param>
+            <returns>True if the index stored attribute can be set, else false.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.CanBeSortable(Mediachase.MetaDataPlus.Configurator.MetaDataType)">
+            <summary>
+            Returns if it is possible to enable the index sortable flag on a metafield with the specified type.
+            </summary>
+            <param name="metaDataType">The metadata type of the field.</param>
+            <returns>True if the index sortable attribute can be set, else false.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.CanBeTokenized(Mediachase.MetaDataPlus.Configurator.MetaDataType)">
+            <summary>
+            Returns if it is possible to enable the index tokenized flag on a metafield with the specified type.
+            </summary>
+            <param name="metaDataType">The metadata type of the field.</param>
+            <returns>True if the index tokenized attribute can be set, else false.</returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.MetaFieldIndexAttrs.CanHaveAnyIndexCapability(Mediachase.MetaDataPlus.Configurator.MetaDataType)">
+            <summary>
+            Returns true if any indexing attributes can be set on a metafield with the specified type.
+            </summary>
+            <param name="metaDataType">The metadata type of the field.</param>
+            <returns>True if any indexing attributes can be set, else false.</returns>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.SearchDocument">
+            <summary>
+            Generic Search Document can be used when no specific provider based functionality is needed.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchDocument.Add(Mediachase.Search.ISearchField)">
+            <summary>
+            Adds the specified field.
+            </summary>
+            <param name="field">The field.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchDocument.RemoveField(System.String)">
+            <summary>
+            Removes the field.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchDocument.FieldCount">
+            <summary>
+            Gets the field count.
+            </summary>
+            <value>The field count.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchDocument.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Mediachase.Search.ISearchField"/> at the specified index.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchDocument.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:Mediachase.Search.ISearchField"/> with the specified name.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.SearchDocuments">
+            <summary>
+            Search Document Container.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchDocuments.TotalCount">
+            <summary>
+            Gets or sets the total count.
+            </summary>
+            <value>The total count.</value>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.SearchField">
+            <summary>
+            Document Field.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchField.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.SearchField"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchField.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.SearchField"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchField.#ctor(System.String,System.Object,System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.SearchField"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="value">The value.</param>
+            <param name="attributes">The attributes.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchField.ContainsValue(System.String)">
+            <summary>
+            Determines whether the specified value contains value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            	<c>true</c> if the specified value contains value; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchField.ContainsAttribute(System.String)">
+            <summary>
+            Determines whether the specified value contains attribute.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            	<c>true</c> if the specified value contains attribute; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchField.AddValue(System.Object)">
+            <summary>
+            Adds the value.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchField.Attributes">
+            <summary>
+            Gets or sets the attributes.
+            </summary>
+            <value>The attributes.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchField.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchField.Values">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchField.Value">
+            <summary>
+            Gets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.SearchField.Index">
+            <summary>
+            Defines how to index/analyse the value.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.SearchField.Index.TOKENIZED">
+            <summary>
+            Values are parsed to tokens
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.SearchField.Index.UN_TOKENIZED">
+            <summary>
+            Values are indexed as is
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.SearchField.Index.NO">
+            <summary>
+            Values are not indexed
+            </summary>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.SearchField.Store">
+            <summary>
+            Defines how the field it stored.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.SearchField.Store.YES">
+            <summary>
+            Values are stored in the index
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.SearchField.Store.NO">
+            <summary>
+            Values are not stored
+            </summary>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.SearchField.IncludeInDefaultSearch">
+            <summary>
+            Defines if the field should be included in the default text search.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.SearchField.IncludeInDefaultSearch.YES">
+            <summary>
+            Value is included in the default text search.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Search.Extensions.SearchField.IncludeInDefaultSearch.NO">
+            <summary>
+            Value is not included in the default text search.
+            </summary>
+        </member>
+        <member name="T:Mediachase.Search.Extensions.SearchResults">
+            <summary>
+            Concrete implementation for ISearchResults
+            </summary>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchResults.GetIntResults">
+            <summary>
+            Gets the int results.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchResults.#ctor(Mediachase.Search.ISearchDocuments,Mediachase.Search.ISearchCriteria)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Search.Extensions.SearchResults"/> class.
+            </summary>
+            <param name="documents">The documents.</param>
+            <param name="criteria">The criteria.</param>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchResults.GetFieldValue``1(System.Int32,System.String)">
+            <summary>
+            Gets the field value converted to the type specified.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="index">The index.</param>
+            <param name="fieldName">Name of the field.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Search.Extensions.SearchResults.GetKeyFieldValues``1">
+            <summary>
+            Gets the array of values from the key field defined in the ISearchCriteria.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchResults.TotalCount">
+            <summary>
+            Gets the total count of all results that we can potentially return.
+            </summary>
+            <value>The total count.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchResults.Documents">
+            <summary>
+            Gets the documents that are contained within current results.
+            </summary>
+            <value>The documents.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchResults.SearchCriteria">
+            <summary>
+            Gets the search criteria that was used to generate search results.
+            </summary>
+            <value>The search criteria.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchResults.FacetGroups">
+            <summary>
+            Gets the facet groups.
+            </summary>
+            <value>The facet groups.</value>
+        </member>
+        <member name="P:Mediachase.Search.Extensions.SearchResults.Suggestions">
+            <summary>
+            Gets or sets the word suggestions.
+            </summary>
+            <value>The suggestions.</value>
+        </member>
+    </members>
+</doc>

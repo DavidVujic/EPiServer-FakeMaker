@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mediachase.Commerce.Plugins.Shipping</name>
+    </assembly>
+    <members>
+        <member name="T:Mediachase.Commerce.Plugins.Shipping.Generic.GenericGateway">
+            <summary>
+            Summary description for Generic.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Plugins.Shipping.Generic.GenericGateway.#ctor(Mediachase.Commerce.IMarket)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Plugins.Shipping.Generic.GenericGateway"/> class.
+            </summary>
+            <param name="market">The market.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Plugins.Shipping.Generic.GenericGateway.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Plugins.Shipping.Generic.GenericGateway"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Plugins.Shipping.Generic.GenericGateway.GetRate(System.Guid,Mediachase.Commerce.Orders.Shipment,System.String@)">
+            <summary>
+            Returns the package option array when method id and package that needs to be send is passed.
+            Use passed message string to pass errors back to the application if any occured.
+            </summary>
+            <param name="methodId"></param>
+            <param name="shipment">The shipment.</param>
+            <param name="message">The message.</param>
+            <returns>empty array if no results found</returns>
+        </member>
+        <member name="T:Mediachase.Commerce.Plugins.Shipping.WeightJurisdictionGateway">
+            <summary>
+            Summary description for Generic.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Plugins.Shipping.WeightJurisdictionGateway.#ctor(Mediachase.Commerce.IMarket)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Plugins.Shipping.WeightJurisdictionGateway"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Plugins.Shipping.WeightJurisdictionGateway.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Plugins.Shipping.WeightJurisdictionGateway"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Plugins.Shipping.WeightJurisdictionGateway.GetRate(System.Guid,Mediachase.Commerce.Orders.Shipment,System.String@)">
+            <summary>
+            Returns the package option array when method id and package that needs to be send is passed.
+            Use passed message string to pass errors back to the application if any occured.
+            </summary>
+            <param name="methodId"></param>
+            <param name="shipment">The shipment.</param>
+            <param name="message">The message.</param>
+            <returns>empty array if no results found</returns>
+        </member>
+    </members>
+</doc>

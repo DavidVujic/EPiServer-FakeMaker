@@ -1,0 +1,2353 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mediachase.Commerce.Marketing.Validators</name>
+    </assembly>
+    <members>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.ConditionBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.ConditionBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.ConditionBase"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.ConditionBase.GetProperty(System.Object,System.String)">
+            <summary>
+            Gets the property.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="propName">Name of the prop.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.ConditionBase.#ctor(System.Xml.XmlNode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.ConditionBase"/> class.
+            </summary>
+            <param name="node">The node.</param>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.ConditionBase.ObjectName">
+            <summary>
+            Gets or sets the name of the object.
+            </summary>
+            <value>The name of the object.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.ConditionBase.IsRequired">
+            <summary>
+            Gets or sets a value indicating whether this instance is required.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is required; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate">
+            <summary>
+            Default implementation of the IPromotionEntryPopulate interface.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate.#ctor">
+            <summary>
+            Creates an instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate.#ctor(Mediachase.Commerce.Pricing.IPriceService)">
+            <summary>
+            Creates an instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate"/> class with explicit dependencies.
+            </summary>
+            <param name="priceService">The price service dependency.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate.Populate(Mediachase.Commerce.Marketing.PromotionEntry@,System.Object)">
+            <summary>
+            Populates the specified promotion catalogEntry with attribute values from the val object. Automatically adds all the meta fields.
+            The objects supported are LineItem and Entry.
+            </summary>
+            <param name="promotionEntry">The catalogEntry.</param>
+            <param name="val">The val. Can be LineItem or Entry.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate.Populate(Mediachase.Commerce.Marketing.PromotionEntry,Mediachase.Commerce.Catalog.Objects.Entry,Mediachase.Commerce.MarketId,Mediachase.Commerce.Currency)">
+            <summary>
+            Populates the specified entry.
+            </summary>
+            <param name="entry">The entry.</param>
+            <param name="catalogEntry">The catalog entry.</param>
+            <param name="marketId">The market id.</param>
+            <param name="currency">The currency.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate.Populate(Mediachase.Commerce.Marketing.PromotionEntry,Mediachase.Commerce.Orders.LineItem)">
+            <summary>
+            Populates the line item.
+            </summary>
+            <param name="entry">The promotion entry.</param>
+            <param name="lineItem">The line item.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PromotionEntryPopulate.PopulateCustom(Mediachase.Commerce.Marketing.PromotionEntry,System.Object)">
+            <summary>
+            Populates the specified promotion entry with attribute values from the object.
+            </summary>
+            <param name="promotionEntry">The promotion entry to populate.</param>
+            <param name="obj">The object to populate values from.</param>
+            <exception cref="T:System.NotSupportedException">
+            The method is not supported in this implementation.
+              </exception>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.PropertyCondition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PropertyCondition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.PropertyCondition"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PropertyCondition.Eval(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Evals the specified context.
+            </summary>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.PropertyCondition.#ctor(System.Xml.XmlNode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.PropertyCondition"/> class.
+            </summary>
+            <param name="node">The node.</param>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.PropertyCondition.PropertyName">
+            <summary>
+            Gets or sets the name of the property.
+            </summary>
+            <value>The name of the property.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.PropertyCondition.PropertyValue">
+            <summary>
+            Gets or sets the property value.
+            </summary>
+            <value>The property value.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.PropertyCondition.Operator">
+            <summary>
+            Gets or sets the operator.
+            </summary>
+            <value>The operator.</value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider">
+            <summary>
+            Base class for Filter Expression Providers that use Windows Workflow Foundation Rules engine to store and retrieve expressions.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.RegisterProviderElementDefinitions">
+            <summary>
+            Registers the provider element definitions.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.CreateFilterNodes">
+            <summary>
+            Creates the filter nodes.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.FindElementDef(System.String)">
+            <summary>
+            Searches in registered ElementDefs
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.RegisterDefinitions(System.Collections.Generic.IEnumerable{Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs})">
+            <summary>
+            Registers the definitions in to cache map.
+            </summary>
+            <param name="definitions">The definitions.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.CreateMethodElement(Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs,System.String)">
+            <summary>
+            Creates the method element by him definitions
+            </summary>
+            <param name="methodDef">The method def.</param>
+            <param name="customControlPath">The custom control path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.CreateConditionElement(Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs,Mediachase.BusinessFoundation.ConditionElementType,System.String,System.Collections.Generic.IEnumerable{Mediachase.BusinessFoundation.ConditionSelectItem})">
+            <summary>
+            Creates the condition element by him definitions
+            </summary>
+            <param name="conditionDef">The condition def.</param>
+            <param name="condElType">Type of the cond el.</param>
+            <param name="customControlPath">The custom control path.</param>
+            <param name="items">The items.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.GetElementDefsByMetaDataPlusMetaClass(System.String,Mediachase.MetaDataPlus.Configurator.MetaClass)">
+            <summary>
+            Creates the filter expression node.
+            </summary>
+            <param name="pattern">The pattern.</param>
+            <param name="metaClass">The meta class.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.GetElementDefsByBAFDataMetaClass(System.String,System.String)">
+            <summary>
+            Gets the element defs by BAF data meta class.
+            </summary>
+            <param name="pattern">The pattern.</param>
+            <param name="metaClassName">Name of the meta class.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.CreateFilterExpressionNode(Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs)">
+            <summary>
+            Creates the filter expression node by him definitions
+            </summary>
+            <param name="elementDef">The element def.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.EliminateEmptyNodes(Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Eliminates the empty nodes (nodes that consist of only logical elements).
+            </summary>
+            <param name="nodes">The nodes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.AddExpression(System.CodeDom.CodeBinaryOperatorExpression,System.CodeDom.CodeBinaryOperatorType,System.CodeDom.CodeBinaryOperatorExpression)">
+            <summary>
+            Adds the new expression to the current master.
+            </summary>
+            <param name="master">The master.</param>
+            <param name="op">The op.</param>
+            <param name="expr">The expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertNodesToExpression(Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Converts the nodes to expression.
+            </summary>
+            <param name="nodes">The nodes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertNodeToBlock(Mediachase.BusinessFoundation.FilterExpressionNode,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Converts the node to block.
+            </summary>
+            <param name="leftNode">The left node.</param>
+            <param name="rightNode">The right node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertNodeToExpression(Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Converts the node to expression.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.CreateRule(System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Creates the rule.
+            </summary>
+            <param name="expressionKey">The expression key.</param>
+            <param name="filters">The filters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.IsStringCondition(Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs)">
+            <summary>
+            Determines whether a given definition is a text condition.
+            </summary>
+            <param name="conditionDef">The condition definition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.AddStringExpression(System.String,System.String,System.String)">
+            <summary>
+            Adds the string expression.
+            </summary>
+            <param name="master">The master.</param>
+            <param name="op">The op.</param>
+            <param name="expr">The expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertNodeToStringExpression(Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Converts the node to string expression.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertNodesToStringExpression(Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Converts the nodes to string expression.
+            </summary>
+            <param name="nodes">The nodes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertNodesToStringExpression(Mediachase.BusinessFoundation.FilterExpressionNodeCollection,System.String)">
+            <summary>
+            Converts the nodes to string expression.
+            </summary>
+            <param name="nodes">The nodes.</param>
+            <param name="separator">The separator.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.CreateRule2(System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Creates the rule2.
+            </summary>
+            <param name="expressionKey">The expression key.</param>
+            <param name="filters">The filters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.CreateRuleSet(System.String,System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Creates the rule set.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key.</param>
+            <param name="filters">The filters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.LoadExpressionNodeCollectionFromXaml(System.String)">
+            <summary>
+            Loads the expression.
+            </summary>
+            <param name="xaml">The xaml.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertRuleSetToExpressionNodes(System.Workflow.Activities.Rules.RuleSet)">
+            <summary>
+            Converts the rule set to expression nodes.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.AddExpressionAsNode(Mediachase.BusinessFoundation.FilterExpressionNodeCollection@,System.CodeDom.CodeExpression)">
+            <summary>
+            Adds the expression as node.
+            </summary>
+            <param name="col">The col.</param>
+            <param name="expr">The expr.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.AddExpressionAsNode(Mediachase.BusinessFoundation.FilterExpressionNodeCollection@,System.CodeDom.CodeBinaryOperatorExpression)">
+            <summary>
+            Adds the expression as node.
+            </summary>
+            <param name="col">The col.</param>
+            <param name="expr">The expr.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertExpressionToNode(System.CodeDom.CodeMethodInvokeExpression)">
+            <summary>
+            Converts the expression to node.
+            </summary>
+            <param name="expr">The expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ExtractPropertyFromTarget(System.CodeDom.CodeExpression)">
+            <summary>
+            Extracts the property from target.
+            </summary>
+            <param name="expr">The expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertTargetToString(System.CodeDom.CodeExpression)">
+            <summary>
+            Converts the target to string.
+            </summary>
+            <param name="expr">The expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertTargetToString(System.CodeDom.CodeMethodInvokeExpression)">
+            <summary>
+            Converts the target to string.
+            </summary>
+            <param name="expr">The expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConvertTargetToString(System.CodeDom.CodePropertyReferenceExpression)">
+            <summary>
+            Converts the target to string.
+            </summary>
+            <param name="expr">The expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.GetEscapedAndCleanedExpressionNodeRightValue(Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the escaped and cleaned expression node right value.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.FilterNodeFindRecursively(System.Collections.Generic.IEnumerable{Mediachase.BusinessFoundation.FilterExpressionNode},System.Func{Mediachase.BusinessFoundation.FilterExpressionNode,System.Boolean})">
+            <summary>
+            Filters the node find recursively.
+            </summary>
+            <param name="nodeCollection">The node collection.</param>
+            <param name="predicate">The predicate.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.DeserializeRuleSet(System.String)">
+            <summary>
+            Deserializes the rule set.
+            </summary>
+            <param name="ruleSetXml">The rule set XML.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.GetElementMethods(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element methods.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.GetNewElements(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the new elements.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="parent">The parent.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.GetElementConditions(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element conditions.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.LoadFilters(System.String,System.String)">
+            <summary>
+            Loads the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.SaveFilters(System.String,System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Saves the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key.</param>
+            <param name="filters">The filters.</param>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConditionTextDefs">
+            <summary>
+            Gets or sets the condition text defs.
+            </summary>
+            <value>The condition text defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConditionDecimalDefs">
+            <summary>
+            Gets or sets the condition decimal defs.
+            </summary>
+            <value>The condition decimal defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConditionBoolDefs">
+            <summary>
+            Gets or sets the condition bool defs.
+            </summary>
+            <value>The condition bool defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.BaseRuleSetFilterExpressionProvider.ConditionIntegerDefs">
+            <summary>
+            Gets or sets the condition integer defs.
+            </summary>
+            <value>The condition integer defs.</value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs">
+            <summary>
+            Represents definition mapping methods and defines UID for all posible filter elements
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_BillingCurrency">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_CustomerName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_HandlingTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_ShippingTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_SubTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_TaxTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ShoppingCart_Total">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_LineItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_ShippingMethodName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_ShipmentTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_Child_ShippingMethodName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_Child_ShipmentTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_Child_OrderForm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_LineItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_BillingAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_DiscountAmount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_HandlingTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_ShippingTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_SubTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_TaxTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Shipment_OrderForm_Total">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_Address">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_Quantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_ListPrice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_Catalog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_CatalogNode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_CatalogEntryId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_MinQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_MaxQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_PlacedPrice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_LineItemDiscountAmount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_OrderLevelDiscountAmount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_ShippingMethodName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_ExtendedPrice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_DisplayName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_AllowBackordersAndPreorders">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_InStockQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_PreorderQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_BackorderQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.LineItem_InventoryStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_LineItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_BillingAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_Shipments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_DiscountAmount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_HandlingTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_ShippingTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_SubTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_TaxTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderForm_Total">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_Organization">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_Line1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_Line2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_City">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_State">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_CountryCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_CountryName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_PostalCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_RegionCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_RegionName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_DaytimePhoneNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_EveningPhoneNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_FaxNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.OrderAddress_Email">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_Quantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_ListPrice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_Catalog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_CatalogNode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_CatalogEntryId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_MinQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_MaxQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_PlacedPrice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_LineItemDiscountAmount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_OrderLevelDiscountAmount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_ShippingMethodName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_ExtendedPrice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_DisplayName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_AllowBackordersAndPreorders">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_InStockQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_PreorderQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_BackorderQuantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.TargetLineItem_InventoryStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.RunningTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Contact_Addresses">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Contact_CustomerGroup">
+            <summary>
+            Identifier for the CustomerGroup attribute of a contact
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_ShipmentPercent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_ShipmentValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_AllEntryValueOfItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_AllEntryPercentOfItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_WholeOrderValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_WholeOrderPercent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_AllEntryValueOfSkuSet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_AllEntryPercentOfSkuSet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_EachEntryValueOfSkuSet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_GiftOfSkuSet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_Sum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_Count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_All">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_Any">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_Action_EachEntry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_Action_AllEntry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_Action_AllEntryPercent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Method_Action_Gift">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_Condition_SkuSelect">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_Condition_FreeShiping">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_Condition_PercentDecimal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Action_Condition_Decimal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Text_Equals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Text_NotEquals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Text_Contains">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Text_NotContains">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Text_StartsWith">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Text_EndsWith">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Decimal_Equals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Decimal_NotEquals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Decimal_Greater">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Decimal_Less">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Decimal_GreaterOrEqual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Decimal_LessOrEqual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Int_Equals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Int_NotEquals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Int_Greater">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Int_Less">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Int_GreaterOrEqual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Int_LessOrEqual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_Bool_Equals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_ShippingMethod_Equals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_ShippingMethod_NotEquals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_CustomerGroupMethod_Equals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Condition_CustomerGroupMethod_NotEquals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Descr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.ConversionPattern">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Tag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Childrens">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Methods">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Conditions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.GetDynamicKey(System.String)">
+            <summary>
+            Gets the dynamic key.
+            </summary>
+            <param name="pattern">The pattern.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.GetConditionDefByName(System.String)">
+            <summary>
+            Gets the name of the condition def by.
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.GetMethodDef(System.String)">
+            <summary>
+            Gets the method def.
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>
+            A new object that is a copy of this instance.
+            </returns>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs.HasChildren">
+            <summary>
+            Gets a value indicating whether this instance has children.
+            </summary>
+            <value>
+            	<c>true</c> if this instance has children; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider">
+            <summary>
+            Represents the fileter expression povider for creation custom reward.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.RegisterProviderElementDefinitions">
+            <summary>
+            Registers the provider element definitions.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.CreateFilterNodes">
+            <summary>
+            Creates the filter nodes.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.CreateFilterExpressionNode(Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs)">
+            <summary>
+            Creates the filter expression node by him definitions
+            </summary>
+            <param name="elementDef">The element def.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ConvertNodeToStringExpression(Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Converts the node to string expression.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.CreateRuleActions(System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Creates the rule actions.
+            </summary>
+            <param name="expressionKey">The expression key.</param>
+            <param name="filters">The filters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.GetNewElements(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the new elements.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.GetElementConditions(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element conditions.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.GetElementMethods(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element methods.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.LoadFilters(System.String,System.String)">
+            <summary>
+            Loads the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.SaveFilters(System.String,System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Saves the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key.</param>
+            <param name="filters">The filters.</param>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ActionsOrderDefs">
+            <summary>
+            Gets or sets the actions order defs.
+            </summary>
+            <value>The actions order defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ActionsEntryDefs">
+            <summary>
+            Gets or sets the actions entry defs.
+            </summary>
+            <value>The actions entry defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ActionsShipmentDefs">
+            <summary>
+            Gets or sets the actions shipment defs.
+            </summary>
+            <value>The actions shipment defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.MethodEachEntryDefs">
+            <summary>
+            Gets or sets the method each entry defs.
+            </summary>
+            <value>The method each entry defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.MethodAllEntryDefs">
+            <summary>
+            Gets or sets the method all entry defs.
+            </summary>
+            <value>The method all entry defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.MethodAllEntryPercentDefs">
+            <summary>
+            Gets or sets the method all entry percent defs.
+            </summary>
+            <value>The method all entry percent defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.MethodGiftDefs">
+            <summary>
+            Gets or sets the method gift defs.
+            </summary>
+            <value>The method gift defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ConditionSkuSelectDefs">
+            <summary>
+            Gets or sets the condition sku select defs.
+            </summary>
+            <value>The condition sku select defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ConditionFreeShipingDefs">
+            <summary>
+            Gets or sets the condition free shiping defs.
+            </summary>
+            <value>The condition free shiping defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ConditionPercentDecimalDefs">
+            <summary>
+            Gets or sets the condition percent decimal defs.
+            </summary>
+            <value>The condition percent decimal defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionActionProvider.ConditionDecimalDefs">
+            <summary>
+            Gets or sets the condition decimal defs.
+            </summary>
+            <value>The condition decimal defs.</value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider">
+            <summary>
+            Represents Promotion filter expression provider.
+            This provider will be used to construct windows workflow foundation rules using the Expression Builder User Interface DHTML Control.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.RegisterProviderElementDefinitions">
+            <summary>
+            Registers the provider element definitions.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.CreateFilterNodes">
+            <summary>
+            Initializes the provider.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.IsStringCondition(Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs)">
+            <summary>
+            Determines whether a given definition is a text condition.
+            </summary>
+            <param name="conditionDef">The condition definition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.ConvertNodeToStringExpression(Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Converts the node to string expression.
+            </summary>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.GetDataSourceDto(System.Object)">
+            <summary>
+            Gets the data source dto.
+            </summary>
+            <param name="dataSource">The data source.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.SaveExpression(System.Workflow.Activities.Rules.RuleSet,System.Int32)">
+            <summary>
+            Saves the expression.
+            </summary>
+            <param name="set">The set.</param>
+            <param name="expressionId">The expression id.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.LoadFilters(System.String,System.String)">
+            <summary>
+            Loads the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.SaveFilters(System.String,System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Saves the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key, should be passed in the format of segmentid:expressionid</param>
+            <param name="filters">The filters.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.GetNewElements(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the new elements.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.GetElementConditions(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element conditions.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.GetElementMethods(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element methods.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.ShoppingCartDefs">
+            <summary>
+            Gets or sets the shopping cart defs.
+            </summary>
+            <value>The shopping cart defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.OrderFormDefs">
+            <summary>
+            Gets or sets the order form defs.
+            </summary>
+            <value>The order form defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.ShipmentOrderFormDefs">
+            <summary>
+            Gets or sets the shipment order form defs.
+            </summary>
+            <value>The shipment order form defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.ShipmentDefs">
+            <summary>
+            Gets or sets the shipment defs.
+            </summary>
+            <value>The shipment defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.ShipmentChildDefs">
+            <summary>
+            Definitions used exclusively as child defs.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.OrderAddressDefs">
+            <summary>
+            Definitions maping fields MC OrderAddress -> indexed property PromotionEntry
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.LineItemDefs">
+            <summary>
+            Definitions maping fields MC LineItem -> PromotionEntry
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.LineItemWithAddressDefs">
+            <summary>
+            Gets or sets the line item with address defs.
+            </summary>
+            <value>The line item with address defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.TargetLineItemDefs">
+            <summary>
+            Definitions maping fields TargetLineItem -> PromotionEntry
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.RunningTotalDefs">
+            <summary>
+            Gets or sets the running total defs.
+            </summary>
+            <value>The running total defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.MethodSumDef">
+            <summary>
+            Gets or sets the method sum def.
+            </summary>
+            <value>The method sum def.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.MethodCountDef">
+            <summary>
+            Gets or sets the method count def.
+            </summary>
+            <value>The method count def.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.MethodAllDef">
+            <summary>
+            Gets or sets the method all def.
+            </summary>
+            <value>The method all def.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.MethodAnyDef">
+            <summary>
+            Gets or sets the method any def.
+            </summary>
+            <value>The method any def.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.CollectionMethodDefs">
+            <summary>
+            Gets or sets the collection method defs.
+            </summary>
+            <value>The collection method defs.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.PromotionFilterExpressionProvider.ConditionShippingMethodDefs">
+            <summary>
+            Gets or sets the condition shipping method.
+            </summary>
+            <value>The condition shipping method.</value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider">
+            <summary>
+            Represents Customer segments filter expression provider.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.RegisterProviderElementDefinitions">
+            <summary>
+            Registers the provider element definitions.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.CreateFilterNodes">
+            <summary>
+            Initializes the provider.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.UpdateCustomerGroupConditions">
+            <summary>
+            Updates the customer group conditions.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.IsStringCondition(Mediachase.Commerce.Marketing.Validators.Providers.ElementDefs)">
+            <summary>
+            Determines whether a given definition is a text condition.
+            </summary>
+            <param name="conditionDef">The condition definition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.LoadFilters(System.String,System.String)">
+            <summary>
+            Loads the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.SaveFilters(System.String,System.String,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Saves the filters.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="expressionKey">The expression key, should be passed in the format of segmentid:expressionid</param>
+            <param name="filters">The filters.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.GetNewElements(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the new elements.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="parent">The parent.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.GetElementMethods(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element methods.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.GetElementConditions(System.String,Mediachase.BusinessFoundation.FilterExpressionNode)">
+            <summary>
+            Gets the element conditions.
+            </summary>
+            <param name="expressionPlace">The expression place.</param>
+            <param name="node">The node.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.AddressDefs">
+            <summary>
+            Address definitions.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.ContactDefs">
+            <summary>
+            Contact definitions.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.AddressMethodDefs">
+            <summary>
+            Address method definitions.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.CustomerFilterExpressionProvider.ConditionCustomerGroupMethodDefs">
+            <summary>
+            Gets or sets the condition customer group condition.
+            </summary>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType">
+            <summary>
+            Enumerates the types of tokens that can be classified by the tokenizer.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.NotAToken">
+            <summary>
+            This is reserved for the NullToken.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.Identifier">
+            <summary>
+            An identifier can be either a class or property name.  The tokenizer does 
+            not have enough information to make that distinction.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.Operator">
+            <summary>
+            An operator like + or *.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.Comma">
+            <summary>
+            A comma
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.Dot">
+            <summary>
+            A dot (".").
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.Primitive">
+            <summary>
+            A primitive like a quoted string, boolean value, or number.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.OpenParens">
+            <summary>
+            Open parenthesis
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.CloseParens">
+            <summary>
+            Close parenthesis
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.OpenBracket">
+            <summary>
+            Open bracket
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.CloseBracket">
+            <summary>
+            Close bracket
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType.Quote">
+            <summary>
+            Double quote token, only used internally by tokenizer.
+            </summary>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority">
+            <summary>
+            Indicates priority in order of operations.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.None">
+            <summary>
+            Default
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.Or">
+            <summary>
+            Bitwise or
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.And">
+            <summary>
+            Bitwise and
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.Not">
+            <summary>
+            Bitwise not
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.Equality">
+            <summary>
+            Equality comparisons like &gt;, &lt;=, ==, etc.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.PlusMinus">
+            <summary>
+            Plus or minus
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.Mod">
+            <summary>
+            Modulus
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.MulDiv">
+            <summary>
+            Multiply or divide
+            </summary>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority.UnaryMinus">
+            <summary>
+            Unary minus
+            </summary>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser">
+            <summary>
+            Parses expressions written in strings into CodeDom expressions.  There is a certain 
+            amount of context that the parser may need to be familiar with.  This is why the 
+            parsing methods are not exposed as static.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser.ParseExpression(System.String)">
+            <summary>
+            Parses an expression into a <see cref="T:System.CodeDom.CodeExpression"/>.
+            </summary>
+            <param name="exp">expression to parse</param>
+            <returns>CodeDom representing the expression</returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser.ReadExpression(Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer,Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority)">
+            <summary>
+            Recursive method that reads an expression.
+            </summary>
+            <param name="t"></param>
+            <param name="priority"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser.ReadIdentifier(Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer)">
+            <summary>
+            When an identifier is encountered, it could be a number of things.  A single identifer by itself
+            is considered a variable.  The pattern identifier[.identifier]+ will consider the 
+            first identifier as a variable and the others as properties.  Any identifier that is followed
+            by an open parenthesis is considered to be a function call.  Indexes are not handled yet, but
+            should be handled in the future.  If the identifier is "this" then a this reference is used.
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser.RecognizedTypes">
+            <summary>
+            A collection of identifiers that should be recognized as types.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser.Enums">
+            <summary>
+            A collection of identifiers that should be recognized as enums.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Parser.Fields">
+            <summary>
+            A collection of names of fields.
+            </summary>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token">
+            <summary>
+            Represents a token that is parsed out by the <see cref="T:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer"/>.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token.#ctor(System.String,Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType,Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority)">
+            <summary>
+            Constructor for tokens that are not parsed.
+            </summary>
+            <param name="text"></param>
+            <param name="type"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token.#ctor(System.Object,Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenType,Mediachase.Commerce.Marketing.Validators.Providers.DomParser.TokenPriority)">
+            <summary>
+            Constructor for tokens that are parsed.
+            </summary>
+            <param name="parsedObj"></param>
+            <param name="type"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="F:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token.NullToken">
+            <summary>
+            The null token represents a state where the <see cref="T:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer"/> encountered an error
+            or has not begun parsing yet.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token.Text">
+            <summary>
+            The text that makes up the token.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token.ParsedObject">
+            <summary>
+            If the token can be parsed into a type like an integer, this property holds that value.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token.Type">
+            <summary>
+            Token type
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Token.Priority">
+            <summary>
+            Token priority
+            </summary>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer">
+            <summary>
+            Divides the string into tokens.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.#ctor(System.String)">
+            <summary>
+            A tokenizer is always constructed on a single string.  Create one tokenizer per string.
+            </summary>
+            <param name="s">string to tokenize</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.MoveNext">
+            <summary>
+            Moves to the next character.  If there are no more characters, then the tokenizer is
+            invalid.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.GetNextToken">
+            <summary>
+            Gets the next token in the string.  Reads as many characters as necessary to retrieve
+            that token.
+            </summary>
+            <returns>next token</returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.GetString">
+            <summary>
+            Anything that starts with a character is considered a string.  This could be a 
+            primitive quoted string, a primitive expression, or an identifier
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.GetNumber">
+            <summary>
+            A token that starts with a number can be an integer, a long, or a double.
+            </summary>
+            <returns></returns>
+            <remarks>
+            An integer is the default for numbers.  Numbers can also be followed by a
+            l, L, d, or D character to indicate a long or a double value respectively.
+            Any numbers containing a dot (".") are considered doubles.
+            </remarks>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.GetOperator">
+            <summary>
+            Some operators take more than one character.  Also, the tokenizer is able to 
+            categorize the token's priority based on what kind of operator it is.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.Current">
+            <summary>
+            Allows access to the token most recently parsed.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.IsInvalid">
+            <summary>
+            Indicates that there are no more characters in the string and tokenizer is finished.
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.IsChar">
+            <summary>
+            Is the current character a letter or underscore?
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.IsDot">
+            <summary>
+            Is the current character a dot (".")?
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.IsComma">
+            <summary>
+            Is the current character a comma?
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.IsNumber">
+            <summary>
+            Is the current character a number?
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.IsSpace">
+            <summary>
+            Is the current character a whitespace character?
+            </summary>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.DomParser.Tokenizer.IsOperator">
+            <summary>
+            Is the current character an operator?
+            </summary>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.Providers.RuleHelper">
+            <summary>
+            This class simplifies programming constructions of rules
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.RuleHelper.CreateRule(System.String,System.Int32,Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Creates the rule.
+            </summary>
+            <param name="stringRuleName">Name of the string rule.</param>
+            <param name="priority">The priority.</param>
+            <param name="filters">The filters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.Providers.RuleHelper.EliminateEmptyNodes(Mediachase.BusinessFoundation.FilterExpressionNodeCollection)">
+            <summary>
+            Eliminates the empty nodes (nodes that consist of only logical elements).
+            </summary>
+            <param name="nodes">The nodes.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.RuleHelper.IsValidTrueAction">
+            <summary>
+            Gets the "this.ValidationResult.IsValid = true" action, that can be assigned to TheActions for the Rule.
+            </summary>
+            <value>The is valid true action.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.Providers.RuleHelper.HaltAction">
+            <summary>
+            Gets the halt action.
+            </summary>
+            <value>The halt action.</value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.RulesContext">
+            <summary>
+            The context object that will be passed to the Rules Engine. Provides way to do intellisense
+            rules creation. Class can also be extended with custom functionality if needed, as well as 
+            functions that might be useful during rules creation.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.AddFreeGiftToCart(System.String,System.String[])">
+            <summary>
+            Adds the free gift to cart.
+            </summary>
+            <remarks> This method using in promotion actions rulset</remarks>
+            <param name="quantity">The quantity.</param>
+            <param name="entryCodes">The entry codes.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.PredicateFunction(System.Object,System.CodeDom.CodeExpression)">
+            <summary>
+            	<![CDATA[
+            BaseRuleSetFilterExpressionProvider must interpret all collection expression to string call
+            one of methods ( ValidateAll, ValidateAny, ConditionCollectionCount ) with CodeExpression for one of collection item
+            Example: ConditionCollectionAll(this.CustomerAccount.Addresses, "this.Organization == "Org1" && this.Line1 = "line"")
+            exactly second parameter must be converted to CodeExpression statement by Parser in provider.
+            ]]>
+            </summary>
+            <param name="item">The item.</param>
+            <param name="codeExpr">The code expr.</param>
+            <returns></returns>
+            <example><![CDATA[ConditionCollectionAll(this.CustomerAccount.Addresses, "this.Organization == \"Org1\" && this.Line1 = \"line\"");]]></example>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.ParseExpression(System.String)">
+            <summary>
+            Parses the expression.
+            </summary>
+            <param name="strExpr">The STR expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.ValidateAll(System.Object,System.String)">
+            <summary>
+            Validates all.
+            </summary>
+            <param name="obj">The obj.</param>
+            <param name="strCodeExpr">The STR code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.ValidateAll(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Returns true if all of the items in the collection satisfies the specified condition.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="strCodeExpr">The STR code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.ValidateAll(System.Collections.IEnumerable,System.CodeDom.CodeExpression)">
+            <summary>
+            Returns true if all of the items in the collection satisfies the specified condition.
+            </summary>
+            <remarks>
+            Returns false if collection does not contain any elements.
+            </remarks>
+            <param name="collection">The collection.</param>
+            <param name="codeExpr">The code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.ValidateAny(System.Object,System.String)">
+            <summary>
+            Validates any.
+            </summary>
+            <param name="obj">The obj.</param>
+            <param name="strCodeExpr">The STR code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.ValidateAny(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Returns true if any of the items in the collection satisfies the specified condition.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="strCodeExpr">The STR code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.ValidateAny(System.Collections.IEnumerable,System.CodeDom.CodeExpression)">
+            <summary>
+            Returns true if any of the items in the collection satisfies the specified condition.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="codeExpr">The code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetValidatedCount(System.Object,System.String)">
+            <summary>
+            Gets the validated count.
+            </summary>
+            <param name="obj">The obj.</param>
+            <param name="strCodeExpr">The STR code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetValidatedCount(System.Collections.IEnumerable,System.String)">
+            <summary>
+            Returns the number of items that satisfied the specified condition.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="strCodeExpr">The STR code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetCount(System.Object)">
+            <summary>
+            Gets the count.
+            </summary>
+            <param name="obj">The obj.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetCount(System.Collections.IEnumerable)">
+            <summary>
+            Gets the count.
+            </summary>
+            <param name="collection">The collection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetValidatedCount(System.Collections.IEnumerable,System.CodeDom.CodeExpression)">
+            <summary>
+            Returns the number of items that satisfied the specified condition.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="codeExpr">The code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetCollectionSum(System.Object,System.String,System.String)">
+            <summary>
+            Gets the collection sum.
+            </summary>
+            <param name="obj">The obj.</param>
+            <param name="fieldName">Name of the field.</param>
+            <param name="codeExpr">The code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetCollectionSum(System.Collections.IEnumerable,System.String,System.String)">
+            <summary>
+            Gets the collection sum.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="fieldName">Name of the field.</param>
+            <param name="codeExpr">The code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.GetCollectionSum(System.Collections.IEnumerable,System.String,System.CodeDom.CodeExpression)">
+            <summary>
+            Gets the collection sum.
+            </summary>
+            <param name="collection">The collection.</param>
+            <param name="fieldName">Name of the field.</param>
+            <param name="codeExpr">The code expr.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.FindLineItemByEntryCode(System.String,Mediachase.Commerce.Orders.OrderGroup)">
+            <summary>
+            Finds the line item by entry code.
+            </summary>
+            <param name="entryCode">The entry code.</param>
+            <param name="orderGroup">The order group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.FindLineItemByCatalogNodeCode(System.String,Mediachase.Commerce.Orders.OrderGroup)">
+            <summary>
+            Finds the line item by catalog node code.
+            </summary>
+            <param name="nodeCode">The node code.</param>
+            <param name="orderGroup">The order group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.AddPromotionItemRecord(Mediachase.Commerce.Marketing.Objects.PromotionItemRecord)">
+            <summary>
+            Adds the promotion item record.
+            </summary>
+            <param name="record">The record.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.AddPromotionItemRecord(Mediachase.Commerce.Marketing.Objects.PromotionReward,Mediachase.Commerce.Marketing.PromotionEntriesSet[])">
+            <summary>
+            Adds the promotion item record.
+            </summary>
+            <param name="reward">The reward.</param>
+            <param name="entrySetsCollection">The entry sets collection.</param>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.CreatePromotionEntriesSetFromTarget(System.String)">
+            <summary>
+            Creates the promotion entries set from target.
+            </summary>
+            <param name="entryCode">The entry code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.CreatePromotionEntriesSetFromTarget(System.String,System.Decimal)">
+            <summary>
+            Creates the entry from target.
+            </summary>
+            <param name="entryCode">The entry code.</param>
+            <param name="quantity">The quantity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.CreatePromotionReward(System.String,System.Decimal,System.String)">
+            <summary>
+            Creates the promotion reward.
+            </summary>
+            <param name="rewardType">Type of the reward.</param>
+            <param name="amountOff">The amount off.</param>
+            <param name="amountType">Type of the amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.CreatePromotionReward(System.String,System.String,System.String)">
+            <summary>
+            Creates the promotion reward. And validate input parameters
+            </summary>
+            <param name="rewardType">Type of the reward.</param>
+            <param name="amountOff">The amount off.</param>
+            <param name="amountType">Type of the amount.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesContext.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.RulesContext"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.Context">
+            <summary>
+            Gets the context.
+            </summary>
+            <value>The context.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.RuntimeContext">
+            <summary>
+            Runtime context which can be used to store variables in the rules engine.
+            </summary>
+            <value>The runtime context.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.ValidationResult">
+            <summary>
+            Gets or sets the validation result.
+            </summary>
+            <value>The validation result.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.PromotionContext">
+            <summary>
+            Gets the promotion context.
+            </summary>
+            <value>The promotion context.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.ShoppingCart">
+            <summary>
+            Gets the shopping cart.
+            </summary>
+            <value>The shopping cart.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.CustomerProfile">
+            <summary>
+            Gets the customer profile.
+            </summary>
+            <value>The customer profile.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.CurrentCustomerContact">
+            <summary>
+            Gets the customer account.
+            </summary>
+            <value>The customer account.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.Orders">
+            <summary>
+            Gets the orders.
+            </summary>
+            <value>The orders.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.PromotionTargetLineItem">
+            <summary>
+            Gets the promotion target line item.
+            </summary>
+            <value>The promotion target line item.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.PromotionCurrentOrderForm">
+            <summary>
+            Gets the promotion current order form.
+            </summary>
+            <value>The promotion current order form.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.PromotionOrderFormBillingAddress">
+            <summary>
+            Gets the promotion order form billing address.
+            </summary>
+            <value>The promotion order form billing address.</value>
+        </member>
+        <member name="P:Mediachase.Commerce.Marketing.Validators.RulesContext.PromotionCurrentShipment">
+            <summary>
+            Gets the promotion current shipment.
+            </summary>
+            <value>The promotion current shipment.</value>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.RulesExprValidator">
+            <summary>
+            Rule Expression Validator based on Windows Workflow Foundation Rules Engine.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesExprValidator.Eval(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Evals the specified expression against the context passed in the dictionary.
+            </summary>
+            <param name="key">The key. Must be a unique key identifying the current expression. It might be used for caching purpose by the engine.</param>
+            <param name="expr">The expr.</param>
+            <param name="context">The context, which consists of object that will be accessible during expression evaluation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.RulesExprValidator.DeserializeRuleSet(System.String)">
+            <summary>
+            Deserializes the rule set.
+            </summary>
+            <param name="ruleSetXmlDefinition">The rule set XML definition.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mediachase.Commerce.Marketing.Validators.SimpleExprValidator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.SimpleExprValidator.Eval(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Validates the xml string and compares it to existing profile.
+            The xml string must have the following format:
+            <![CDATA[
+            <Profile>
+            <propertyCondition name="Profile" required="true|false">
+            <Parameter name="operator" value="=|!=|contains|doesNotContain"/>
+            <Parameter name="propertyName" value="propertyName"/>
+            <Parameter name="propertyValue" value="propertyValue"/>
+            </propertyCondition>
+            </Profile>
+            ]]>
+            Condition.Name should correspond to the object in the context dictionary with a same name.
+            </summary>
+            <param name="key">The key. Must be a unique key identifying the current expression. It might be used for caching purpose by the engine.</param>
+            <param name="expr">The expression that needs to be evaluated.</param>
+            <param name="context">The context, which consists of object that will be accessible during expression evaluation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.SimpleExprValidator.EvalPropertyCondition(System.Xml.XmlNode)">
+            <summary>
+            Evals the property condition.
+            </summary>
+            <param name="propertyCondition">The property condition.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Commerce.Marketing.Validators.SimpleExprValidator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mediachase.Commerce.Marketing.Validators.SimpleExprValidator"/> class.
+            </summary>
+        </member>
+    </members>
+</doc>
