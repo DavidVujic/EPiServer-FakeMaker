@@ -68,7 +68,7 @@ You can pass in the fake repository to the code you are about to test, by inject
 
 You can also use 
 ```cs 
-var repository = ServiceLocator.Current.GetRepository<IContentRepository>();
+var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
 ```
 or
 
