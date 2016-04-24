@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mediachase.DataProvider</name>
+    </assembly>
+    <members>
+        <member name="T:Mediachase.Data.Provider.MasterCacheKeys">
+            <summary>
+            Returns cache keys that should be used as master key dependencies for other objects,
+            to get those other objects purged form the cache when their dependent data changes. 
+            </summary>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.RootKey">
+            <summary>
+            The root key that all inserts to CatalogCache depend on
+            </summary>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyEntryKey">
+            <summary>
+            Gets a cache key which is purged when any entry is updated.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetEntryKey(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when the specific entry is updated.
+            </summary>
+            <param name="entryId">The entry id.</param>
+            <returns>
+            The cache key to use as master key for another cache entry.
+            </returns>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyNodeKey">
+            <summary>
+            Gets a cache key which is purged when any node is updated.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetNodeKey(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when the specific node is updated.
+            </summary>
+            <param name="nodeId">The node id.</param>
+            <returns>
+            The cache key to use as master key for another cache entry.
+            </returns>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyCatalogKey">
+            <summary>
+            Gets a cache key which is purged when any catalog is updated.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetCatalogKey(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when the specific catalog is updated.
+            </summary>
+            <param name="catalogId">The catalog identifier.</param>
+            <returns>
+            The cache key to use as master key for another cache entry.
+            </returns>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyEntryRelationKey">
+            <summary>
+            Gets a cache key which is purged when any entry-entry relation is updated.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetEntryRelationKey(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when an entry-entry relation with the specific entry
+            at either end of the relation is updated.
+            </summary>
+            <param name="entryId">The entry id.</param>
+            <returns>
+            The cache key to use as master key for another cache entry.
+            </returns>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyNodeRelationKey">
+            <summary>
+            Gets a cache key which is purged when any node-node or node-entry relation is updated.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetNodeRelationKeyForNode(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when a node-node or node-entry relation with the specific node
+            at either end of the relation is updated.
+            </summary>
+            <param name="nodeId">The node id.</param>
+            <returns>
+            The cache key to use as master key for another cache entry.
+            </returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetNodeRelationKeyForEntry(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when a node-entry relation of the specific entry is updated.
+            </summary>
+            <param name="entryId">The entry id.</param>
+            <returns>
+            The cache key to use as master key for another cache entry.
+            </returns>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyAssociationKey">
+            <summary>
+            Gets a cache key which is purged when any association is updated.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetAssociationKey(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when the associations for the specific entry are updated.
+            </summary>
+            <param name="entryId">The entry id.</param>
+            <returns>
+            The cache key to use as master key for another cache entry.
+            </returns>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyAssociationTypeKey">
+            <summary>
+            Gets a cache key which is purged when any association type is updated.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyCurrencyKey">
+            <summary>
+            Gets a cache key which is purged when any currency is updated.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyWarehouseKey">
+            <summary>
+            Gets a cache key which is purged when any warehouse is updated.
+            </summary>
+        </member>
+        <member name="F:Mediachase.Data.Provider.MasterCacheKeys.AnyTaxCategoryKey">
+            <summary>
+            Gets a cache key which is purged when any tax category is updated.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetTaxCategoryKey(System.Int32)">
+            <summary>
+            Gets a cache key which is purged when the tax categories for the specific tax category is updated.
+            </summary>
+            <param name="taxCategoryId">The tax category id.</param>
+            <returns>
+            The cache key to use as master key for another cache tax category.
+            </returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetTaxCategoryKey(System.String)">
+            <summary>
+            Gets a cache key which is purged when the tax categories for the specific tax category is updated.
+            </summary>
+            <param name="categoryName">The tax category name.</param>
+            <returns>
+            The cache key to use as master key for another cache tax category.
+            </returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.MasterCacheKeys.GetMetaObjectKey(System.Int32,System.Int32)">
+            <summary>
+            Gets a cache key which is purged when the specific meta object is updated.
+            </summary>
+            <param name="metaClassId">The meta class id.</param>
+            <param name="metaObjectId">The meta object id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.LoadTable(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Executes a command resulting in a single table, and returns the table.
+            </summary>
+            <param name="command">The command to execute.</param>
+            <returns>The returned table.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.LoadDataSet(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Executes a command resulting in a data set, and returns the data set.
+            </summary>
+            <param name="command">The command to execute.</param>
+            <returns>A data result containing the returned data set.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.LoadReader(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Executes a command, and returns a reader enumerating the results.
+            </summary>
+            <param name="command">The command to execute.</param>
+            <returns>A <see cref="T:Mediachase.Data.Provider.DataResult"/> containing the result reader.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.LoadReader(Mediachase.Data.Provider.DataCommand,System.DateTimeKind)">
+            <summary>
+            Executes a command, and returns a reader enumerating the results.
+            </summary>
+            <param name="command">The command to execute.</param>
+            <param name="dateTimeKind">
+            All <see cref="T:DateTime"/> values in the result will have 
+            <paramref name="dateTimeKind"/> specified as the value of <see cref="P:DateTime.Kind"/>.
+            </param>
+            <returns>A <see cref="T:Mediachase.Data.Provider.DataResult"/> containing the result reader.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.Save(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Saves the data table.
+            </summary>
+            <param name="command">The command.</param>
+            <returns>Returns either DataTable or DataRow[] depending on what was passed in the command</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.Run(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Runs the specified command.
+            </summary>
+            <param name="command">The command.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.RunReturnInteger(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Runs the return integer.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataProvider.ExecuteScalar(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Runs the return integer.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Mediachase.Data.Provider.DataProvider.ApplicationName">
+            <summary>
+            Gets or sets the name of the application.
+            </summary>
+            <value>The name of the application.</value>
+        </member>
+        <member name="T:Mediachase.Data.Provider.DataService">
+            <summary>
+            Encapsulates data transactions using the configured data provider.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.LoadTable(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Executes a command resulting in a single table, and returns the table.
+            </summary>
+            <param name="command">The command to execute.</param>
+            <returns>The returned table.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.LoadDataSet(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Executes a command resulting in a single table, and returns the table.
+            </summary>
+            <param name="command">The command to execute.</param>        
+            <returns>The returned table.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.LoadReader(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Executes a command resulting in a data set, and returns the data set.
+            </summary>
+            <param name="command">The command to execute.</param>
+            <returns>A data result containing the returned data set.</returns>        
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.LoadReader(Mediachase.Data.Provider.DataCommand,System.DateTimeKind)">
+            <summary>
+            Executes a command, and returns a reader enumerating the results.
+            </summary>
+            <param name="command">The command to execute.</param>
+            <param name="dateTimeKind">
+            All <see cref="T:DateTime"/> values in the result will have 
+            <paramref name="dateTimeKind"/> specified as the value of <see cref="P:DateTime.Kind"/>.
+            </param>
+            <returns>A <see cref="T:Mediachase.Data.Provider.DataResult"/> containing the result reader.</returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.LoadTableSchema(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Loads the table.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.ExecuteNonExec(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Loads the table.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.ExecuteScalar(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Loads the table.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.Run(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Runs the specified command.
+            </summary>
+            <param name="command">The command.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.RunReturnInteger(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Runs the return integer.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.Save(Mediachase.Data.Provider.DataCommand)">
+            <summary>
+            Saves the specified command.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mediachase.Data.Provider.DataService.ThrowIfReadonlyMode">
+            <summary>
+            Throws not supported error if read-only mode.
+            </summary>
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="P:Mediachase.Data.Provider.DataService.Provider">
+            <summary>
+            Gets the provider.
+            </summary>
+            <value>The provider.</value>
+        </member>
+        <member name="P:Mediachase.Data.Provider.DataService.Providers">
+            <summary>
+            Gets the providers.
+            </summary>
+            <value>The providers.</value>
+        </member>
+        <member name="P:Mediachase.Data.Provider.DataService.DatabaseMode">
+            <summary>
+            Sets the database mode.
+            </summary>
+        </member>
+        <member name="M:Mediachase.Data.Provider.TransactionScope.OnCommit(System.Action)">
+            <summary>
+            Runs an action when the current transaction is committed, or immediately if a transaction is not in progress.
+            </summary>
+            <param name="action">The action to execute.</param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.TransactionScope.OnCommit(System.Action,Mediachase.Data.Provider.TransactionScope.ExecutionOrder)">
+            <summary>
+            Runs an action when the current transaction is committed, or immediately if a transaction is not in progress.
+            </summary>
+            <param name="action">The action to execute.</param>
+            <param name="executionOrder">The execution order. if <see cref="F:Mediachase.Data.Provider.TransactionScope.ExecutionOrder.First"/> the action will execute before any action registered using <see cref="F:Mediachase.Data.Provider.TransactionScope.ExecutionOrder.Second"/></param>
+        </member>
+        <member name="M:Mediachase.Data.Provider.TransactionScope.OpenConnection(System.Data.IDbCommand,System.String,Mediachase.Data.Provider.TransactionScope.ConnectionDelegate)">
+            <summary>
+            Assigns a connection and a transaction to the specified database command.
+            The connection and transaction will be reused if there is a transaction in progress on the specified database.
+            </summary>
+            <param name="cmd">The database command.</param>
+            <param name="connectionString">The connection string of the target database.</param>
+            <param name="connectionFactory">A delegate for creating database connections.</param>
+            <returns>True if a new connection was created, otherwise false.</returns>
+            <remarks>If true is returned, the caller will be reponsible for closing the database connection.</remarks>
+        </member>
+        <member name="T:Mediachase.Data.Provider.TransactionScope.ExecutionOrder">
+            <summary>
+            The mode of the cleanupAction.
+            </summary>
+        </member>
+        <member name="T:Mediachase.Data.Provider.TransactionScope.ConnectionDelegate">
+            <summary>
+            The delegate use to create database connection objects.
+            </summary>
+            <returns>A database connection.</returns>
+        </member>
+    </members>
+</doc>
