@@ -1,8 +1,10 @@
 ﻿using EPiFakeMaker;
+using EPiServer;
 using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace FakeMaker.Commerce
 {
@@ -36,6 +38,9 @@ namespace FakeMaker.Commerce
 
             fake.WithReferenceId(Randomizer.Next(10, 1000));
 
+            fake.RepoGet = repo => repo.Get<T>(fake.Content.ContentLink);
+            fake.LoaderGet = loader => loader.Get<T>(fake.Content.ContentLink);
+
             return fake;
         }
 
@@ -51,9 +56,15 @@ namespace FakeMaker.Commerce
             return Content as T;
         }
 
+        internal Expression<Func<IContentRepository, IContent>> RepoGet { get; private set; }
+        internal Expression<Func<IContentLoader, IContent>> LoaderGet { get; private set; }
+
         internal override void HelpCreatingMockForCurrentType(IFakeMaker maker)
         {
-            throw new NotImplementedException();
+            maker.CreateMockFor<EntryContentBase>(this);
+            maker.CreateMockFor<EntryContentBase>(this, Children);
+            maker.CreateMockFor(this, RepoGet);
+            maker.CreateMockFor(this, LoaderGet);
         }
     }
 }
