@@ -3,7 +3,6 @@ using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.ServiceLocation;
 using FakeMaker.Commerce;
 using NUnit.Framework;
-using System.Linq;
 
 namespace EPiFakeMaker.Commerce.Tests
 {
