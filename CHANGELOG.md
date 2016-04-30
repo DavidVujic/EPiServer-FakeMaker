@@ -1,6 +1,8 @@
 #### v 1.1.2 (2016-04-30)
 
-FakeMaker now has support for ContentLoader, in addition to the existing ContentRepository support. This release also includes a fix for StructureMap dependency errors that can occur if versions differ between projects.
+* FakeMaker now has support for ContentLoader, in addition to the existing ContentRepository support.
+* The types ContentData and IContentData are now also mocked (in addition to PageData and IContent) when adding a page to the repository.
+* This release also includes a fix for StructureMap dependency errors that can occur if versions differ between projects.
 
 #### v 1.1.1 (2016-02-05)
 Updated with EPiServer CMS 9.6.1 assemblies and dependencies.
