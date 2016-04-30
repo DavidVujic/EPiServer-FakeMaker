@@ -66,17 +66,16 @@ var page = FakePage.Create("MyPageName").To<PageData>();
 
 You can pass in the fake repository to the code you are about to test, by injecting it to the class (aka Dependency Injection).
 
-You can also use 
-```cs 
-var repository = ServiceLocator.Current.GetRepository<IContentRepository>();
+You can also use
+```cs
+var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
 ```
 or
 
-```cs 
+```cs
 var loader = ServiceLocator.Current.GetInstance<IContentLoader>();
 ```
 
 as an alternative to Dependency Injection in your code under test.
 
 __Please contact me if you have feedback or questions about FakeMaker!__
-
