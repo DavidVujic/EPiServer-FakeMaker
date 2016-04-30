@@ -264,7 +264,7 @@ namespace EPiFakeMaker.Examples
 
             // Act
             var pages_from_repo =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink,repository)
+                HelperExamples.GetChildrenOf(root.Content.ContentLink, repository)
                     .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
 
             var pages_from_loader =
