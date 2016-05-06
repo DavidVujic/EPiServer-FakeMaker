@@ -129,7 +129,7 @@ publish/
 *.pubxml
 
 # NuGet Packages Directory
-# packages/
+packages/
 
 # NuGet Packages and specifications
 *.nupkg
