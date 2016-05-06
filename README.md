@@ -25,12 +25,15 @@ Let me know what you think about it!
 ## Setup
 Just add the FakeMaker NuGet package to your test project and you are ready. To avoid dependency version issues, make sure your test project has the references set up like the project under test. FakeMaker will use the existing references, otherwise install the version it is built with.
 
-If you prefer using the source code, create a folder called "EPiFakeMaker" in your test project and drop the files FakeMaker.cs, FakePage.cs and IFake.cs in there.
+If you prefer using the source code, create a folder called "EPiFakeMaker" in your test project and drop the files FakeMaker.cs, FakePage.cs, Fake.cs and IFake.cs in there.
 
 FakeMaker relies on the __Moq__ library and the __EPiServer__ assemblies (currently version 9). The assembly references in the Visual Studio project file are added from both the official NuGet feed and the EPiServer feed if missing in the current project.
 
 ## Usage
 Have a look at the __FakeMaker.Examples/ExampleUnitTests.cs__, containing some basic scenarios for unit testing with the FakeMaker and FakePage classes.
+
+__Commerce?__
+The Commerce code is currently under early development and not included in the NuGet package. Stay tuned!
 
 #### Create an instance of FakeMaker:
 
