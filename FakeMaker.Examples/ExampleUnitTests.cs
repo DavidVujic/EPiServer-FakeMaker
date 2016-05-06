@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using EPiServer.Core;
 using NUnit.Framework;
+using EPiServer.ServiceLocation;
+using EPiServer;
 
 namespace EPiFakeMaker.Examples
 {
@@ -66,11 +68,8 @@ namespace EPiFakeMaker.Examples
 
             _fake.AddToRepository(root);
 
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
+            var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
+            var loader = ServiceLocator.Current.GetInstance<IContentLoader>();
 
             // Act
             var descendants_from_repo = repository.GetDescendents(root.Content.ContentLink);
