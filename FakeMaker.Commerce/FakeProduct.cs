@@ -36,6 +36,10 @@ namespace FakeMaker.Commerce
         {
             var fake = new FakeProduct { Content = new T() };
 
+            fake.Product.Name = productName;
+            fake.Product.DisplayName = productName;
+            fake.Product.Code = productName;
+
             fake.WithReferenceId(Randomizer.Next(10, 1000));
 
             fake.RepoGet = repo => repo.Get<T>(fake.Content.ContentLink);
