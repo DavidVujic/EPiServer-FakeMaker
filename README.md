@@ -4,8 +4,6 @@
 ﻿Help features for test driving EPiServer CMS
 ========
 
-__Note__ - This branch depends on EPiServer CMS version 9 references. Need version 8 support? Clone this repository and checkout the __epi-8-support__ branch.
-
 If you don't want the source code, there is a __NuGet__ package: https://www.nuget.org/packages/FakeMaker/
 
 ## What is FakeMaker?
@@ -37,6 +35,9 @@ The Commerce code is currently under early development and not included in the N
 
 __Roadmap?__
 Here is the current [roadmap](ROADMAP.md).
+
+__EPiServer 8 support?__
+This branch depends on EPiServer CMS version 9 references. Need version 8 support? Clone this repository and checkout the __epi-8-support__ branch.
 
 #### Create an instance of FakeMaker:
 
