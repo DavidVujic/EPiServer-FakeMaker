@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using EPiServer.Core;
 using NUnit.Framework;
@@ -12,637 +11,110 @@ namespace EPiFakeMaker.Examples
     public class ExampleUnitTests
     {
         private FakeMaker _fake;
+        private FakePage _root;
 
         [SetUp]
         public void Setup()
         {
             _fake = new FakeMaker();
-        }
 
-        [Test]
-        public void Get_descendants()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("Root");
+            // Arrange: create a page tree
+            _root = FakePage.Create("root");
 
             var start = FakePage
                 .Create("Start")
-                .ChildOf(root);
-
-            FakePage
-                .Create("About us")
-                .ChildOf(start);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var descendants_from_repo = repository.GetDescendents(root.Content.ContentLink);
-            var descendants_from_loader = loader.GetDescendents(root.Content.ContentLink);
-
-            //Assert
-            Assert.That(descendants_from_repo.Count(), Is.EqualTo(2));
-            Assert.That(descendants_from_loader.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void Get_descendants_by_using_ServiceLocator()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("Root");
-
-            var start = FakePage
-                .Create("Start")
-                .ChildOf(root);
-
-            FakePage
-                .Create("About us")
-                .ChildOf(start);
-
-            _fake.AddToRepository(root);
-
-            var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
-            var loader = ServiceLocator.Current.GetInstance<IContentLoader>();
-
-            // Act
-            var descendants_from_repo = repository.GetDescendents(root.Content.ContentLink);
-            var descendants_from_loader = loader.GetDescendents(root.Content.ContentLink);
-
-            //Assert
-            Assert.That(descendants_from_repo.Count(), Is.EqualTo(2));
-            Assert.That(descendants_from_loader.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void Get_published_only_pages()
-        {
-            // Arrange
-            var lastWeek = DateTime.Today.AddDays(-7);
-            var yesterday = DateTime.Today.AddDays(-1);
-
-            var root = FakePage
-                .Create("Root");
-
-            var start = FakePage
-                .Create("Start")
-                .ChildOf(root)
-                .PublishedOn(lastWeek);
-
-            FakePage
-                .Create("About us")
-                .ChildOf(start)
-                .PublishedOn(lastWeek, yesterday);
-
-            FakePage
-                .Create("Our services")
-                .ChildOf(start)
-                .PublishedOn(lastWeek);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var pages_from_repo = HelperExamples.GetAllPublishedPages(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetAllPublishedPages(root.Content.ContentLink, loader);
-
-            //Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void Get_pages_visible_in_menu()
-        {
-            // Arrange
-            var root = FakePage.Create("root");
+                .ChildOf(_root)
+                .AsStartPage();
 
             FakePage
                 .Create("AboutUs")
-                .ChildOf(root)
-                .VisibleInMenu();
+                .ChildOf(_root);
 
             FakePage
-                .Create("OtherPage")
-                .ChildOf(root)
+                .Create<CustomPageData>("OtherPage")
+                .ChildOf(_root)
                 .HiddenFromMenu();
 
             FakePage
                 .Create("Contact")
-                .ChildOf(root)
-                .VisibleInMenu();
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var pages_from_repo = HelperExamples.GetMenu(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetMenu(root.Content.ContentLink, repository);
-
-            // Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void Get_pages_of_certain_pagedata_type()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("root");
+                .ChildOf(_root);
 
             FakePage
-                .Create("AboutUs")
-                .ChildOf(root);
-
-            FakePage
-                .Create<CustomPageData>("OtherPage")
-                .ChildOf(root);
-
-            FakePage
-                .Create("Contact")
-                .ChildOf(root);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var pages_from_repo = HelperExamples.GetDescendantsOf<CustomPageData>(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetDescendantsOf<CustomPageData>(root.Content.ContentLink, loader);
-
-            // Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void Get_pages_with_certain_pagetypeid()
-        {
-            // Arrange
-            var root = FakePage.Create("root");
-
-            FakePage
-                .Create("AboutUs")
-                .ChildOf(root)
-                .WithContentTypeId(1);
-
-            FakePage
-                .Create("OtherPage")
-                .ChildOf(root)
-                .WithContentTypeId(2);
-
-            FakePage
-                .Create("Contact")
-                .ChildOf(root)
-                .WithContentTypeId(3);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var pages_from_repo = HelperExamples.GetChildrenOf(root.Content.ContentLink, repository).Where(p => p.ContentTypeID == 2);
-            var pages_from_loader = HelperExamples.GetChildrenOf(root.Content.ContentLink, loader).Where(p => p.ContentTypeID == 2);
-
-            // Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void Get_pages_with_custom_property()
-        {
-            // Arrange
-            var root = FakePage.Create("root");
-
-            FakePage
-                .Create("AboutUs")
-                .ChildOf(root);
-
-            FakePage
-                .Create("OtherPage")
-                .ChildOf(root)
-                .WithProperty("CustomProperty", new PropertyString("Custom value"));
-
-            FakePage
-                .Create("Contact")
-                .ChildOf(root);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var pages_from_repo =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, repository)
-                    .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
-
-            var pages_from_loader =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, loader)
-                    .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
-
-            // Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void Get_pages_with_certain_languagebranch()
-        {
-            // Arrange
-            var root = FakePage.Create("root").WithLanguageBranch("en");
-
-            FakePage
-                .Create("AboutUs")
-                .ChildOf(root)
-                .WithLanguageBranch("en");
-
-            FakePage
-                .Create("OtherPage")
-                .ChildOf(root)
-                .WithLanguageBranch("sv");
-
-            FakePage.
-                Create("Contact")
-                .ChildOf(root)
-                .WithLanguageBranch("en");
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var pages_from_repo =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, repository)
-                    .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
-
-            var pages_from_loader =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, loader)
-                    .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
-
-            // Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void Get_descendants_from_with_children()
-        {
-            // Arrange
-            var root =
-                FakePage.Create("root")
-                    .WithChildren(
-                        new List<FakePage>
-                            {
-                                FakePage.Create("AboutUs"),
-                                FakePage.Create("News").WithChildren(new List<FakePage>
-                                        {
-                                            FakePage.Create("News item 1"),
-                                            FakePage.Create("News item 2")
-                                        }),
-                                FakePage.Create("Contact")
-                            });
-
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var pages_from_repo = repository.GetDescendents(root.Content.ContentLink);
-            var pages_from_loader = loader.GetDescendents(root.Content.ContentLink);
-
-            // Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(5));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(5));
-        }
-
-        [Test]
-        public void Set_a_page_as_start_page()
-        {
-            var root = FakePage
-                .Create<PageData>("Root");
-
-            var start = FakePage
-                .Create<PageData>("Start")
-                .ChildOf(root)
-                .AsStartPage();
-
-            FakePage
-                .Create<PageData>("Child")
+                .Create("Our sub page")
                 .ChildOf(start);
 
-            _fake.AddToRepository(root);
-
-            Assert.That(ContentReference.StartPage, Is.EqualTo(start.Content.ContentLink));
-        }
-
-        [Test]
-        public void Get_page_of_explicit_page_type()
-        {
-            // Arrange
-            var customPage = FakePage
-                .Create<CustomPageData>("MyCustomPage");
-
-            _fake.AddToRepository(customPage);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var result_from_repo = repository.Get<CustomPageData>(customPage.Content.ContentLink);
-            var result_from_loader = loader.Get<CustomPageData>(customPage.Content.ContentLink);
-
-            // Assert
-            Assert.IsNotNull(result_from_repo);
-            Assert.IsNotNull(result_from_loader);
-        }
-
-        [Test]
-        public void Get_page_of_explicit_base_page_type()
-        {
-            // Arrange
-            var fakePage = FakePage
-                .Create<InteritsCustomPageData>("MyInheritedCustomPage");
-
-            _fake.AddToRepository(fakePage);
-
-            // Custom mocking that is not handled by FakeMaker
-            _fake.GetMockForFakeContentRepository()
-                .Setup(repo => repo.Get<CustomPageData>(fakePage.Content.ContentLink))
-                .Returns(fakePage.To<CustomPageData>());
-
-            // Act
-            var result = _fake.ContentRepository.Get<CustomPageData>(fakePage.Content.ContentLink);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.That(result is InteritsCustomPageData);
-        }
-
-        [Test]
-        public void Get_children_as_explicit_page_type()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("Root");
-
-            var start = FakePage
-                .Create("Start")
-                .ChildOf(root).AsStartPage();
-
-            var aboutUs = FakePage
-                .Create<CustomPageData>("About us")
-                .ChildOf(start);
-
-            _fake.AddToRepository(root);
-
-            var customPageDataList = new List<CustomPageData> { aboutUs.To<CustomPageData>() };
-
-            // Custom mocking that is not handled by FakeMaker
-            _fake.GetMockForFakeContentRepository()
-                .Setup(repo => repo.GetChildren<CustomPageData>(ContentReference.StartPage))
-                .Returns(customPageDataList);
-
-            // Act
-            var children = _fake.ContentRepository.GetChildren<CustomPageData>(ContentReference.StartPage);
-
-            // Assert
-            Assert.That(children.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void Get_instance_of_base_type()
-        {
-            // Arrange
-            var fakePage = FakePage.Create("MyPage");
-
-            _fake.AddToRepository(fakePage);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var result_from_repo = repository.Get<ContentData>(fakePage.Content.ContentLink);
-            var result_from_loader = loader.Get<ContentData>(fakePage.Content.ContentLink);
-
-            // Assert
-            Assert.IsNotNull(result_from_repo);
-            Assert.That(result_from_repo is ContentData);
-
-            Assert.IsNotNull(result_from_loader);
-            Assert.That(result_from_loader is ContentData);
-        }
-
-        [Test]
-        public void Get_instance_of_base_interface_type()
-        {
-            // Arrange
-            var fakePage = FakePage.Create("MyPage");
-
-            _fake.AddToRepository(fakePage);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var result_from_repo = repository.Get<IContentData>(fakePage.Content.ContentLink);
-            var result_from_loader = loader.Get<IContentData>(fakePage.Content.ContentLink);
-
-            // Assert
-            Assert.IsNotNull(result_from_repo);
-            Assert.That(result_from_repo is IContentData);
-
-            Assert.IsNotNull(result_from_loader);
-            Assert.That(result_from_loader is IContentData);
-        }
-
-        [Test]
-        public void Get_instance_of_pagedata_with_derived_class()
-        {
-            // Arrange
-            var fakePage = FakePage.Create<CustomPageData>("MyPage");
-
-            _fake.AddToRepository(fakePage);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var result_from_repo = repository.Get<PageData>(fakePage.Content.ContentLink);
-            var result_from_loader = loader.Get<PageData>(fakePage.Content.ContentLink);
-
-            // Assert
-            Assert.IsNotNull(result_from_repo);
-            Assert.That(result_from_repo is PageData);
-
-            Assert.IsNotNull(result_from_loader);
-            Assert.That(result_from_loader is PageData);
-        }
-
-        [Test]
-        public void Get_children_as_base_content_type()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("Root");
-
-            var start = FakePage
-                .Create("Start")
-                .ChildOf(root).AsStartPage();
-
-            var aboutUs = FakePage
-                .Create("About us")
-                .ChildOf(start);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var children_from_repo = repository.GetChildren<ContentData>(ContentReference.StartPage);
-            var children_from_loader = loader.GetChildren<ContentData>(ContentReference.StartPage);
-
-            // Assert
-            Assert.That(children_from_repo.Count(), Is.EqualTo(1));
-            Assert.That(children_from_loader.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void Get_children_as_base_content_interface_type()
-        {
-            // Arrange
-            var root = FakePage
-                .Create("Root");
-
-            var start = FakePage
-                .Create("Start")
-                .ChildOf(root).AsStartPage();
-
-            var aboutUs = FakePage
-                .Create("About us")
-                .ChildOf(start);
-
-            _fake.AddToRepository(root);
-
-            // An instance of IContentRepository that you can use for Dependency Injection
-            var repository = _fake.ContentRepository;
-
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
-            // Act
-            var children_from_repo = repository.GetChildren<IContentData>(ContentReference.StartPage);
-            var children_from_loader = loader.GetChildren<IContentData>(ContentReference.StartPage);
-
-            // Assert
-            Assert.That(children_from_repo.Count(), Is.EqualTo(1));
-            Assert.That(children_from_loader.Count(), Is.EqualTo(1));
+            // Arrange: add the entire page tree to the episerver repository.
+            _fake.AddToRepository(_root);
         }
 
         [Test]
         public void Get_children()
         {
-            // Arrange
-            var root = FakePage.Create("root");
-
-            FakePage
-                .Create("AboutUs")
-                .ChildOf(root);
-
-            FakePage
-                .Create("OtherPage")
-                .ChildOf(root);
-
-            FakePage
-                .Create("Contact")
-                .ChildOf(root);
-
-            _fake.AddToRepository(root);
-
             // An instance of IContentRepository that you can use for Dependency Injection
             var repository = _fake.ContentRepository;
 
-            // Or, an instance of IContentLoader that you can use for Dependency Injection
-            var loader = _fake.ContentLoader;
-
             // Act
-            var pages_from_repo = HelperExamples.GetChildrenOf(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetChildrenOf(root.Content.ContentLink, loader);
+            var pages = repository.GetChildren<IContent>(_root.Content.ContentLink);
 
             // Assert
-            Assert.That(pages_from_repo.Count(), Is.EqualTo(3));
-            Assert.That(pages_from_loader.Count(), Is.EqualTo(3));
+            Assert.That(pages.Count(), Is.EqualTo(4));
         }
 
         [Test]
-        public void Get_content_as_page()
+        public void Get_descendants()
         {
-            var fake = FakePage.Create("MyPage");
+            var repository = _fake.ContentRepository;
 
-            Assert.That(fake.Page, Is.Not.Null);
+            // Act
+            var descendants = repository.GetDescendents(_root.Content.ContentLink);
+
+            Assert.That(descendants.Count(), Is.EqualTo(5));
+        }
+
+        [Test]
+        public void Get_descendants_by_using_ServiceLocator()
+        {
+            var repository = ServiceLocator.Current.GetInstance<IContentRepository>();
+
+            // Act
+            var descendants = repository.GetDescendents(_root.Content.ContentLink);
+
+            //Assert
+            Assert.That(descendants.Count(), Is.EqualTo(5));
+        }
+
+        [Test]
+        public void Get_pages_visible_in_menu()
+        {
+            var repository = _fake.ContentRepository;
+
+            // Act
+            var children = repository.GetChildren<PageData>(_root.Content.ContentLink);
+
+            var pages = children.Where(page => page.VisibleInMenu).ToList();
+
+            // Assert
+            Assert.That(pages.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void Get_pages_of_certain_pagedata_type()
+        {
+            var repository = _fake.ContentRepository;
+
+            // Act
+            var descendants = repository.GetDescendents(_root.Content.ContentLink);
+            var pages = descendants
+                .Select(repository.Get<IContent>)
+                .OfType<CustomPageData>();
+
+            // Assert
+            Assert.That(pages.Count(), Is.EqualTo(1));
         }
     }
 
     public class CustomPageData : PageData
     {
         public string CustomPageName { get; set; }
-    }
-
-    public class InteritsCustomPageData : CustomPageData
-    {
     }
 }
