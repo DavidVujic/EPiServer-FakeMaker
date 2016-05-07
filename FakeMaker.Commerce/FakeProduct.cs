@@ -60,6 +60,15 @@ namespace FakeMaker.Commerce
             return Content as T;
         }
 
+        public virtual FakeProduct ChildOf(IFake parent)
+        {
+            parent.Children.Add(this);
+
+            Product.ParentLink = parent.Content.ContentLink;
+
+            return this;
+        }
+
         internal Expression<Func<IContentRepository, IContent>> RepoGet { get; private set; }
         internal Expression<Func<IContentLoader, IContent>> LoaderGet { get; private set; }
 

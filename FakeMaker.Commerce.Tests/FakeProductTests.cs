@@ -1,8 +1,10 @@
 ﻿using EPiServer;
 using EPiServer.Commerce.Catalog.ContentTypes;
+using EPiServer.Core;
 using EPiServer.ServiceLocation;
 using FakeMaker.Commerce;
 using NUnit.Framework;
+using System.Linq;
 
 namespace EPiFakeMaker.Commerce.Tests
 {
@@ -73,8 +75,29 @@ namespace EPiFakeMaker.Commerce.Tests
             var phone = repo.Get<ProductContent>(fakePhone.Content.ContentLink);
 
             //Assert
-            Assert.IsNotNull(phone);
             Assert.AreEqual(phone.StopPublish, tomorrow);
+        }
+
+        [Test]
+        public void Get_children()
+        {
+            var phones = FakeProduct.Create<VariationContent>("phones");
+
+            var phone1 = FakeProduct
+                .Create<ProductContent>("iphone standard")
+                .ChildOf(phones);
+
+            var phone2 = FakeProduct
+                .Create<ProductContent>("iphone gold")
+                .ChildOf(phones);
+
+            _fake.AddToRepository(phones);
+
+            // Act
+            var products = _fake.ContentRepository.GetChildren<IContent>(phones.Content.ContentLink);
+
+            // Assert
+            Assert.That(products.Count(), Is.EqualTo(2));
         }
     }
 }

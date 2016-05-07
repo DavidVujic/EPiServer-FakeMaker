@@ -55,7 +55,7 @@ namespace EPiFakeMaker
             return fake;
         }
 
-        public virtual FakePage ChildOf(FakePage parent)
+        public virtual FakePage ChildOf(IFake parent)
         {
             parent.Children.Add(this);
 
