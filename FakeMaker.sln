@@ -1,7 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker", "FakeMaker\FakeMaker.csproj", "{59D000E1-35FD-4C0C-B53E-459E7CFE4910}"
@@ -18,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Commerce", "FakeMaker.Commerce\FakeMaker.Commerce.csproj", "{35B9F268-44CE-4898-BBDC-BB2BAFA1279E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Commerce.Tests", "FakeMaker.Commerce.Tests\FakeMaker.Commerce.Tests.csproj", "{9273F188-16CA-47F1-9541-83BE24A40A5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeMaker.Tests", "FakeMaker.Tests\FakeMaker.Tests.csproj", "{AD1EA42B-D000-400F-9C33-9A5708AC9419}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +42,10 @@ Global
 		{9273F188-16CA-47F1-9541-83BE24A40A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9273F188-16CA-47F1-9541-83BE24A40A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9273F188-16CA-47F1-9541-83BE24A40A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1EA42B-D000-400F-9C33-9A5708AC9419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1EA42B-D000-400F-9C33-9A5708AC9419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1EA42B-D000-400F-9C33-9A5708AC9419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1EA42B-D000-400F-9C33-9A5708AC9419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
