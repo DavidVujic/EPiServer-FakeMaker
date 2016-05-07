@@ -1,8 +1,5 @@
 ﻿using EPiServer.Core;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("FakeMaker.Commerce")]
 
 namespace EPiFakeMaker
 {
