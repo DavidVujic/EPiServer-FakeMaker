@@ -9,7 +9,7 @@ using EPiServer;
 namespace EPiFakeMaker.Tests
 {
     [TestFixture]
-    public class ExampleUnitTests
+    public class FakeMakerTests
     {
         private FakeMaker _fake;
 
@@ -114,8 +114,8 @@ namespace EPiFakeMaker.Tests
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetAllPublishedPages(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetAllPublishedPages(root.Content.ContentLink, loader);
+            var pages_from_repo = GetAllPublishedPages(root.Content.ContentLink, repository);
+            var pages_from_loader = GetAllPublishedPages(root.Content.ContentLink, loader);
 
             //Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
@@ -152,12 +152,19 @@ namespace EPiFakeMaker.Tests
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetMenu(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetMenu(root.Content.ContentLink, repository);
+            var pages_from_repo = GetMenu(root.Content.ContentLink, repository);
+            var pages_from_loader = GetMenu(root.Content.ContentLink, repository);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
             Assert.That(pages_from_loader.Count(), Is.EqualTo(2));
+        }
+
+        private static IEnumerable<IContent> GetMenu(ContentReference reference, IContentRepository repository)
+        {
+            var children = repository.GetChildren<PageData>(reference);
+
+            return children.Where(page => page.VisibleInMenu).ToList();
         }
 
         [Test]
@@ -188,8 +195,8 @@ namespace EPiFakeMaker.Tests
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetDescendantsOf<CustomPageData>(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetDescendantsOf<CustomPageData>(root.Content.ContentLink, loader);
+            var pages_from_repo = GetDescendantsOf<CustomPageData>(root.Content.ContentLink, repository);
+            var pages_from_loader = GetDescendantsOf<CustomPageData>(root.Content.ContentLink, loader);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
@@ -226,8 +233,9 @@ namespace EPiFakeMaker.Tests
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetChildrenOf(root.Content.ContentLink, repository).Where(p => p.ContentTypeID == 2);
-            var pages_from_loader = HelperExamples.GetChildrenOf(root.Content.ContentLink, loader).Where(p => p.ContentTypeID == 2);
+
+            var pages_from_repo = repository.GetChildren<IContent>(root.Content.ContentLink).Where(p => p.ContentTypeID == 2);
+            var pages_from_loader = loader.GetChildren<IContent>(root.Content.ContentLink).Where(p => p.ContentTypeID == 2);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(1));
@@ -263,11 +271,11 @@ namespace EPiFakeMaker.Tests
 
             // Act
             var pages_from_repo =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, repository)
+                repository.GetChildren<IContent>(root.Content.ContentLink)
                     .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
 
             var pages_from_loader =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, loader)
+                loader.GetChildren<IContent>(root.Content.ContentLink)
                     .Where(content => content.Property["CustomProperty"] != null && content.Property["CustomProperty"].Value.ToString() == "Custom value");
 
             // Assert
@@ -306,11 +314,11 @@ namespace EPiFakeMaker.Tests
 
             // Act
             var pages_from_repo =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, repository)
+                repository.GetChildren<IContent>(root.Content.ContentLink)
                     .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
 
             var pages_from_loader =
-                HelperExamples.GetChildrenOf(root.Content.ContentLink, loader)
+                loader.GetChildren<IContent>(root.Content.ContentLink)
                     .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
 
             // Assert
@@ -620,8 +628,8 @@ namespace EPiFakeMaker.Tests
             var loader = _fake.ContentLoader;
 
             // Act
-            var pages_from_repo = HelperExamples.GetChildrenOf(root.Content.ContentLink, repository);
-            var pages_from_loader = HelperExamples.GetChildrenOf(root.Content.ContentLink, loader);
+            var pages_from_repo = repository.GetChildren<IContent>(root.Content.ContentLink);
+            var pages_from_loader = loader.GetChildren<IContent>(root.Content.ContentLink);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(3));
@@ -634,6 +642,39 @@ namespace EPiFakeMaker.Tests
             var fake = FakePage.Create("MyPage");
 
             Assert.That(fake.Page, Is.Not.Null);
+        }
+
+        private static IEnumerable<IContent> GetAllPublishedPages(ContentReference root, IContentLoader repository)
+        {
+            var descendants = GetDescendantsOf(root, repository);
+
+            var references = descendants
+                .Where(item => ToPage(item, repository).CheckPublishedStatus(PagePublishedStatus.Published));
+
+            return references.Select(reference => ToPage(reference, repository)).Cast<IContent>().ToList();
+        }
+
+        private static IEnumerable<IContent> GetDescendantsOf<T>(ContentReference root, IContentLoader repository)
+            where T : PageData
+        {
+            var descendants = GetDescendantsOf(root, repository);
+            var pages = descendants
+                .Select(repository.Get<IContent>)
+                .OfType<T>();
+
+            return pages;
+        }
+
+        private static IEnumerable<ContentReference> GetDescendantsOf(ContentReference root, IContentLoader repository)
+        {
+            return repository.GetDescendents(root);
+        }
+
+        private static PageData ToPage(ContentReference reference, IContentLoader repository)
+        {
+            var page = repository.Get<PageData>(reference);
+
+            return page;
         }
     }
 
