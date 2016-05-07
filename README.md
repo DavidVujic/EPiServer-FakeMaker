@@ -4,7 +4,7 @@
 ﻿Help features for test driving EPiServer CMS
 ========
 
-If you don't want the source code, there is a __NuGet__ package: https://www.nuget.org/packages/FakeMaker/
+There is also a __NuGet__ package: https://www.nuget.org/packages/FakeMaker/
 
 ## What is FakeMaker?
 FakeMaker takes care of mocking and a simplifies creating fake content, that you can use when testing your code.
@@ -13,17 +13,12 @@ Unit testing the EPiServer CMS got a whole lot easier with version 7. However, c
 
 When mocking of code is all you see on your screen, this little library may help. A bigger screen probably also would, but is probably more expensive. FakeMaker make it easier to write unit tests for mvc controllers and helpers that expect the episerver repositories to return content.
 
-Check out the example unit tests, using the FakeMaker class that takes care of mocking a repository and populating the ServiceLocator, and also the FakePage class for creating Pages with the ability to set some of the most common properties.
-
-Let me know what you think about it!
-
-
 # Quick Start
 
 ## Setup
 Just add the FakeMaker NuGet package to your test project and you are ready. To avoid dependency version issues, make sure your test project has the references set up like the project under test. FakeMaker will use the existing references, otherwise install the version it is built with.
 
-If you prefer using the source code, create a folder called "EPiFakeMaker" in your test project and drop the files FakeMaker.cs, FakePage.cs, Fake.cs and IFake.cs in there.
+If you prefer using the source code, create a folder called "EPiFakeMaker" in your test project and drop the files FakeMaker.cs, FakePage.cs, Fake.cs and IFake.cs from the FakeMaker project in there.
 
 FakeMaker relies on the __Moq__ library and the __EPiServer__ assemblies (currently version 9). The assembly references in the Visual Studio project file are added from both the official NuGet feed and the EPiServer feed if missing in the current project.
 
