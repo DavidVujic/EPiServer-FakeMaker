@@ -7,7 +7,7 @@
     <ProjectGuid>{AD1EA42B-D000-400F-9C33-9A5708AC9419}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FakeMaker.Tests</RootNamespace>
+    <RootNamespace>EPiFakeMaker.Tests</RootNamespace>
     <AssemblyName>FakeMaker.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -156,6 +156,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExampleUnitTests.cs" />
+    <Compile Include="HelperExamples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +168,9 @@
       <Project>{59d000e1-35fd-4c0c-b53e-459e7cfe4910}</Project>
       <Name>FakeMaker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
