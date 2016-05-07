@@ -30,10 +30,13 @@ If you prefer using the source code, create a folder called "EPiFakeMaker" in yo
 FakeMaker relies on the __Moq__ library and the __EPiServer__ assemblies (currently version 9). The assembly references in the Visual Studio project file are added from both the official NuGet feed and the EPiServer feed if missing in the current project.
 
 ## Usage
-Have a look at the __FakeMaker.Examples/ExampleUnitTests.cs__, containing some basic scenarios for unit testing with the FakeMaker and FakePage classes.
+Have a look at the [Example unit tests](FakeMaker.Examples/ExampleUnitTests.cs), containing some basic scenarios for unit testing with the FakeMaker and FakePage classes. If you want more scenarios, check out the __FakeMaker.Tests__ library.
 
-__Commerce?__
+__Commerce support?__
 The Commerce code is currently under early development and not included in the NuGet package. Stay tuned!
+
+__Roadmap?__
+Here is the current [roadmap](ROADMAP.md).
 
 #### Create an instance of FakeMaker:
 
