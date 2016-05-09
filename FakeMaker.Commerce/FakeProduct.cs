@@ -1,12 +1,11 @@
-﻿using EPiFakeMaker;
-using EPiServer;
+﻿using EPiServer;
 using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace FakeMaker.Commerce
+namespace EPiFakeMaker.Commerce
 {
     public class FakeProduct : Fake
     {
