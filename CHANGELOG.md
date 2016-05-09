@@ -1,3 +1,6 @@
+#### v 1.1.3 (2016-05-09)
+Add support for a Commerce plugin to FakeMaker.
+
 #### v 1.1.2 (2016-04-30)
 
 * FakeMaker now has support for ContentLoader, in addition to the existing ContentRepository support.
