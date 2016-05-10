@@ -17,7 +17,7 @@ Unit testing the EPiServer CMS got a whole lot easier with version 7. However, c
 When mocking of code is all you see on your screen, this little library may help. A bigger screen probably also would, but is probably more expensive. FakeMaker make it easier to write unit tests for mvc controllers and helpers that expect the episerver repositories to return content.
 
 __What about Commerce?__
-Yes! FakeMaker now have support for Commerce. Check out the source code or install FakeMaker.Commerce plugin from NuGet. The package currently suppport basic unit testing scenarios. What kind of features are missing? Create an issue here on GitHub and share your feedback, thoughts & ideas!
+Yes! FakeMaker now have support for Commerce. Check out the source code or install the FakeMaker.Commerce plugin from NuGet. The package currently suppport basic unit testing scenarios. What kind of features are missing? Create an issue here on GitHub and share your feedback, thoughts & ideas!
 
 # Quick Start
 
