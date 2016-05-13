@@ -72,13 +72,14 @@ or
 var loader = fake.ContentLoader;
 ```
 
-#### Cast FakePage to PageData
+You can pass in the fake repository to the code you are about to test, by injecting it to the class (aka Dependency Injection) like this:
 
 ```cs
-var page = FakePage.Create("MyPageName").To<PageData>();
+[Test]
+public void MyUnitTest()
+{
+  var controller = new MyController(fake.ContentRepository);
 ```
-
-You can pass in the fake repository to the code you are about to test, by injecting it to the class (aka Dependency Injection).
 
 You can also use
 ```cs
@@ -90,7 +91,7 @@ or
 var loader = ServiceLocator.Current.GetInstance<IContentLoader>();
 ```
 
-as an alternative to Dependency Injection in your code under test.
+in your controller as an alternative to Dependency Injection in your (controller) code under test.
 
 #### Create fake Commerce products
 
