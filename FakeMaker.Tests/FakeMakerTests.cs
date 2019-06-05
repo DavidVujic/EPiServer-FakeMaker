@@ -153,7 +153,7 @@ namespace EPiFakeMaker.Tests
 
             // Act
             var pages_from_repo = GetMenu(root.Content.ContentLink, repository);
-            var pages_from_loader = GetMenu(root.Content.ContentLink, repository);
+            var pages_from_loader = GetMenu(root.Content.ContentLink, loader);
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(2));
@@ -167,7 +167,14 @@ namespace EPiFakeMaker.Tests
             return children.Where(page => page.VisibleInMenu).ToList();
         }
 
-        [Test]
+		private static IEnumerable<IContent> GetMenu(ContentReference reference, IContentLoader loader)
+		{
+			var children = loader.GetChildren<PageData>(reference);
+
+			return children.Where(page => page.VisibleInMenu).ToList();
+		}
+
+		[Test]
         public void Get_pages_of_certain_pagedata_type()
         {
             // Arrange
@@ -315,11 +322,11 @@ namespace EPiFakeMaker.Tests
             // Act
             var pages_from_repo =
                 repository.GetChildren<IContent>(root.Content.ContentLink)
-                    .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
+                    .Where(content => content is PageData && ((ILocalizable)content).Language.Name == "sv");
 
             var pages_from_loader =
                 loader.GetChildren<IContent>(root.Content.ContentLink)
-                    .Where(content => content is PageData && ((PageData)content).LanguageBranch == "sv");
+                    .Where(content => content is PageData && ((ILocalizable)content).Language.Name == "sv");
 
             // Assert
             Assert.That(pages_from_repo.Count(), Is.EqualTo(1));

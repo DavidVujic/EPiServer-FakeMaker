@@ -129,7 +129,7 @@ publish/
 *.pubxml
 
 # NuGet Packages Directory
-# packages/
+packages/
 
 # NuGet Packages and specifications
 *.nupkg
@@ -216,3 +216,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/.vs/FakeMaker/v16
